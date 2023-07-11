@@ -1,0 +1,11 @@
+mysql-connector-python==8.0.31
+redis==4.3.4
+Django==4.2
+gunicorn
+djangorestframework
+django-filter
+djangorestframework-filters
+drf-yasg
+mysqlclient
+requests
+psycopg2
