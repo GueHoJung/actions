@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    build: ./nginx
+    ports:
+      # 외부 포트: 내부 포트
+      # designer_backend port mapping
+      - "80:80"
+      # server port mapping sample
+      # - "8080:8080"
+    volumes:
+      - ./nginx:/etc/nginx.conf.d
+      - ./designer_backend/backend_server/.static_root/:/static
+    depends_on:
+      - designer_backend
+    networks:
+      - backend
+
+  redis: # See Also: https://hub.docker.com/_/redis
+    container_name: redis
+    image: redis:7.0.5-alpine
+    hostname: hostname-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+
+  mysql: # See Also: https://hub.docker.com/_/mysql
+    container_name: mysql
+    image: mysql:8.0.31
+    hostname: hostname-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: designer_app
+      # MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      TZ: Asia/Seoul
+    networks:
+      - backend
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+#    env_file: .env
+    expose:
+      - "3306"
+
+  mssql: # See Also: https://hub.docker.com/_/mysql
+    container_name: mssql
+    image: mcr.microsoft.com/azure-sql-edge
+    hostname: hostname-mssql
+    restart: always
+    user: root
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_USER: "SA"
+      MSSQL_SA_PASSWORD: "Rajhans123@" # "Password.1"
+      MSSQL_PID: Developer
+    networks:
+      - backend
+    ports:
+      - "51433:1433"
+#      - "1431:1433"
+    volumes:
+      - ./mssql/data:/var/lib/mssql
+    #    env_file: .env
+#    expose:
+#      - "1433"
+#      - "1431"
+
+
+  designer_backend: # designer_backend
+    image: designer_backend
+    container_name: designer_backend
+    build:
+        context: .
+        dockerfile: ./designer_backend/Dockerfile
+    volumes:
+      - ./designer_backend/backend_server:/backend_server
+    depends_on:
+      - redis
+      - postgresql
+      - mssql
+      - mysql
+    expose:
+      - "8000"
+    # python manage.py runserver 0:8000 역할을 gunicorn 에서 수행
+    # gunicorn 장고프로젝트명.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+#volumes:
+#  sqlsystem:
+#  sqldata:
+#  sqllog:
+#  sqlbackup:
