@@ -9,3 +9,6 @@ drf-yasg
 mysqlclient
 requests
 psycopg2
+flex
+ssv
+swagger_spec_validator
