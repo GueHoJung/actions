@@ -37,7 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # django-admin startapp 으로 생선한 designer_server
+    'designer_server',
+    # requirements.txt에 작성 된 djangorestframework
+    'rest_framework',
+    # yet another swagger,
+    'drf_yasg',
 ]
+
+# django admin화면 접속 시도시 Site matching query does not exist. 발생
+# /adim/ 화면 안뜨는 문제 해결 위해 추가
+# SITE_ID=1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,9 +138,7 @@ USE_TZ = True
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-print("BASE_DIR"+str(BASE_DIR))
 ROOT_DIR = os.path.dirname(BASE_DIR)
-print("ROOT_DIR"+str(ROOT_DIR))
 
 STATIC_URL = 'static/'
 

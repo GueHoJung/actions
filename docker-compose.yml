@@ -39,6 +39,8 @@ services:
       POSTGRES_PASSWORD: "postgres"
     volumes:
       - ./postgresql/data:/var/lib/postgresql/data
+    networks:
+      - backend
 
   mysql: # See Also: https://hub.docker.com/_/mysql
     container_name: mysql
@@ -111,7 +113,7 @@ services:
 
 networks:
   backend:
-    driver: bridge
+    driver: bridgeF
 
 #volumes:
 #  sqlsystem:
