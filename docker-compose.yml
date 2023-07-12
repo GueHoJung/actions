@@ -116,7 +116,7 @@ services:
 
 networks:
   backend:
-    driver: bridgeF
+    driver: bridge
 
 #volumes:
 #  sqlsystem:
