@@ -9,11 +9,14 @@ services:
       # 외부 포트: 내부 포트
       # designer_backend port mapping
       - "80:80"
+      - "443:443"
       # server port mapping sample
       # - "8080:8080"
     volumes:
       - ./nginx:/etc/nginx.conf.d
       - ./designer_backend/backend_server/.static_root/:/static
+    environment:
+      - TZ=Asia/Seoul
     depends_on:
       - designer_backend
     networks:
