@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# designer_server
-
-# Softstone Designer App Backend Server
-=======
 # Softstone Designer App Backend Server
 
 # Docker(docker-compose) - Nginx, Gunicorn, Django, DRF, Swagger
