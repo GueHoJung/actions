@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-# designer_server
-
-# Softstone Designer App Backend Server
-=======
 # Softstone Designer App Backend Server
 
 # Docker(docker-compose) - Nginx, Gunicorn, Django, DRF, Swagger
 
->>>>>>> 8651d033ef9616655f8148ed870c85dd106dcc31
+
 ## Index
 - [Softstone Designer App](#Softstone-Designer-App)
   - [Index](#index)

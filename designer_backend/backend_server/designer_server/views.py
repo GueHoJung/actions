@@ -10,7 +10,7 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 
 from .serializers import ItemSerializer
-from .models import DesignerTest
+from .models import DesignerTest, ImageUpload
 
 
 # Create your views here.
@@ -19,6 +19,9 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = DesignerTest.objects.all()
     serializer_class = ItemSerializer
 
+def index(request):
+    image = ImageUpload.objects.all()
+    return render(request, 'app/index.html', {'image': image})
 
 # api_view decorator django rest framework 방식
 @api_view(["GET"])

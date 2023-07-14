@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nginx:
     container_name: nginx
-    image: nginx
+    image: nginx:1.25.1
     build: ./nginx
     ports:
       # 외부 포트: 내부 포트
@@ -15,6 +15,7 @@ services:
     volumes:
       - ./nginx:/etc/nginx.conf.d
       - ./designer_backend/backend_server/.static_root/:/static
+      - ./designer_backend/backend_server/.media_root/:/media
     environment:
       - TZ=Asia/Seoul
     depends_on:
@@ -32,68 +33,68 @@ services:
       - backend
 
   postgresql:
-    image: postgres:latest
+    image: postgres:15
     container_name: postgres
     # hostname: postgresql
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: "designer_app"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: ${POSTGRES_INITDB_ARGS}
     volumes:
       - ./postgresql/data:/var/lib/postgresql/data
     networks:
       - backend
 
-  mysql: # See Also: https://hub.docker.com/_/mysql
-    container_name: mysql
-    image: mysql:8.0.31
-    hostname: hostname-mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: designer_app
-      # MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      TZ: Asia/Seoul
-    networks:
-      - backend
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./mysql/conf.d:/etc/mysql/conf.d
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
-#    env_file: .env
-    expose:
-      - "3306"
-
-  mssql: # See Also: https://hub.docker.com/_/mysql
-    container_name: mssql
-    image: mcr.microsoft.com/azure-sql-edge
-    hostname: hostname-mssql
-    restart: always
-    user: root
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_USER: "SA"
-      MSSQL_SA_PASSWORD: "Rajhans123@" # "Password.1"
-      MSSQL_PID: Developer
-    networks:
-      - backend
-    ports:
-      - "51433:1433"
-#      - "1431:1433"
-    volumes:
-      - ./mssql/data:/var/lib/mssql
-    #    env_file: .env
+#  mysql: # See Also: https://hub.docker.com/_/mysql
+#    container_name: mysql
+#    image: mysql:8.0.31
+#    hostname: hostname-mysql
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: designer_app
+#      # MYSQL_USER: root
+#      MYSQL_PASSWORD: root
+#      TZ: Asia/Seoul
+#    networks:
+#      - backend
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - ./mysql/conf.d:/etc/mysql/conf.d
+#      - ./mysql/data:/var/lib/mysql
+#      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+##    env_file: .env
 #    expose:
-#      - "1433"
-#      - "1431"
+#      - "3306"
+
+#  mssql: # See Also: https://hub.docker.com/_/mysql
+#    container_name: mssql
+#    image: mcr.microsoft.com/azure-sql-edge
+#    hostname: hostname-mssql
+#    restart: always
+#    user: root
+#    environment:
+#      ACCEPT_EULA: "Y"
+#      MSSQL_USER: "SA"
+#      MSSQL_SA_PASSWORD: "Rajhans123@" # "Password.1"
+#      MSSQL_PID: Developer
+#    networks:
+#      - backend
+#    ports:
+#      - "51433:1433"
+##      - "1431:1433"
+#    volumes:
+#      - ./mssql/data:/var/lib/mssql
+#    #    env_file: .env
+##    expose:
+##      - "1433"
+##      - "1431"
 
 
   designer_backend: # designer_backend
@@ -107,13 +108,28 @@ services:
     depends_on:
       - redis
       - postgresql
-      - mssql
-      - mysql
-    expose:
-      - "8000"
+#      - mssql
+#      - mysql
+    # .env 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
+    environment:
+      - DJANGO_SUPERUSER_USERNAME=${DADMIN_ID}
+      - DJANGO_SUPERUSER_PASSWORD=${DADMIN_PASSWORD}
+      - DJANGO_SUPERUSER_EMAIL=${DADMIN_EMAIL}
     # python manage.py runserver 0:8000 역할을 gunicorn 에서 수행
     # gunicorn 장고프로젝트명.wsgi:application --bind 0.0.0.0:8000
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    # administration 유저 자동 생성 명령어
+    # && python manage.py createsuperuser --noinput
+    # wait_for_it.sh 파일을 이용하여 postgresql 컨테이너가 실행될 때까지 기다림
+    # wait_for_it.sh 파일은 django 프로젝트 폴더에 위치해야 함(WORKDIR)
+    command: >
+      bash -c "
+      chmod +x ./wait_for_it.sh
+      && ./wait_for_it.sh postgresql:5432 --timeout=120
+      && python manage.py collectstatic --noinput
+      && python manage.py makemigrations
+      && python manage.py makemigrations designer_server
+      && python manage.py migrate
+      && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     networks:
       - backend
 
