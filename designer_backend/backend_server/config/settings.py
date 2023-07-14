@@ -49,6 +49,9 @@ INSTALLED_APPS = [
 # /adim/ 화면 안뜨는 문제 해결 위해 추가
 # SITE_ID=1
 
+#  Forbidden (Origin checking failed - https://app.junobiz.com does not match any trusted origins.)
+CSRF_TRUSTED_ORIGINS = ['https://app.junobiz.com']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -148,3 +151,4 @@ STATIC_ROOT = './.static_root/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
