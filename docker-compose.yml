@@ -15,6 +15,7 @@ services:
     volumes:
       - ./nginx:/etc/nginx.conf.d
       - ./designer_backend/backend_server/.static_root/:/static
+      - ./designer_backend/backend_server/.media_root/:/media
     environment:
       - TZ=Asia/Seoul
     depends_on:
