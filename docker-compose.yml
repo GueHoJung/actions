@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nginx:
     container_name: nginx
-    image: nginx
+    image: nginx:1.25.1
     build: ./nginx
     ports:
       # 외부 포트: 내부 포트
@@ -32,7 +32,7 @@ services:
       - backend
 
   postgresql:
-    image: postgres:latest
+    image: postgres:15
     container_name: postgres
     # hostname: postgresql
     restart: always
