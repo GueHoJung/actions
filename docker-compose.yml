@@ -116,7 +116,7 @@ services:
       - DJANGO_SUPERUSER_EMAIL=${DADMIN_EMAIL}
     # python manage.py runserver 0:8000 역할을 gunicorn 에서 수행
     # gunicorn 장고프로젝트명.wsgi:application --bind 0.0.0.0:8000
-    # 유저 자동 생성 명령어
+    # administration 유저 자동 생성 명령어
     # && python manage.py createsuperuser --noinput
     # wait_for_it.sh 파일을 이용하여 postgresql 컨테이너가 실행될 때까지 기다림
     # wait_for_it.sh 파일은 django 프로젝트 폴더에 위치해야 함(WORKDIR)
