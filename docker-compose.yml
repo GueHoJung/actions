@@ -109,6 +109,7 @@ services:
       - postgresql
 #      - mssql
 #      - mysql
+    # .env 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
     environment:
       - DJANGO_SUPERUSER_USERNAME=${DADMIN_ID}
       - DJANGO_SUPERUSER_PASSWORD=${DADMIN_PASSWORD}
@@ -117,10 +118,12 @@ services:
     # gunicorn 장고프로젝트명.wsgi:application --bind 0.0.0.0:8000
     # 유저 자동 생성 명령어
     # && python manage.py createsuperuser --noinput
+    # wait_for_it.sh 파일을 이용하여 postgresql 컨테이너가 실행될 때까지 기다림
+    # wait_for_it.sh 파일은 django 프로젝트 폴더에 위치해야 함(WORKDIR)
     command: >
       bash -c "
       chmod +x ./wait_for_it.sh
-      && ./wait_for_it.sh postgresql:5432 --timeout=60
+      && ./wait_for_it.sh postgresql:5432 --timeout=120
       && python manage.py collectstatic --noinput
       && python manage.py makemigrations
       && python manage.py makemigrations designer_server
