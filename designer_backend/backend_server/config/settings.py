@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'designer_server',
     # django-admin startapp 으로 생선한 web
     'web',
+    # django-cors-headers
+    'corsheaders',
 ]
 
 # django admin화면 접속 시도시 Site matching query does not exist. 발생
