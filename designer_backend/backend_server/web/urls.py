@@ -10,6 +10,6 @@ router.register("ImageUpload", views.ItemViewSet)  # router에 viewset 등록
 
 # 진입점 설정
 urlpatterns = [
-    path('',views.index)
-
+    path('',views.index),
+    path('image_test',views.image_test)
 ]
