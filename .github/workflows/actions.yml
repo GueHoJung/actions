@@ -17,4 +17,4 @@ jobs:
       - name: Pull
         run: docker-compose pull
       - name: wait
-        run: docker-compose start
+        run: docker-compose up
