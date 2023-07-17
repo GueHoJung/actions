@@ -17,4 +17,4 @@ jobs:
       - name: Pull
         run: docker-compose pull
       - name: wait
-        run: docker-compose exec designer_backend ./wait_for_it.sh postgresql:5432 --timeout=120
+        run: docker-compose up --build
