@@ -38,7 +38,7 @@
 #             - test: 누락된 테스트 추가 또는 기존 테스트 수정
 #           <scope>
 #             - 선택 입력
-#             - 변경 사항에 영향 받는 npm 패키지 이름
+#             - 변경 사항에 영향 받는 패키지 이름
 #             - location, browser, compile, rootScope ...
 #           <short summary>
 #             - 필수 입력

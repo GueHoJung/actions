@@ -14,7 +14,7 @@ WORKDIR /backend_server
 # get packages
 COPY ./designer_backend/$REQUIREMENT $REQUIREMENT
 RUN pip install --upgrade pip
-RUN pip install --upgrade django-rest-framework
+# RUN pip install --upgrade django-rest-framework
 RUN pip install --no-cache-dir -r ./$REQUIREMENT
 
 
