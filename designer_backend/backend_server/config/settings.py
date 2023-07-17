@@ -58,6 +58,10 @@ INSTALLED_APPS = [
 #  Forbidden (Origin checking failed - https://app.junobiz.com does not match any trusted origins.)
 CSRF_TRUSTED_ORIGINS = ['https://app.junobiz.com']
 
+# CORS Error 대응
+# CORS_ORIGIN_WHITELIST = [] 설정도 가능, 하지만 CORS_ORIGIN_ALLOW_ALL = True 설정으로 모든 도메인 허용
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
