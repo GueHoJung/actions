@@ -24,8 +24,8 @@ services:
       - backend
 
   redis: # See Also: https://hub.docker.com/_/redis
-    container_name: softstoneghjung/redis:1.0
-    image: redis:7.0.5-alpine
+    image: softstoneghjung/redis:1.0
+    container_name: redis:7.0.5-alpine
     hostname: hostname-redis
     ports:
       - "6379:6379"
