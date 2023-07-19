@@ -19,10 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used _in production secret!
 SECRET_KEY = 'django-insecure-j!pi9-@b^sn0l0!%=-hj=!oe!voy!(0fl-)4^j9nodvg7tsxw!'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on _in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -49,6 +49,15 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+# settings.py
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ]
+}
+
 # django admin화면 접속 시도시 Site matching query does not exist. 발생
 # /adim/ 화면 안뜨는 문제 해결 위해 추가
 # SITE_ID=1
@@ -56,9 +65,14 @@ INSTALLED_APPS = [
 #  Forbidden (Origin checking failed - https://app.junobiz.com does not match any trusted origins.)
 CSRF_TRUSTED_ORIGINS = ['https://app.junobiz.com']
 
-# CORS Error 대응
+# CORS Error 대응 https://dzone.com/articles/how-to-fix-django-cors-error
 # CORS_ORIGIN_WHITELIST = [] 설정도 가능, 하지만 CORS_ORIGIN_ALLOW_ALL = True 설정으로 모든 도메인 허용
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    'https://app.junobiz.com',
+]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # CORS Error 대응
