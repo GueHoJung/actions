@@ -12,6 +12,7 @@ services:
       - "443:443"
       # server port mapping sample
       # - "8080:8080"
+    # CORS 문제 해결 관련
     volumes:
       - ./nginx:/etc/nginx.conf.d
       - ./designer_backend/backend_server/.static_root/:/static
@@ -98,7 +99,7 @@ services:
 
 
   designer_backend: # designer_backend
-    image: designer_backend
+    image: softstoneghjung/designer_backend
     container_name: designer_backend
     build:
         context: .
@@ -132,6 +133,14 @@ services:
       && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     networks:
       - backend
+
+#  swagger_editor:
+#    image: swaggerapi/swagger-editor
+#    container_name: swagger_editor
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - backend
 
 networks:
   backend:

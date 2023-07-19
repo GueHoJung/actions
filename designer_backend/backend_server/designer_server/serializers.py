@@ -12,3 +12,11 @@ class ItemSerializer(serializers.ModelSerializer):
 
         # 옵션
         ordering_fields = 'id'
+
+
+class PostRequestSerializer(serializers.Serializer):
+    body = serializers.CharField()
+
+
+class PostResponseSerializer(serializers.Serializer):
+    status = serializers.CharField()
