@@ -11,7 +11,7 @@ pre.highlight code * {
 }
 
 pre.highlight {
-  overflow-x: auto;       /* this sets the scrolling in x */
+  overflow-x: auto;       /* this sets the scrolling _in x */
 }
 
 pre.highlight code {

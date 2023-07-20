@@ -48,7 +48,7 @@
             if (addButton === null) {
                 if ($this.prop("tagName") === "TR") {
                     // If forms are laid out as table rows, insert the
-                    // "add" button in a new table row:
+                    // "add" button _in a new table row:
                     const numCols = $this.eq(-1).children().length;
                     $parent.append('<tr class="' + options.addCssClass + '"><td colspan="' + numCols + '"><a href="#">' + options.addText + "</a></tr>");
                     addButton = $parent.find("tr:last a");
@@ -102,7 +102,7 @@
          */
         const addInlineDeleteButton = function(row) {
             if (row.is("tr")) {
-                // If the forms are laid out in table rows, insert
+                // If the forms are laid out _in table rows, insert
                 // the remove button into the last table cell:
                 row.children(":last").append('<div><a class="' + options.deleteCssClass + '" href="#">' + options.deleteText + "</a></div>");
             } else if (row.is("ul") || row.is("ol")) {
@@ -150,7 +150,7 @@
             // Hide the remove buttons if at min_num.
             toggleDeleteButtonVisibility(inlineGroup);
             // Also, update names and ids for all remaining form controls so
-            // they remain in sequence:
+            // they remain _in sequence:
             let i, formCount;
             const updateElementCallback = function() {
                 updateElementIndex(this, options.prefix, i);
@@ -203,7 +203,7 @@
         addCssClass: "add-row", // CSS class applied to the add link
         deleteCssClass: "delete-row", // CSS class applied to the delete link
         emptyCssClass: "empty-row", // CSS class applied to the empty row
-        formCssClass: "dynamic-form", // CSS class applied to each form in a formset
+        formCssClass: "dynamic-form", // CSS class applied to each form _in a formset
         added: null, // Function called each time a new form is added
         removed: null, // Function called each time a form is deleted
         addButton: null // Existing add button to use
@@ -305,7 +305,7 @@
                     dependency_list = input.data('dependency_list') || [],
                     dependencies = [];
                 $.each(dependency_list, function(i, field_name) {
-                    // Dependency in a fieldset.
+                    // Dependency _in a fieldset.
                     let field_element = row.find('.form-row .field-' + field_name);
                     // Dependency without a fieldset.
                     if (!field_element.length) {

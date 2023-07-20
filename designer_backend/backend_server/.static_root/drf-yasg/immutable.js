@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * This source code is licensed under the MIT license found _in the
+ * LICENSE file _in the root directory of this source tree.
  */
 
 (function (global, factory) {
@@ -82,7 +82,7 @@
   var DELETE = 'delete';
 
   // Constants describing the size of trie nodes.
-  var SHIFT = 5; // Resulted in best performance after ______?
+  var SHIFT = 5; // Resulted _in best performance after ______?
   var SIZE = 1 << SHIFT;
   var MASK = SIZE - 1;
 
@@ -381,7 +381,7 @@
       var array = this._array;
       var maxIndex = array.length - 1;
       var ii = 0;
-      return new Iterator(function() 
+      return new Iterator(function()
         {return ii > maxIndex ?
           iteratorDone() :
           iteratorValue(type, ii, array[reverse ? maxIndex - ii++ : ii++])}
@@ -688,7 +688,7 @@
    *     assert( a.equals(b) === b.equals(a) );
    *
    * `hashCode` returns a 32bit integer number representing the object which will
-   * be used to determine how to store the value object in a Map or Set. You must
+   * be used to determine how to store the value object _in a Map or Set. You must
    * provide both or neither methods, one must not exist without the other.
    *
    * Also, an important relationship between these methods must be upheld: if two
@@ -852,7 +852,7 @@
 
     Repeat.prototype.__iterator = function(type, reverse) {var this$0 = this;
       var ii = 0;
-      return new Iterator(function() 
+      return new Iterator(function()
         {return ii < this$0.size ? iteratorValue(type, ii++, this$0._value) : iteratorDone()}
       );
     };
@@ -1014,7 +1014,7 @@
 
   // v8 has an optimization for storing 31-bit signed numbers.
   // Values which have either 00 or 11 as the high order bits qualify.
-  // This function drops the highest order bit in a signed number, maintaining
+  // This function drops the highest order bit _in a signed number, maintaining
   // the sign bit.
   function smi(i32) {
     return ((i32 >>> 1) & 0x40000000) | (i32 & 0xBFFFFFFF);
@@ -1138,7 +1138,7 @@
                obj.propertyIsEnumerable === obj.constructor.prototype.propertyIsEnumerable) {
       // Since we can't define a non-enumerable property on the object
       // we'll hijack one of the less-used non-enumerable properties to
-      // save our hash on it. Since this is a function it will not show up in
+      // save our hash on it. Since this is a function it will not show up _in
       // `JSON.stringify` which is what we want.
       obj.propertyIsEnumerable = function() {
         return this.constructor.prototype.propertyIsEnumerable.apply(this, arguments);
@@ -2917,7 +2917,7 @@
     FromEntriesSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
       return this._iter.__iterate(function(entry ) {
         // Check if entry exists first so array access doesn't throw for holes
-        // in the parent iteration.
+        // _in the parent iteration.
         if (entry) {
           validateEntry(entry);
           var indexedIterable = isIterable(entry);
@@ -2940,7 +2940,7 @@
           }
           var entry = step.value;
           // Check if entry exists first so array access doesn't throw for holes
-          // in the parent iteration.
+          // _in the parent iteration.
           if (entry) {
             validateEntry(entry);
             var indexedIterable = isIterable(entry);
@@ -3050,7 +3050,7 @@
         return flipSequence;
       };
     }
-    reversedSequence.get = function(key, notSetValue) 
+    reversedSequence.get = function(key, notSetValue)
       {return iterable.get(useKeys ? key : -1 - key, notSetValue)};
     reversedSequence.has = function(key )
       {return iterable.has(useKeys ? key : -1 - key)};
@@ -3249,7 +3249,7 @@
         return this.cacheResult().__iterate(fn, reverse);
       }
       var iterations = 0;
-      iterable.__iterate(function(v, k, c) 
+      iterable.__iterate(function(v, k, c)
         {return predicate.call(context, v, k, c) && ++iterations && fn(v, k, this$0)}
       );
       return iterations;
@@ -3440,7 +3440,7 @@
     interposedSequence.size = iterable.size && iterable.size * 2 -1;
     interposedSequence.__iterateUncached = function(fn, reverse) {var this$0 = this;
       var iterations = 0;
-      iterable.__iterate(function(v, k) 
+      iterable.__iterate(function(v, k)
         {return (!iterations || fn(separator, iterations++, this$0) !== false) &&
         fn(v, iterations++, this$0) !== false},
         reverse
@@ -3504,7 +3504,7 @@
   function maxCompare(comparator, a, b) {
     var comp = comparator(b, a);
     // b is considered the new max if the comparator declares them equal, but
-    // they are not equal and b is in fact a nullish value.
+    // they are not equal and b is _in fact a nullish value.
     return (comp === 0 && b !== a && (b === undefined || b === null || b !== b)) || comp > 0;
   }
 
@@ -3512,8 +3512,8 @@
   function zipWithFactory(keyIter, zipper, iters) {
     var zipSequence = makeSequence(keyIter);
     zipSequence.size = new ArraySeq(iters).map(function(i ) {return i.size}).min();
-    // Note: this a generic base implementation of __iterate in terms of
-    // __iterator which may be more generically useful in the future.
+    // Note: this a generic base implementation of __iterate _in terms of
+    // __iterator which may be more generically useful _in the future.
     zipSequence.__iterate = function(fn, reverse) {
       /* generic:
       var iterator = this.__iterator(ITERATE_ENTRIES, reverse);
@@ -3614,7 +3614,7 @@
   function forceIterator(keyPath) {
     var iter = getIterator(keyPath);
     if (!iter) {
-      // Array might not be iterable in this environment, so we need a fallback
+      // Array might not be iterable _in this environment, so we need a fallback
       // to our wrapped type.
       if (!isArrayLike(keyPath)) {
         throw new TypeError('Expected iterable or array-like: ' + keyPath);
@@ -4536,7 +4536,7 @@
 
     getIn: function(searchKeyPath, notSetValue) {
       var nested = this;
-      // Note: in an ES6 environment, we would prefer:
+      // Note: _in an ES6 environment, we would prefer:
       // for (var key of searchKeyPath) {
       var iter = forceIterator(searchKeyPath);
       var step;
@@ -4759,7 +4759,7 @@
       }
       // If index is negative, it should resolve relative to the size of the
       // collection. However size may be expensive to compute if not cached, so
-      // only call count() if the number is in fact negative.
+      // only call count() if the number is _in fact negative.
       index = resolveBegin(index, index < 0 ? this.count() : this.size);
       var spliced = this.slice(0, index);
       return reify(

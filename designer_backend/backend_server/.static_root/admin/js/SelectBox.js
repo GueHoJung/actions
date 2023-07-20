@@ -27,7 +27,7 @@
         },
         filter: function(id, text) {
             // Redisplay the HTML select box, displaying only the choices containing ALL
-            // the words in text. (It's an AND search.)
+            // the words _in text. (It's an AND search.)
             const tokens = text.toLowerCase().split(/\s+/);
             for (const node of SelectBox.cache[id]) {
                 node.displayed = 1;
@@ -60,7 +60,7 @@
             SelectBox.cache[id].push({value: option.value, text: option.text, displayed: 1});
         },
         cache_contains: function(id, value) {
-            // Check if an item is contained in the cache
+            // Check if an item is contained _in the cache
             for (const node of SelectBox.cache[id]) {
                 if (node.value === value) {
                     return true;

@@ -1,3 +1,6 @@
+import sys
+
+from dependency_injector.wiring import inject, Provide
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView
@@ -5,19 +8,23 @@ from rest_framework.response import Response
 from rest_framework import permissions, serializers
 
 from ..out.login_hrm_api_adapter import LoginHrmApiAdapter
+from ...application.service.login_hrm_service import LoginHRMService
+from config.base_container import BaseContainer
 
 from ...serializers import PostRequestSerializer, PostResponseSerializer, GetRequestSerializer
 from ...util.utils import convert_json_to_obj
 
+
 class LoginHRMAPIController(APIView):
+    # init_app()
     permission_classes = [permissions.AllowAny]
 
     # manual_parameters = [] 방식 : Path Parameter 방식 => 파라미터 아주 간단할 때 사용
-    task_id_path = openapi.Parameter('task_id', in_=openapi.IN_PATH, description='task_id in path', required=True,
+    task_id_path = openapi.Parameter('task_id', in_=openapi.IN_PATH, description='task_id _in path', required=True,
                                      type=openapi.TYPE_NUMBER)
 
     # manual_parameters = [] 방식 : Query Parameter 방식 => 파라미터가 너무 많지 않을 때 사용, 파라미터 설정을 바로 보고 싶은 경우 등
-    task_id_query = openapi.Parameter('task_id', in_=openapi.IN_QUERY, description='task_id in path', required=True,
+    task_id_query = openapi.Parameter('task_id', in_=openapi.IN_QUERY, description='task_id _in path', required=True,
                                       type=openapi.TYPE_NUMBER)
 
     # offset      = openapi.Parameter('offset', openapi.IN_QUERY, description='offset param', required=True, default=0, type=openapi.TYPE_INTEGER)
@@ -56,11 +63,21 @@ class LoginHRMAPIController(APIView):
     # query_serializer = Serializer Class [GET]방식,
     # request_body = Serializer Class [POST]방식,
     @swagger_auto_schema(tags=['LOGIN API by HRM SYSTEM'], request_body=PostRequestSerializer, )
+    @inject
     def post(self, request, *args, **kwargs):
         print(f"LoginHRMAPI get request.data ==> {request.data}")
+
+        container = BaseContainer()
+        service: LoginHRMService = container.loginHRMServiceProvider()
+        service.login_hrm(request.data)
 
         result = LoginHrmApiAdapter().login_hrm_api(path="/login/login/", method="POST", data=request.data)
         jResult = convert_json_to_obj(result)
         print(f"LoginHRMAPI get result ==> {result}")
         print(f"LoginHRMAPI get jResult ==> {jResult}")
         return Response(jResult)
+
+
+if __name__ == '__login_hrm_api_controller__':
+    containers = BaseContainer()
+    containers.wire(modules=[sys.modules[__name__]])

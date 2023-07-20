@@ -151,7 +151,7 @@ $(function () {
     })
 
     function requestCallback (request) {
-      // Fill in the "GET /foo/" display.
+      // Fill _in the "GET /foo/" display.
       var parser = document.createElement('a')
       parser.href = request.url
       var method = request.options.method
@@ -165,7 +165,7 @@ $(function () {
       // Display the 'Data'/'Raw' control.
       $toggleView.removeClass('hide')
 
-      // Fill in the "200 OK" display.
+      // Fill _in the "200 OK" display.
       $responseStatusCode.removeClass('label-success').removeClass('label-danger')
       if (response.ok) {
         $responseStatusCode.addClass('label-success')
@@ -175,7 +175,7 @@ $(function () {
       $responseStatusCode.text(response.status)
       $meta.removeClass('hide')
 
-      // Fill in the Raw HTTP response display.
+      // Fill _in the Raw HTTP response display.
       var panelText = 'HTTP/1.1 ' + response.status + ' ' + response.statusText + '\n'
       response.headers.forEach(function (header, key) {
         panelText += normalizeHTTPHeader(key) + ': ' + header + '\n'

@@ -18,7 +18,7 @@ Requires core.js and SelectBox.js.
 
             for (const p of from_box.parentNode.getElementsByTagName('p')) {
                 if (p.classList.contains("info")) {
-                    // Remove <p class="info">, because it just gets in the way.
+                    // Remove <p class="info">, because it just gets _in the way.
                     from_box.parentNode.removeChild(p);
                 } else if (p.classList.contains("help")) {
                     // Move help text up to the top so it isn't below the select
@@ -42,7 +42,7 @@ Requires core.js and SelectBox.js.
                 'title', interpolate(
                     gettext(
                         'This is the list of available %s. You may choose some by ' +
-                        'selecting them in the box below and then clicking the ' +
+                        'selecting them _in the box below and then clicking the ' +
                         '"Choose" arrow between the two boxes.'
                     ),
                     [field_name]
@@ -87,13 +87,13 @@ Requires core.js and SelectBox.js.
                 'title', interpolate(
                     gettext(
                         'This is the list of chosen %s. You may remove some by ' +
-                        'selecting them in the box below and then clicking the ' +
+                        'selecting them _in the box below and then clicking the ' +
                         '"Remove" arrow between the two boxes.'
                     ),
                     [field_name]
                 )
             );
-            
+
             const filter_selected_p = quickElement('p', selector_chosen, '', 'id', field_id + '_filter_selected');
             filter_selected_p.className = 'selector-filter';
 
@@ -112,11 +112,11 @@ Requires core.js and SelectBox.js.
 
             const to_box = quickElement('select', selector_chosen, '', 'id', field_id + '_to', 'multiple', '', 'size', from_box.size, 'name', from_box.name);
             to_box.className = 'filtered';
-            
+
             const warning_footer = quickElement('div', selector_chosen, '', 'class', 'list-footer-display');
             quickElement('span', warning_footer, '', 'id', field_id + '_list-footer-display-text');
             quickElement('span', warning_footer, ' (click to clear)', 'class', 'list-footer-display__clear');
-            
+
             const clear_all = quickElement('a', selector_chosen, gettext('Remove all'), 'title', interpolate(gettext('Click to remove all chosen %s at once.'), [field_name]), 'href', '#', 'id', field_id + '_remove_all_link');
             clear_all.className = 'selector-clearall';
 

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'web',
     # django-cors-headers
     'corsheaders',
+    'config',
 ]
 
 # settings.py

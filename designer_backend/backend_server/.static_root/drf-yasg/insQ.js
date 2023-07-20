@@ -72,7 +72,7 @@ var insertionQ = (function () {
 
 
     function tag(el) {
-        el.QinsQ = true; //bug in V8 causes memory leaks when weird characters are used as field names. I don't want to risk leaking DOM trees so the key is not '-+-' anymore
+        el.QinsQ = true; //bug _in V8 causes memory leaks when weird characters are used as field names. I don't want to risk leaking DOM trees so the key is not '-+-' anymore
     }
 
     function isTagged(el) {

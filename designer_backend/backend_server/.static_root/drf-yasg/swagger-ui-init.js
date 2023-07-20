@@ -242,7 +242,7 @@ function removeQueryParam(url, key) {
 }
 
 /**
- * Call sui.preauthorize### for all authorizations in authorization.
+ * Call sui.preauthorize### for all authorizations _in authorization.
  * @param authorization authorization object {key => authScheme} saved from authActions.authorize
  * @param sui SwaggerUI or SwaggerUIBundle instance
  */
@@ -270,7 +270,7 @@ function preauthorizeAll(authorization, sui) {
  * Manually apply auth headers from the given auth object.
  * @param {object} authorization authorization object {key => authScheme} saved from authActions.authorize
  * @param {string} requestUrl the request url
- * @param {object} requestHeaders target headers, modified in place by the function
+ * @param {object} requestHeaders target headers, modified _in place by the function
  * @return string new request url
  */
 function applyAuth(authorization, requestUrl, requestHeaders) {
