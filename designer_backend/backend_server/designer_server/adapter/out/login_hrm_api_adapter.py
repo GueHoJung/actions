@@ -1,7 +1,4 @@
-import json
-
 import requests
-import json
 
 
 class LoginHrmApiAdapter:
@@ -19,45 +16,21 @@ class LoginHrmApiAdapter:
         }
         is_verify = True
         print(f"LoginHRMAPI get data ==> {data}")
-        # jBody = convert_json_to_obj(data.body)
-        jBody = convert_dict_to_json(data)
+        # response = None
 
         try:
             if method == 'GET':
                 response = requests.get(url, headers=headers)
             elif method == 'POST':
-                # response = requests.post(url, headers=headers, data=json.dumps(body, ensure_ascii=False, indent="\t"))
-                response = requests.post(url, json=jBody, headers=headers, verify=is_verify, timeout=8)
-                print("response status %r" % response.status_code)
-                print("response text %r" % response.text)
+                response = requests.post(url, json=data, headers=headers, verify=is_verify, timeout=8)
+                print("0. response status %r" % response.status_code)
+                print("0. response text %r" % response.text)
                 if response.ok:
-                    print("response status %r" % response.status_code)
-                    print("response text %r" % response.text)
+                    print("1. response status %r" % response.status_code)
+                    print("1. response text %r" % response.text)
                     return response.text
+
         except Exception as ex:
             print(ex)
 
 
-# convert json to object
-def convert_json_to_obj(data):
-    """
-    json string 을 object 로 변환
-    :param data: request data 혹은 interface response data
-    :return: object
-    """
-    if isinstance(data, str):
-        return json.loads(data)
-    else:
-        return json.loads(data.body.decode('utf-8'))
-
-
-def convert_dict_to_json(data):
-    """
-    dictionary data 를 json 형식으로 변환
-    :param data: dictionary type data
-    :return: object
-    """
-    if isinstance(data, dict):
-        return json.dumps(data, ensure_ascii=False)
-    else:
-        return data

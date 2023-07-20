@@ -14,8 +14,16 @@ class ItemSerializer(serializers.ModelSerializer):
         ordering_fields = 'id'
 
 
+class GetRequestSerializer(serializers.Serializer):
+    param1 = serializers.CharField(help_text="HRM LOGIN PARAM JSON BODY", required=True)
+
+
+class GetResponseSerializer(serializers.Serializer):
+    param1 = serializers.CharField(help_text="HRM LOGIN PARAM JSON BODY", required=True)
+
+
 class PostRequestSerializer(serializers.Serializer):
-    body = serializers.CharField()
+    body = serializers.CharField(help_text="HRM LOGIN PARAM JSON BODY", required=True)
 
 
 class PostResponseSerializer(serializers.Serializer):
