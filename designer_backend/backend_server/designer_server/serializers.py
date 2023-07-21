@@ -17,14 +17,26 @@ class ItemSerializer(serializers.ModelSerializer):
 class GetRequestSerializer(serializers.Serializer):
     param1 = serializers.CharField(help_text="HRM LOGIN PARAM JSON BODY", required=True)
 
+    class Meta :
+        ref_name = 'DesignerServer_GetRequestSerializer'
+
 
 class GetResponseSerializer(serializers.Serializer):
     param1 = serializers.CharField(help_text="HRM LOGIN PARAM JSON BODY", required=True)
+
+    class Meta :
+        ref_name = 'DesignerServer_GetResponseSerializer'
 
 
 class PostRequestSerializer(serializers.Serializer):
     body = serializers.CharField(help_text="HRM LOGIN PARAM JSON BODY", required=True)
 
+    class Meta :
+        ref_name = 'DesignerServer_PostRequestSerializer'
+
 
 class PostResponseSerializer(serializers.Serializer):
     status = serializers.CharField()
+
+    class Meta :
+        ref_name = 'DesignerServer_PostResponseSerializer'

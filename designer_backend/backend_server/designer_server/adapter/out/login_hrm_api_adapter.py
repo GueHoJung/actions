@@ -1,9 +1,34 @@
 import requests
 
 
-class LoginApiAdapter:
-
+class LoginHrmApiAdapter:
+    """
+    # CLASS : LoginHRMApiAdapter
+    # AUTHOR : jung-gyuho
+    # TIME : 2023/07/21 1:59 PM
+    # DESCRIPTION
+        - LoginHRMApiAdapter
+        - HRM Login API 호출
+    """
     def login_hrm_api(self, path, method, data):
+        """
+        # login_hrm_api 설명
+
+        # PARAMS
+            path : BASE URL 이하 경로
+            method : POST 사용, GET, POST 등
+            data : Login Json Data
+        # RETURN
+            return response.text
+        # DESCRIPTION
+            HRM SYSTEM Login API 호출
+            로그인 후 권한에 맞는 정보 리턴
+            토큰 발행 X
+        ==================================================
+        AUTHOR              DATE                NOTE
+        --------------------------------------------------
+        jung-gyuho              2023/07/21 2:32 PM       최초 작성
+        """
         API_HOST = "http://192.168.0.100:9001"
         url = API_HOST + path
         headers = {'Content-Type': 'application/json; charset=utf-8'}
@@ -23,11 +48,11 @@ class LoginApiAdapter:
                 response = requests.get(url, headers=headers)
             elif method == 'POST':
                 response = requests.post(url, json=data, headers=headers, verify=is_verify, timeout=8)
-                print("0. response status %r" % response.status_code)
+                # print("0. response status %r" % response.status_code)
                 print("0. response text %r" % response.text)
                 if response.ok:
-                    print("1. response status %r" % response.status_code)
-                    print("1. response text %r" % response.text)
+                    # print("1. response status %r" % response.status_code)
+                    # print("1. response text %r" % response.text)
                     return response.text
 
         except Exception as ex:

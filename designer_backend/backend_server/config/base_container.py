@@ -3,10 +3,22 @@ from dependency_injector.containers import DeclarativeContainer
 from dependency_injector.providers import Configuration, Singleton
 
 from designer_server.application.service.login_service import LoginService
-from designer_server.application.port._in.login_in_port import LoginInHRMAPI
-from designer_server.application.port.out.login_out_port import LoginOutHRMAPI
-from designer_server.adapter.out.login_api_adapter import LoginApiAdapter
+from designer_server.application.port._in.login_in_port import LoginInHrmAPI
+from designer_server.application.port._in.login_in_port import LoginInCrmAPI
+from designer_server.application.port.out.login_out_port import LoginOutHrmAPI
+from designer_server.application.port.out.login_out_port import LoginOutCrmAPI
+from designer_server.adapter.out.login_hrm_api_adapter import LoginHrmApiAdapter
+from designer_server.adapter.out.login_crm_api_adapter import LoginCrmApiAdapter
 
+from reservation.application.service.reservation_service import ReservationService
+from reservation.application.port.out.reservation_out_port import ReservationOutCrmAPI
+from reservation.application.port._in.reservation_in_port import ReservationInCrmImpl
+from reservation.adapter.out.reservation_api_adapter import ReservationApiAdapter
+
+from customer.application.service.customer_service import CustomerService
+from customer.application.port.out.customer_out_port import CustomerOutCrmImpl
+from customer.application.port._in.customer_in_port import CustomerInCrmImpl
+from customer.adapter.out.customer_api_adapter import CustomerApiAdapter
 
 class BaseContainer(DeclarativeContainer):
     """
@@ -20,19 +32,26 @@ class BaseContainer(DeclarativeContainer):
 
     config = Configuration()
 
-    # Login API 의존성 주입
-    loginHRMApiAdapterProvider = providers.Singleton(LoginApiAdapter)
     # HRM Login API 의존성 주입
-    loginOutHRMPortProvider = providers.Singleton(LoginOutHRMAPI, loginHrmApiAdapter=loginHRMApiAdapterProvider)
-    loginHRMServiceProvider = providers.Singleton(LoginService, portInImpl= LoginInHRMAPI, portOutImpl= loginOutHRMPortProvider)
+    loginHrmApiAdapterProvider = providers.Singleton(LoginHrmApiAdapter)
+    loginOutHrmPortProvider = providers.Singleton(LoginOutHrmAPI, loginHrmApiAdapter=loginHrmApiAdapterProvider)
+    loginHrmServiceProvider = providers.Singleton(LoginService, portInImpl=LoginInHrmAPI,
+                                                  portOutImpl=loginOutHrmPortProvider)
 
     # CRM Login API 의존성 주입
-
-
-
-
-
-if __name__ == "__main__":
-    container = BaseContainer()
-
-    loginHRMServiceProvider = container.loginHRMServiceProvider()
+    loginCrmApiAdapterProvider = providers.Singleton(LoginCrmApiAdapter)
+    loginOutCrmPortProvider = providers.Singleton(LoginOutCrmAPI, loginCrmApiAdapter=loginCrmApiAdapterProvider)
+    loginCrmServiceProvider = providers.Singleton(LoginService, portInImpl=LoginInCrmAPI,
+                                                  portOutImpl=loginOutCrmPortProvider)
+    # CRM Reservation API 의존성 주입
+    reservationCrmApiAdapterProvider = providers.Singleton(ReservationApiAdapter)
+    reservationOutCrmPortProvider = providers.Singleton(ReservationOutCrmAPI,
+                                                        reservationCrmApiAdapter=reservationCrmApiAdapterProvider)
+    reservationCrmServiceProvider = providers.Singleton(ReservationService, portInImpl=ReservationInCrmImpl,
+                                                        portOutImpl=reservationOutCrmPortProvider)
+    # CRM Customer API 의존성 주입
+    customerCrmApiAdapterProvider = providers.Singleton(CustomerApiAdapter)
+    customerOutCrmPortProvider = providers.Singleton(CustomerOutCrmImpl,
+                                                     customerCrmApiAdapter=customerCrmApiAdapterProvider)
+    customerCrmServiceProvider = providers.Singleton(CustomerService, portInImpl=CustomerInCrmImpl,
+                                                     portOutImpl=customerOutCrmPortProvider)

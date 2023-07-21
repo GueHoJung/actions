@@ -41,13 +41,15 @@ INSTALLED_APPS = [
     'rest_framework',
     # yet another swagger,
     'drf_yasg',
-    # django-admin startapp 으로 생선한 designer_server
-    'designer_server',
-    # django-admin startapp 으로 생선한 web
-    'web',
     # django-cors-headers
     'corsheaders',
+    # django-admin startproject 으로 생성한 config
     'config',
+    # django-admin startapp 으로 생성 apps
+    'designer_server',
+    'web',
+    'reservation',
+    'customer',
 ]
 
 # settings.py

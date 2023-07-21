@@ -807,7 +807,7 @@ var determineTransport = function determineTransport(transports, url) {
     }
   }
 
-  throw Error('Unsupported scheme _in URL: ' + url);
+  throw Error('Unsupported scheme in URL: ' + url);
 };
 
 var negotiateDecoder = function negotiateDecoder(decoders, contentType) {
@@ -847,7 +847,7 @@ var negotiateDecoder = function negotiateDecoder(decoders, contentType) {
     }
   }
 
-  throw Error('Unsupported media _in Content-Type header: ' + contentType);
+  throw Error('Unsupported media in Content-Type header: ' + contentType);
 };
 
 var csrfSafeMethod = function csrfSafeMethod(method) {
@@ -866,7 +866,7 @@ module.exports = {
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
-// Return that as the export for use _in Webpack, Browserify etc.
+// Return that as the export for use in Webpack, Browserify etc.
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
@@ -990,7 +990,7 @@ var required = require('requires-port')
  * 1. The property we should set when parsing this value.
  * 2. Indication if it's backwards or forward parsing, when set as number it's
  *    the value of extra chars that should be split off.
- * 3. Inherit from location if non existing _in the parser.
+ * 3. Inherit from location if non existing in the parser.
  * 4. `toLowerCase` the resulting value.
  */
 var rules = [
@@ -1006,7 +1006,7 @@ var rules = [
 /**
  * @typedef ProtocolExtract
  * @type Object
- * @property {String} protocol Protocol matched _in the URL, _in lowercase.
+ * @property {String} protocol Protocol matched in the URL, in lowercase.
  * @property {Boolean} slashes `true` if protocol is followed by "//", else `false`.
  * @property {String} rest Rest of the URL that is not part of the protocol.
  */
@@ -1063,7 +1063,7 @@ function resolve(relative, base) {
 }
 
 /**
- * The actual URL instance. Instead of returning an object we've opted-_in to
+ * The actual URL instance. Instead of returning an object we've opted-in to
  * create an actual constructor as it's much more memory efficient and
  * faster and it pleases my OCD.
  *
@@ -1153,8 +1153,8 @@ function URL(address, location, parser) {
   }
 
   //
-  // Also parse the supplied query string _in to an object. If we're supplied
-  // with a custom parser as function use that instead of the default build-_in
+  // Also parse the supplied query string in to an object. If we're supplied
+  // with a custom parser as function use that instead of the default build-in
   // parser.
   //
   if (parser) url.query = parser(url.query);
@@ -1202,7 +1202,7 @@ function URL(address, location, parser) {
 }
 
 /**
- * This is convenience method for changing properties _in the URL instance to
+ * This is convenience method for changing properties in the URL instance to
  * insure that they all propagate correctly.
  *
  * @param {String} part          Property we need to adjust.
@@ -1289,7 +1289,7 @@ URL.prototype.set = function set(part, value, fn) {
 };
 
 /**
- * Transform the properties back _in to a valid and full URL string.
+ * Transform the properties back in to a valid and full URL string.
  *
  * @param {Function} stringify Optional query stringify function.
  * @returns {String}
@@ -1353,8 +1353,8 @@ var ignore = { hash: 1, query: 1 }
  * The location object differs when your code is loaded through a normal page,
  * Worker or through a worker using a blob. And with the blobble begins the
  * trouble as the location object will contain the URL of the blob, not the
- * location of the page where our code is loaded _in. The actual origin is
- * encoded _in the `pathname` so we can thankfully generate a good "default"
+ * location of the page where our code is loaded in. The actual origin is
+ * encoded in the `pathname` so we can thankfully generate a good "default"
  * location from it so we can generate proper relative URL's again.
  *
  * @param {Object|String} loc Optional default location object.
@@ -1634,7 +1634,7 @@ module.exports = function lolcation(loc) {
       name = String(name)
     }
     if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
-      throw new TypeError('Invalid character _in header field name')
+      throw new TypeError('Invalid character in header field name')
     }
     return name.toLowerCase()
   }

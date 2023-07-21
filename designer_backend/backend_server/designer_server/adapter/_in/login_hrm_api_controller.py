@@ -12,10 +12,15 @@ from ...serializers import PostRequestSerializer
 from config.base_container import BaseContainer
 
 
-
-
-class LoginHRMAPIController(APIView):
-    # init_app()
+class LoginHrmApiController(APIView):
+    """
+    # CLASS : LoginHRMAPIController
+    # AUTHOR : jung-gyuho
+    # TIME : 2023/07/21 1:57 PM
+    # DESCRIPTION
+        - HRM SYSTEM LOGIN API
+        - DESIGNER APP 으로 부터 로그인 요청 받음
+    """
     permission_classes = [permissions.AllowAny]
 
     # manual_parameters = [] 방식 : Path Parameter 방식 => 파라미터 아주 간단할 때 사용
@@ -62,16 +67,14 @@ class LoginHRMAPIController(APIView):
     # query_serializer = Serializer Class [GET]방식,
     # request_body = Serializer Class [POST]방식,
     @swagger_auto_schema(tags=['LOGIN API by HRM SYSTEM'], operation_summary="HRM LOGIN API",
-                         operation_description="DESIGNER SYSTEM에서 HRM SYSTEM으로 로그인 요청 API",
+                         operation_description="# DESIGNER SERVER에서 HRM SYSTEM으로 로그인 요청 API",
                          request_body=PostRequestSerializer, responses={200: 'Success'})
     @inject
     def post(self, request, *args, **kwargs):
         print(f"Controller post get request.data ==> {request.data}")
 
         container = BaseContainer()
-        service: LoginService = container.loginHRMServiceProvider()
+        service: LoginService = container.loginHrmServiceProvider()
         result = service.login_hrm(request.data)
-
-        # result = LoginHrmApiAdapter().login_hrm_api(path="/login/login/", method="POST", data=request.data)
 
         return Response(result, status=200)
