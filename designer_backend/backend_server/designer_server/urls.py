@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 from . import views  # views.py import
-from .adapter._in.login_hrm_api_controller import LoginHRMAPIController
+from .adapter._in.login_hrm_api_controller import LoginAPIController
 
 
 app_name='designer_server_api'
@@ -18,5 +18,5 @@ urlpatterns = [
     # api_view decorator 방식 테스트
     path("designer_test/", views.designer_test),
     # Login HRM 연동 - APIView 방식
-    path("login/", LoginHRMAPIController.as_view()),
+    path("login/", LoginAPIController.as_view()),
 ]

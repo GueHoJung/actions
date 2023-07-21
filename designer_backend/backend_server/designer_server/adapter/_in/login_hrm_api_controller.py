@@ -7,12 +7,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, serializers
 
-from ..out.login_hrm_api_adapter import LoginHrmApiAdapter
-from ...application.service.login_hrm_service import LoginHRMService
+from ...application.service.login_service import LoginService
+from ...serializers import PostRequestSerializer
 from config.base_container import BaseContainer
 
-from ...serializers import PostRequestSerializer, PostResponseSerializer, GetRequestSerializer
-from ...util.utils import convert_json_to_obj
+
 
 
 class LoginHRMAPIController(APIView):
@@ -62,22 +61,17 @@ class LoginHRMAPIController(APIView):
     # Body 방식 : Serializer Class 방식 => 파라미터가 많을 때 사용, 파라미터 설정을 분리해 관리 하고 싶은 경우
     # query_serializer = Serializer Class [GET]방식,
     # request_body = Serializer Class [POST]방식,
-    @swagger_auto_schema(tags=['LOGIN API by HRM SYSTEM'], request_body=PostRequestSerializer, )
+    @swagger_auto_schema(tags=['LOGIN API by HRM SYSTEM'], operation_summary="HRM LOGIN API",
+                         operation_description="DESIGNER SYSTEM에서 HRM SYSTEM으로 로그인 요청 API",
+                         request_body=PostRequestSerializer, responses={200: 'Success'})
     @inject
     def post(self, request, *args, **kwargs):
-        print(f"LoginHRMAPI get request.data ==> {request.data}")
+        print(f"Controller post get request.data ==> {request.data}")
 
         container = BaseContainer()
-        service: LoginHRMService = container.loginHRMServiceProvider()
-        service.login_hrm(request.data)
+        service: LoginService = container.loginHRMServiceProvider()
+        result = service.login_hrm(request.data)
 
-        result = LoginHrmApiAdapter().login_hrm_api(path="/login/login/", method="POST", data=request.data)
-        jResult = convert_json_to_obj(result)
-        print(f"LoginHRMAPI get result ==> {result}")
-        print(f"LoginHRMAPI get jResult ==> {jResult}")
-        return Response(jResult)
+        # result = LoginHrmApiAdapter().login_hrm_api(path="/login/login/", method="POST", data=request.data)
 
-
-if __name__ == '__login_hrm_api_controller__':
-    containers = BaseContainer()
-    containers.wire(modules=[sys.modules[__name__]])
+        return Response(result, status=200)
