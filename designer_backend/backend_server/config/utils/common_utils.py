@@ -40,13 +40,13 @@ def call_crm_api(self, className, path, method, data):
 
             print("0. response status %r" % response.status_code)
             print("0. response text %r" % response.text)
-            print(f"0. {className} : LoginCrmAPI response.cookies ==> {response.cookies}")
+            print(f"0. {className} : call_crm_api response.cookies ==> {response.cookies}")
             if response.ok:
                 # print("1. response status %r" % response.status_code)
                 # print("1. response text %r" % response.text)
                 # requests.cookies = response.cookies
                 # csrftoken = response.cookies['csrftoken']
-                print(f"1. {className} : LoginCrmAPI response.cookies ==> {response.cookies}")
+                print(f"1. {className} : call_crm_api response.cookies ==> {response.cookies}")
                 return response.text
 
     except Exception as ex:

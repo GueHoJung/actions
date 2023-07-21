@@ -24,7 +24,7 @@ from drf_yasg import openapi
 schema_url_v1_patterns = [
     path('v1/', include('designer_server.urls', namespace='designer_server_api')),
     path('reservation/', include('reservation.urls', namespace='reservation')),
-    path('customer/', include('customer.urls', namespace='customer')),
+    # path('customer/', include('customer.urls', namespace='customer')),
 ]
 
 schema_view_v1 = get_schema_view(
@@ -48,7 +48,7 @@ urlpatterns = [
     path('v1/', include('designer_server.urls')),
     path('', include('web.urls')),
     path('reservation/', include('reservation.urls')),
-    path('customer/', include('customer.urls')),
+    # path('customer/', include('customer.urls')),
 
     # Auto DRF API docs
     re_path(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),

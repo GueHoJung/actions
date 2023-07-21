@@ -20,6 +20,7 @@ from customer.application.port.out.customer_out_port import CustomerOutCrmImpl
 from customer.application.port._in.customer_in_port import CustomerInCrmImpl
 from customer.adapter.out.customer_api_adapter import CustomerApiAdapter
 
+
 class BaseContainer(DeclarativeContainer):
     """
     # Base container.

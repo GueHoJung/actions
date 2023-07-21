@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # django-admin startapp 으로 생성 apps
     'designer_server',
     'web',
+    'hexagonal_archi_template',
     'reservation',
     'customer',
 ]
