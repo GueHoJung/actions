@@ -1,0 +1,163 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.25.1
+    build: ./nginx
+    ports:
+      # 외부 포트: 내부 포트
+      # designer_backend port mapping
+      - "80:80"
+      - "443:443"
+      # server port mapping sample
+      # - "8080:8080"
+    # CORS 문제 해결 관련
+    volumes:
+      - ./nginx:/etc/nginx.conf.d
+      - ./designer_backend/backend_server/.static_root/:/static
+      - ./designer_backend/backend_server/.media_root/:/media
+    env_file:
+      - ./.env.dev  # 개발에서 쓰이는 환경변수
+#    environment:
+#      - TZ=Asia/Seoul
+    depends_on:
+      - designer_backend
+    networks:
+      - backend
+
+  redis: # See Also: https://hub.docker.com/_/redis
+    container_name: redis
+    image: redis:7.0.5-alpine
+    hostname: hostname-redis
+    ports:
+      - "6379:6379"
+    env_file:
+      - ./.env.dev  # 개발에서 쓰이는 환경변수
+    networks:
+      - backend
+
+  postgresql:
+    container_name: postgres
+    image: postgres:15
+    # hostname: postgresql
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env.dev  # 개발에서 쓰이는 환경변수
+#    environment:
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      POSTGRES_INITDB_ARGS: ${POSTGRES_INITDB_ARGS}
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+#  mysql: # See Also: https://hub.docker.com/_/mysql
+#    container_name: mysql
+#    image: mysql:8.0.31
+#    hostname: hostname-mysql
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: designer_app
+#      # MYSQL_USER: root
+#      MYSQL_PASSWORD: root
+#      TZ: Asia/Seoul
+#    networks:
+#      - backend
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - ./mysql/conf.d:/etc/mysql/conf.d
+#      - ./mysql/data:/var/lib/mysql
+#      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+##    env_file: ..env_BAK
+#    expose:
+#      - "3306"
+
+#  mssql: # See Also: https://hub.docker.com/_/mysql
+#    container_name: mssql
+#    image: mcr.microsoft.com/azure-sql-edge
+#    hostname: hostname-mssql
+#    restart: always
+#    user: root
+#    environment:
+#      ACCEPT_EULA: "Y"
+#      MSSQL_USER: "SA"
+#      MSSQL_SA_PASSWORD: "Rajhans123@" # "Password.1"
+#      MSSQL_PID: Developer
+#    networks:
+#      - backend
+#    ports:
+#      - "51433:1433"
+##      - "1431:1433"
+#    volumes:
+#      - ./mssql/data:/var/lib/mssql
+#    #    env_file: ..env_BAK
+##    expose:
+##      - "1433"
+##      - "1431"
+
+
+  designer_backend: # designer_backend
+    image: designer_backend
+    container_name: designer_backend
+    build:
+        context: .
+        dockerfile: ./designer_backend/Dockerfile
+    volumes:
+      - ./designer_backend/backend_server:/backend_server
+    depends_on:
+      - redis
+      - postgresql
+#      - mssql
+#      - mysql
+    # ..env_BAK 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
+    env_file:
+      - ./.env.dev  # 개발에서 쓰이는 환경변수
+#    environment:
+#      - DJANGO_SUPERUSER_USERNAME=${DADMIN_ID}
+#      - DJANGO_SUPERUSER_PASSWORD=${DADMIN_PASSWORD}
+#      - DJANGO_SUPERUSER_EMAIL=${DADMIN_EMAIL}
+    # python manage.py runserver 0:8000 역할을 gunicorn 에서 수행
+    # gunicorn 장고프로젝트명.wsgi:application --bind 0.0.0.0:8000
+    # administration 유저 자동 생성 명령어
+    # DB init 환경이라면, migrate 명령 뒤에 위치해야 함
+    # && python manage.py createsuperuser --noinput
+    # wait_for_it.sh 파일을 이용하여 postgresql 컨테이너가 실행될 때까지 기다림
+    # wait_for_it.sh 파일은 django 프로젝트 폴더에 위치해야 함(WORKDIR)
+    command: >
+      bash -c "
+      chmod +x ./wait_for_it.sh
+      && ./wait_for_it.sh postgresql:5432 --timeout=120
+      && python manage.py collectstatic --noinput
+      && python manage.py makemigrations
+      && python manage.py makemigrations designer_server web reservation customer
+      && python manage.py migrate
+      && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+#      && gunicorn config.wsgi:application --bind 0.0.0.0:8001"
+    networks:
+      - backend
+
+#  swagger_editor:
+#    image: swaggerapi/swagger-editor
+#    container_name: swagger_editor
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+#volumes:
+#  sqlsystem:
+#  sqldata:
+#  sqllog:
+#  sqlbackup:

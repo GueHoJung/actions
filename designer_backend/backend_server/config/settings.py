@@ -12,20 +12,34 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+CRM_HOST_IP = env('CRM_HOST_IP')
+CRM_HOST_NAME = env('CRM_HOST_NAME')
+CRM_HOST_PORT = env('CRM_HOST_PORT')
+
+HRM_HOST_IP = env('HRM_HOST_IP')
+HRM_HOST_NAME = env('HRM_HOST_NAME')
+HRM_HOST_PORT = env('HRM_HOST_PORT')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used _in production secret!
-SECRET_KEY = 'django-insecure-j!pi9-@b^sn0l0!%=-hj=!oe!voy!(0fl-)4^j9nodvg7tsxw!'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on _in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG", default=False))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
 
 # Application definition
 
@@ -67,16 +81,14 @@ REST_FRAMEWORK = {
 # SITE_ID=1
 
 #  Forbidden (Origin checking failed - https://app.junobiz.com does not match any trusted origins.)
-CSRF_TRUSTED_ORIGINS = ['https://app.junobiz.com']
+CSRF_TRUSTED_ORIGINS = [os.environ.get("CSRF_TRUSTED_ORIGINS")]
 
 # CORS Error 대응 https://dzone.com/articles/how-to-fix-django-cors-error
 # CORS_ORIGIN_WHITELIST = [] 설정도 가능, 하지만 CORS_ORIGIN_ALLOW_ALL = True 설정으로 모든 도메인 허용
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False
-CORS_ALLOW_HEADERS = ['*']
-CORS_ALLOWED_ORIGINS = [
-    'https://app.junobiz.com',
-]
+CORS_ORIGIN_ALLOW_ALL = bool(os.environ.get("CORS_ORIGIN_ALLOW_ALL", default=False))
+CORS_ALLOW_CREDENTIALS = bool(os.environ.get("CORS_ALLOW_CREDENTIALS", default=False))
+CORS_ALLOW_HEADERS = [os.environ.get("CORS_ALLOW_HEADERS")]
+CORS_ALLOWED_ORIGINS = [os.environ.get("CORS_ALLOWED_ORIGINS")]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # CORS Error 대응
@@ -117,11 +129,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'designer_app',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'postgresql',
-        'PORT': 5432,
+        'NAME': os.environ.get("POSTGRES_DB"),
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+        'HOST': os.environ.get("POSTGRES_HOST"),
+        'PORT': os.environ.get("POSTGRES_PORT"),
     }
 }
 

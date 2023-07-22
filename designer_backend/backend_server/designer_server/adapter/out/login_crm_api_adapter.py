@@ -11,7 +11,7 @@ class LoginCrmApiAdapter:
         - CRM Login API 호출
     """
 
-    def login_crm_api(self, path, method, data):
+    def login_crm_api(self, api_host, path, method, data):
         """
         # login_hrm_api 설명
 
@@ -31,4 +31,4 @@ class LoginCrmApiAdapter:
         jung-gyuho              2023/07/21 2:32 PM       최초 작성
         """
 
-        return CommonUtils.call_crm_api(self, self.__class__.__name__, path, method, data)
+        return CommonUtils.call_crm_api(self, self.__class__.__name__, api_host, path, method, data)

@@ -15,10 +15,10 @@ from reservation.application.port.out.reservation_out_port import ReservationOut
 from reservation.application.port._in.reservation_in_port import ReservationInCrmImpl
 from reservation.adapter.out.reservation_api_adapter import ReservationApiAdapter
 
-from customer.application.service.customer_service import CustomerService
+from customer.adapter.out.customer_api_adapter import CustomerApiAdapter
 from customer.application.port.out.customer_out_port import CustomerOutCrmImpl
 from customer.application.port._in.customer_in_port import CustomerInCrmImpl
-from customer.adapter.out.customer_api_adapter import CustomerApiAdapter
+from customer.application.service.customer_service import CustomerService
 
 
 class BaseContainer(DeclarativeContainer):
@@ -53,6 +53,6 @@ class BaseContainer(DeclarativeContainer):
     # CRM Customer API 의존성 주입
     customerCrmApiAdapterProvider = providers.Singleton(CustomerApiAdapter)
     customerOutCrmPortProvider = providers.Singleton(CustomerOutCrmImpl,
-                                                     customerCrmApiAdapter=customerCrmApiAdapterProvider)
+                                                     customerApiAdapter=customerCrmApiAdapterProvider)
     customerCrmServiceProvider = providers.Singleton(CustomerService, portInImpl=CustomerInCrmImpl,
                                                      portOutImpl=customerOutCrmPortProvider)
