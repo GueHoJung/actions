@@ -17,3 +17,4 @@ django-cors-headers==4.2.0  # cors related - access control
 dependency-injector==4.35.1  # dependency injection
 pydantic==1.9.0  # pydantic
 django-environ==0.6.0  # environment viriables related, https://bio-info.tistory.com/168
+coverage==5.5  # coverage
