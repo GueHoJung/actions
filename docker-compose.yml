@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nginx:
     container_name: nginx
-    image: nginx:1.25.1
+    image: softstoneghjung/nginx:1.0
     build: ./nginx
     ports:
       # 외부 포트: 내부 포트
@@ -24,8 +24,8 @@ services:
       - backend
 
   redis: # See Also: https://hub.docker.com/_/redis
+    image: softstoneghjung/redis:1.0
     container_name: redis
-    image: redis:7.0.5-alpine
     hostname: hostname-redis
     ports:
       - "6379:6379"
@@ -33,7 +33,7 @@ services:
       - backend
 
   postgresql:
-    image: postgres:15
+    image: softstoneghjung/postgres:15
     container_name: postgres
     # hostname: postgresql
     restart: always
@@ -98,7 +98,7 @@ services:
 
 
   designer_backend: # designer_backend
-    image: designer_backend
+    image: softstoneghjung/designer_backend
     container_name: designer_backend
     build:
         context: .
