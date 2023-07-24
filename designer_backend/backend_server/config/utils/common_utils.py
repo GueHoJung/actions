@@ -29,6 +29,7 @@ def call_crm_api(self, className, api_host, path, method, data):
     headers = {'Content-Type': 'application/json; charset=utf-8',
                'Origin': 'http://192.168.0.247:8000'}
 
+    result ={}
     # is_verify = True
     is_verify = False
     print(f"{className} : call_crm_api ==> {data}")
@@ -49,7 +50,11 @@ def call_crm_api(self, className, api_host, path, method, data):
                 # requests.cookies = response.cookies
                 # csrftoken = response.cookies['csrftoken']
                 print(f"1. {className} : call_crm_api response.cookies ==> {response.cookies}")
-                return response.text
+
+                result['accessToken'] = response.cookies['accessToken']
+                result['refreshToken'] = response.cookies['refreshToken']
+                result['data'] = response.text
+                return result
 
     except Exception as ex:
         print(f"{className} : call_crm_api Exception ==> {ex}")
