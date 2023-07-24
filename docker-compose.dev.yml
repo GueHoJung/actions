@@ -51,8 +51,8 @@ services:
 #      POSTGRES_USER: ${POSTGRES_USER}
 #      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 #      POSTGRES_INITDB_ARGS: ${POSTGRES_INITDB_ARGS}
-    volumes:
-      - ./postgresql/data:/var/lib/postgresql/data
+#    volumes:
+#      - ./postgresql/data:/var/lib/postgresql/data
     networks:
       - backend
 
