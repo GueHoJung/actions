@@ -1,6 +1,6 @@
 # Softstone Designer App Backend Server
 
-# Docker(docker-compose) - Nginx, Gunicorn, Django, DRF, Swagger
+# Docker(docker-compose) - Nginx, Gunicorn, Django, DRF, Swagger, TEST
 
 
 ## Index
