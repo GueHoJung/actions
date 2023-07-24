@@ -1,0 +1,91 @@
+COMMENT TEMPLATE
+
+api commnet template
+
+"""
+# API : $APINAME$
+# AUTHOR : $USER$
+# TIME : $DATE$ $TIME$
+# DESCRIPTION
+    - API NAME :
+    - API DESC :
+    - API METHOD :
+    - REQUEST PARAMS :
+        (파라미터 이름, 타입, 최대길이, 설명, 필수여부, 비고)
+        (ex/ cpId, varchar, 20, 조직ID, TRUE, 주노헤어=JN)
+        |PARAM NAME|TYPE   |MAX LENGTH|DESC|REQUIRED|ETC     |
+        |:--------:|:-----:|:--------:|:--:|:------:|:------:|
+        |cpID      |varchar|20        |TRUE|조직ID   |주노헤어=JN|
+
+        -SAMPLE JSON
+        ```
+        {
+            "cpId": "JN",
+            "system": "CRM",
+            "userId": "juno***",
+            "password": "***",
+            "client": "PC"
+        }
+
+        ```
+    - RESPONSE OBJECTS :
+        (파라미터 이름, 타입, 최대길이, 설명, 필수여부, 비고)
+        (ex/ code, varchar, 100, 결과 코드, TRUE, -)
+        |PARAM NAME|TYPE|MAX LENGTH|DESC|REQUIRED|ETC|
+        |:---:|:---:|:---:|:---:|:---:|:---:|
+        |code|varchar|100|결과 코드|TRUE| - |
+        - SAMPLE JSON :
+        ```
+
+        ```
+"""
+
+
+
+cls
+
+class $CLASS$ :
+    """
+    # CLASS : $CLASS$
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+        $END$
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+
+
+
+cls_cmnt
+
+
+"""
+# CLASS : $CLASS$
+# AUTHOR : $USER$
+# TIME : $DATE$ $TIME$
+# DESCRIPTION
+    $END$
+"""
+
+
+
+mthd_cmnt
+
+
+"""
+# $METHOD$ 설명
+
+# PARAMS :
+    $PARAM$
+# RETURN :
+    $RETURN$
+# DESCRIPTION
+    $END$
+==================================================
+AUTHOR              DATE                NOTE
+--------------------------------------------------
+$USER$              $DATE$ $TIME$       최초 작성
+"""

@@ -31,8 +31,8 @@ class LoginOutCrmAPI(LoginOutPort):
     def login_out_port(self, *args, **kwargs):
         print(f"{self.__class__.__name__} login_out_port args ==> {args[1]}")
 
-        for args in args:
-            print(f"{self.__class__.__name__} login_out_port get args ==> {args}")
+        for arg in args:
+            print(f"{self.__class__.__name__} login_out_port get args ==> {arg}")
 
         result = self.loginCrmApiAdapter.login_crm_api(api_host=args[1], path=args[2], method=args[3], data=args[4])
 
