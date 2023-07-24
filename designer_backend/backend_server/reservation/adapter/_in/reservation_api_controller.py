@@ -26,7 +26,7 @@ class ReservationApiController(APIView):
 
     permission_classes = [permissions.AllowAny]
 
-    @swagger_auto_schema(tags=['RESERVATION API by CRM SYSTEM'], operation_summary="CRM RESERVATION API",
+    @swagger_auto_schema(tags=['CRM SYSTEM - RESERVATION API'], operation_summary="CRM RESERVATION API",
                          operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 예약 요청 API\n"
                                                "### Data type : json\n"
                                                "```\n"

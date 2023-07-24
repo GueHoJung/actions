@@ -7,16 +7,27 @@
 - [Softstone Designer App](#Softstone-Designer-App)
   - [Index](#index)
 - [Overview](#overview)
+  - [Docker-Compose 실행 방법](#Docker-Compose 실행 방법)
   - [Mobile-&-CRM-중계-서버-구성](#Mobile-&-CRM-중계-서버-구성)
   - [새로운 API 중계 정책 추가 방법](#새로운-API-중계-정책-추가-방법)
 
 
 # Overview
 - Djangon Rest Framework Docker 구성
+
+## Docker-Compose 실행 방법
+- 명령어 : 옵션들을 조합해 원하는 조건으로 사용
+  - docker-compose up (기본)
+  - docker-compose up --build (with 빌드)
+  - docker-compose up -d --build (daemon, with 빌드)
+  - docker-compose up -d --build --env-file ./envs/.env.dev (daemon, with 빌드, 개발 환경변수 파일 설정)
+  - docker-compose up -d --build --env-file ./envs/.env.prod (daemon, with 빌드, 운영 환경변수 파일 설정)
+  - docker-compose up -d --build --env-file ./envs/.env.dev config (daemon, with 빌드, 환경변수 파일 설정, 설정 내용 확인)
+
 ## Mobile & CRM 중계 서버 구성
 - 프로젝트 구성 : docekr-compose
   - 아키텍처 패턴 : Hexagonal architecture 방식
-  - 데이터베이스 : Mysql
+  - 데이터베이스 : PostgreSQL
   - 웹 앱 서버, 프레임워크 : nginx, gunicorn, Django, Django Rest Framework, Swagger
   - 개발 언어 : 파이썬
 

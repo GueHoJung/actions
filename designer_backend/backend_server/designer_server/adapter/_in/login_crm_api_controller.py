@@ -26,7 +26,7 @@ class LoginCrmApiController(APIView):
 
     permission_classes = [permissions.AllowAny]
 
-    @swagger_auto_schema(tags=['LOGIN API by CRM SYSTEM'], operation_summary="CRM LOGIN API",
+    @swagger_auto_schema(tags=['CRM SYSTEM - LOGIN API'], operation_summary="CRM LOGIN API",
                          operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 로그인 요청 API\n"
                                                "## accessToken 과 refreshToken 을 받아서 response 객체에 저장\n"
                                                "## accessToken 은 12시간 유효, refreshToken 은 1일 유효\n\n"

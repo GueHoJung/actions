@@ -16,7 +16,7 @@ class LoginOutHrmAPI(LoginOutPort):
         self.loginHrmApiAdapter = loginHrmApiAdapter
 
     def login_out_port(self, *args, **kwargs):
-        print(f"LoginHRMOutAPI login_out_port args ==> {args[1]}")
+        print(f"{self.__class__.__name__} login_out_port args ==> {args[1]}")
 
         result = self.loginHrmApiAdapter.login_hrm_api(path="/login/login/", method="POST", data=args[1])
 
@@ -29,8 +29,11 @@ class LoginOutCrmAPI(LoginOutPort):
         self.loginCrmApiAdapter = loginCrmApiAdapter
 
     def login_out_port(self, *args, **kwargs):
-        print(f"LoginCrmOutAPI login_out_port args ==> {args[1]}")
+        print(f"{self.__class__.__name__} login_out_port args ==> {args[1]}")
 
-        result = self.loginCrmApiAdapter.login_crm_api(path="/login/login/", method="POST", data=args[1])
+        for args in args:
+            print(f"{self.__class__.__name__} login_out_port get args ==> {args}")
+
+        result = self.loginCrmApiAdapter.login_crm_api(api_host=args[1], path=args[2], method=args[3], data=args[4])
 
         return result

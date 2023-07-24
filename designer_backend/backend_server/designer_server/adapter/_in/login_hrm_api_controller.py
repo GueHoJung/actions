@@ -54,19 +54,19 @@ class LoginHrmApiController(APIView):
     #     return Response({"mgs": "LoginHRMAPIController get", "get() PARAMS": taskId, "request.GET.get('taskId')": inPathParam},
     #                     status=200)
 
-    @swagger_auto_schema(tags=['LOGIN API by HRM SYSTEM'], operation_summary="IN_QUERY TEST",
-                         operation_description="SWAGGER 제공 PARAMETER 칸 에서 입력시 동작 안되는 문제 QUERY TEST",
-                         manual_parameters=[task_id_query], responses={200: 'Success'})
-    def get(self, request, *args, **kwargs):
-        inQueryParam = request.GET.get('task_id')
-
-        return Response({"mgs": "LoginHRMAPIController get", "inQueryParam": inQueryParam},
-                        status=200)
+    # @swagger_auto_schema(tags=['HRM SYSTEM - LOGIN API'], operation_summary="IN_QUERY TEST",
+    #                      operation_description="SWAGGER 제공 PARAMETER 칸 에서 입력시 동작 안되는 문제 QUERY TEST",
+    #                      manual_parameters=[task_id_query], responses={200: 'Success'})
+    # def get(self, request, *args, **kwargs):
+    #     inQueryParam = request.GET.get('task_id')
+    #
+    #     return Response({"mgs": "LoginHRMAPIController get", "inQueryParam": inQueryParam},
+    #                     status=200)
 
     # Body 방식 : Serializer Class 방식 => 파라미터가 많을 때 사용, 파라미터 설정을 분리해 관리 하고 싶은 경우
     # query_serializer = Serializer Class [GET]방식,
     # request_body = Serializer Class [POST]방식,
-    @swagger_auto_schema(tags=['LOGIN API by HRM SYSTEM'], operation_summary="HRM LOGIN API",
+    @swagger_auto_schema(tags=['HRM SYSTEM - LOGIN API'], operation_summary="HRM LOGIN API",
                          operation_description="# DESIGNER SERVER에서 HRM SYSTEM으로 로그인 요청 API",
                          request_body=PostRequestSerializer, responses={200: 'Success'})
     @inject

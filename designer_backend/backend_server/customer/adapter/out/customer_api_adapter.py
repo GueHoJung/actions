@@ -1,6 +1,5 @@
 import config.utils.common_utils as CommonUtils
 
-
 class CustomerApiAdapter:
     """
     # CLASS : CustomerApiAdapter
@@ -14,5 +13,5 @@ class CustomerApiAdapter:
     2023/07/21          jung-gyuho          최초 생성
     """
 
-    def customer_info_crm_api(self, path, method, data):
-        return CommonUtils.call_crm_api(self, self.__class__.__name__, path, method, data)
+    def customer_info_crm_api(self, api_host, path, method, data):
+        return CommonUtils.call_crm_api(self, self.__class__.__name__, api_host, path, method, data)

@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def call_crm_api(self, className, path, method, data):
+def call_crm_api(self, className, api_host, path, method, data):
     """
     # call_crm_api 설명
 
@@ -22,14 +22,16 @@ def call_crm_api(self, className, path, method, data):
     --------------------------------------------------
     jung-gyuho              2023/07/21 10:13 PM       최초 작성
     """
-    API_HOST = "http://192.168.0.247:8000"
+    # API_HOST = "http://192.168.0.247:8000"
+    API_HOST = api_host
 
     url = API_HOST + path
     headers = {'Content-Type': 'application/json; charset=utf-8',
                'Origin': 'http://192.168.0.247:8000'}
 
-    is_verify = True
-    print(f"{className} : LoginCrmAPI get data ==> {data}")
+    # is_verify = True
+    is_verify = False
+    print(f"{className} : call_crm_api ==> {data}")
 
     try:
         if method == 'GET':
@@ -50,7 +52,8 @@ def call_crm_api(self, className, path, method, data):
                 return response.text
 
     except Exception as ex:
-        print(ex)
+        print(f"{className} : call_crm_api Exception ==> {ex}")
+        return {"Exception": str(ex)}
 
 
 # convert json to object
@@ -60,10 +63,14 @@ def convert_json_to_obj(data):
     :param data: request data 혹은 interface response data
     :return: object
     """
-    if isinstance(data, str):
-        return json.loads(data)
-    else:
-        return json.loads(data.body.decode('utf-8'))
+    try:
+        if isinstance(data, str):
+            return json.loads(data)
+        else:
+            return json.loads(data.body.decode('utf-8'))
+    except Exception as ex:
+        print(f"convert_json_to_obj Exception ==> {ex}")
+        return {"Exception": str(ex)}
 
 
 def convert_dict_to_json(data):

@@ -34,8 +34,8 @@ services:
       - backend
 
   postgresql:
-    image: postgres:15
     container_name: postgres
+    image: postgres:15
     # hostname: postgresql
     restart: always
     ports:
@@ -70,7 +70,7 @@ services:
 #      - ./mysql/conf.d:/etc/mysql/conf.d
 #      - ./mysql/data:/var/lib/mysql
 #      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
-##    env_file: .env
+##    env_file: ..env_BAK
 #    expose:
 #      - "3306"
 
@@ -92,14 +92,14 @@ services:
 ##      - "1431:1433"
 #    volumes:
 #      - ./mssql/data:/var/lib/mssql
-#    #    env_file: .env
+#    #    env_file: ..env_BAK
 ##    expose:
 ##      - "1433"
 ##      - "1431"
 
 
   designer_backend: # designer_backend
-    image: softstoneghjung/designer_backend
+    image: softstoneghjung/designer_backend:1.0
     container_name: designer_backend
     build:
         context: .
@@ -111,7 +111,7 @@ services:
       - postgresql
 #      - mssql
 #      - mysql
-    # .env 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
+    # ..env_BAK 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
     environment:
       - DJANGO_SUPERUSER_USERNAME=${DADMIN_ID}
       - DJANGO_SUPERUSER_PASSWORD=${DADMIN_PASSWORD}
@@ -130,7 +130,7 @@ services:
       && python manage.py makemigrations
       && python manage.py makemigrations designer_server web reservation customer
       && python manage.py migrate
-      && gunicorn config.wsgi:application --bind 0.0.0.0:8001"
+      && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
 #      && gunicorn config.wsgi:application --bind 0.0.0.0:8001"
     networks:
       - backend

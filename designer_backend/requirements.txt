@@ -1,18 +1,20 @@
-mysql-connector-python==8.0.33
-redis==4.6.0
-Django==4.2.3
-gunicorn==20.1.0
-djangorestframework==3.14.0
-django-filter==1.1.0
-djangorestframework-filters==0.11.1
-drf-yasg==1.21.6
-mysqlclient==2.2.0
-requests==2.31.0
-psycopg2==2.9.6
-flex==6.14.1
-swagger_spec_validator==3.0.3
-ssv==0.1.1
-Pillow==10.0.0
-django-cors-headers==4.2.0
-dependency-injector==4.35.1
-pydantic==1.9.0
+mysql-connector-python==8.0.33  # mysql connector
+redis==4.6.0  # redis db
+Django==4.2.3  # django
+gunicorn==20.1.0  # gunicorn web server
+djangorestframework==3.14.0  # django rest framework
+django-filter==1.1.0  # django filter - ORM related
+djangorestframework-filters==0.11.1  # django filter - ORM related
+drf-yasg==1.21.6  # swagger related
+mysqlclient==2.2.0 # mysql client
+requests==2.31.0  # requests
+psycopg2==2.9.6  # postgresql client
+flex==6.14.1  # swagger related
+swagger_spec_validator==3.0.3  # swagger related
+ssv==0.1.1  # swagger related
+Pillow==10.0.0  # django image process
+django-cors-headers==4.2.0  # cors related - access control
+dependency-injector==4.35.1  # dependency injection
+pydantic==1.9.0  # pydantic
+django-environ==0.6.0  # environment viriables related, https://bio-info.tistory.com/168
+coverage==5.5  # coverage

@@ -1,6 +1,7 @@
 from ..port._in.login_in_port import LoginInPort
 from ..port.out.login_out_port import LoginOutPort
 import config.utils.common_utils as CommontUtils
+from django.conf import settings
 
 
 class LoginService:
@@ -10,25 +11,31 @@ class LoginService:
         self.loginOut = portOutImpl
 
     def login_hrm(self, *args, **kwargs):
-        print(f"LoginHRMService login_hrm *args ==> {args[0]}")
+        print(f"{self.__class__.__name__} login_hrm *args ==> {args[0]}")
 
         request = self.loginIn.login_in_port(self, args[0])
-        result = self.loginOut.login_out_port(self, request)
+
+        API_HOST = getattr(settings, "CRM_HOST_IP", None)
+        API_PORT = getattr(settings, "CRM_HOST_PORT", None)
+        API_ADR = API_HOST + ":" + API_PORT
+        print(f"Api adr ==> {API_ADR}")
+
+        result = self.loginOut.login_out_port(self, API_ADR, "/login/login/", "POST", request)
 
         jtOResult = CommontUtils.convert_json_to_obj(result)
-        print(f"LoginHrmService : login_hrm get result ==> {result}")
-        print(f"LoginHrmService : login_hrm get jResult ==> {jtOResult}")
+        print(f"{self.__class__.__name__} : login_hrm get result ==> {result}")
+        print(f"{self.__class__.__name__} : login_hrm get jResult ==> {jtOResult}")
 
         return jtOResult
 
     def login_crm(self, *args, **kwargs):
-        print(f"LoginCrmService login_crm *args ==> {args[0]}")
+        print(f"{self.__class__.__name__} login_crm *args ==> {args[0]}")
 
         request = self.loginIn.login_in_port(self, args[0])
         result = self.loginOut.login_out_port(self, request)
 
         jtOResult = CommontUtils.convert_json_to_obj(result)
-        print(f"LoginCrmService : login_crm get result ==> {result}")
-        print(f"LoginCrmService : login_crm get jtOResult ==> {jtOResult}")
+        print(f"{self.__class__.__name__} : login_crm get result ==> {result}")
+        print(f"{self.__class__.__name__} : login_crm get jtOResult ==> {jtOResult}")
 
         return jtOResult

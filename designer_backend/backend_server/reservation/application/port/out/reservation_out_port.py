@@ -15,8 +15,11 @@ class ReservationOutCrmAPI(ReservationOutPort):
         self.reservationCrmApiAdapter = reservationCrmApiAdapter
 
     def reservation_out_port(self, *args, **kwargs):
-        print(f"ReservationOutCrmAPI login_out_port args ==> {args[1]}")
+        print(f"{self.__class__.__name__} login_out_port args ==> {args[1]}")
 
-        result = self.reservationCrmApiAdapter.reservation_crm_api(path="/reservation/getPopRsrvDetailInfo/", method="POST", data=args[1])
+        for arg in args:
+            print(f"{self.__class__.__name__} : login_out_port get arg ==> {arg}")
+
+        result = self.reservationCrmApiAdapter.reservation_crm_api(api_host=args[1], path=args[2], method=args[3], data=args[4])
 
         return result
