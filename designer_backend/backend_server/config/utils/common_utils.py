@@ -51,8 +51,17 @@ def call_crm_api(self, className, api_host, path, method, data):
                 # csrftoken = response.cookies['csrftoken']
                 print(f"1. {className} : call_crm_api response.cookies ==> {response.cookies}")
 
-                result['accessToken'] = response.cookies['accessToken']
-                result['refreshToken'] = response.cookies['refreshToken']
+                # response.cookies 에 accessToken, refreshToken 값 있는 경우 result 에 저장
+                for res in response.cookies:
+                    if res.name == 'accessToken':
+                        result['accessToken'] = res.value
+                        print(
+                            f"2. {className} : call_crm_api response.cookie.name : value  ==> {res.name} : {res.value}")
+                    if res.name == 'refreshToken':
+                        result['refreshToken'] = res.value
+                        print(
+                            f"2. {className} : call_crm_api response.cookie.name : value  ==> {res.name} : {res.value}")
+
                 result['data'] = response.text
                 return result
 
