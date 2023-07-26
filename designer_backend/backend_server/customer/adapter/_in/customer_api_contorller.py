@@ -4,7 +4,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions
 from rest_framework.views import APIView
 
-# from ...application.service.customer_service import CustomerService
+from ...application.service.customer_service import CustomerService
 from ...serializers import PostRequestSerializer
 
 from config.base_container import BaseContainer
@@ -43,10 +43,62 @@ class CustomerApiController(APIView):
                          request_body=PostRequestSerializer, responses={200: 'Success'})
     @inject
     def post(self, request, *args, **kwargs):
+        """
+        # API : post
+        # AUTHOR : jung-gyuho
+        # TIME : 2023/07/26 6:29 PM
+        # DESCRIPTION
+            - API NAME :
+            - API DESC :
+            - API METHOD :
+            - REQUEST PARAMS :
+                (파라미터 이름, 타입, 최대길이, 설명, 필수여부, 비고)
+                (ex/ cpId, varchar, 20, 조직ID, TRUE, 주노헤어=JN)
+                |PARAM NAME|TYPE   |MAX LENGTH|DESC|REQUIRED|ETC     |
+                |:--------:|:-----:|:--------:|:--:|:------:|:------:|
+                |cpID      |varchar|20        |TRUE|조직ID   |주노헤어=JN|
+
+                -SAMPLE JSON
+                ```
+                {
+                    "cpId": "JN",
+                    "system": "CRM",
+                    "userId": "juno***",
+                    "password": "***",
+                    "client": "PC"
+                }
+
+                ```
+            - RESPONSE OBJECTS :
+                (파라미터 이름, 타입, 최대길이, 설명, 필수여부, 비고)
+                (ex/ code, varchar, 100, 결과 코드, TRUE, -)
+                |PARAM NAME|TYPE|MAX LENGTH|DESC|REQUIRED|ETC|
+                |:---:|:---:|:---:|:---:|:---:|:---:|
+                |code|varchar|100|결과 코드|TRUE| - |
+                - SAMPLE JSON :
+                ```
+
+                ```
+        """
+        # refreshToken 은 쿠키로 관리
+        if request.COOKIES['refreshToken'] :
+            print(
+                f"{self.__class__.__name__} : Controller post get request.COOKIES['refreshToken'] ==> {request.COOKIES['refreshToken']}")
+            kwargs['refreshToken'] = request.COOKIES['refreshToken']
+
+        # accessToken 은 헤더 'Authorization' 값으로 관리
+        if request.headers['Authorization'] :
+            print(
+                f"{self.__class__.__name__} : Controller post get request.META.get('Authorization') ==> {request.headers['Authorization']}")
+            kwargs['accessToken'] = request.headers['Authorization']
+
         print(f"{self.__class__.__name__} : Controller post get request.data ==> {request.data}")
+        # print(f"{self.__class__.__name__} : Controller post get request.COOKIES ==> {request.COOKIES}")
+        # print(f"{self.__class__.__name__} : Controller post get request.META.get('HTTP_COOKIE') ==> {request.META.get('HTTP_COOKIE')}")
+
 
         container = BaseContainer()
         service: CustomerService = container.customerCrmServiceProvider()
-        result = service.customer_info_crm(request.data)
+        result = service.customer_info_crm(request.data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
 
         return Response(result, status=200)

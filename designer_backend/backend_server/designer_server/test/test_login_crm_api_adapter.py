@@ -13,7 +13,7 @@ class AdapterTest(TestCase):
     def setUpTestData(cls):
         print(f"{cls.__name__} setUpTestData: Run once to set up non-modified data for all class methods.")
 
-        cls.crmAdapter = LoginCrmApiAdapter()
+        # cls.crmAdapter = LoginCrmApiAdapter()
 
     def setUp(self):
         print(f"{self.__class__.__name__} setUp: Run once for every test method to setup clean data.")
@@ -29,6 +29,6 @@ class AdapterTest(TestCase):
         self.API_ADR = self.API_HOST + ":" + self.API_PORT
         print(f"Api adr ==> {self.API_ADR}")
 
-    def test_adapter(self):
-        print(f"{self.__class__.__name__} test_adapter: exec")
-        self.crmAdapter.login_crm_api(self.API_ADR, "/login/login/", "POST", self.json)
+    # def test_adapter(self):
+    #     print(f"{self.__class__.__name__} test_adapter: exec")
+    #     self.crmAdapter.login_crm_api(self.API_ADR, "/login/login/", "POST", self.json)

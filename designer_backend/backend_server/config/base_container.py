@@ -1,6 +1,6 @@
 from dependency_injector import providers
 from dependency_injector.containers import DeclarativeContainer
-from dependency_injector.providers import Configuration, Singleton
+from dependency_injector.providers import Configuration
 
 from designer_server.application.service.login_service import LoginService
 from designer_server.application.port._in.login_in_port import LoginInHrmAPI

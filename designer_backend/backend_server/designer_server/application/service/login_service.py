@@ -3,6 +3,8 @@ from ..port.out.login_out_port import LoginOutPort
 import config.utils.common_utils as CommontUtils
 from django.conf import settings
 
+from ...domain.login_domain import LoginDomain
+
 
 class LoginService:
 
@@ -51,5 +53,9 @@ class LoginService:
             jtOResult['refreshToken'] = result['refreshToken']
 
         print(f"{self.__class__.__name__} : login_crm get jtOResult ==> {jtOResult}")
+
+        # 도메인 테스트
+        # domain = LoginDomain()
+        # domain.getAllDate()
 
         return jtOResult

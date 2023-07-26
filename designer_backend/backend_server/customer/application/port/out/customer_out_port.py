@@ -32,7 +32,10 @@ class CustomerOutCrmImpl(CustomerOutPort):
         for arg in args:
             print(f"{self.__class__.__name__} : customer_out_port get arg ==> {arg}")
 
+        for kwarg in kwargs:
+            print(f"{self.__class__.__name__} : customer_out_port get kwarg ==> {kwarg}")
+
         result = self.customerApiAdapter.customer_info_crm_api(api_host=args[1], path=args[2], method=args[3],
-                                                               data=args[4])
+                                                               data=args[4], accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
 
         return result
