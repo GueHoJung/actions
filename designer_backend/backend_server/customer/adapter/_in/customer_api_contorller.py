@@ -81,13 +81,13 @@ class CustomerApiController(APIView):
                 ```
         """
         # refreshToken 은 쿠키로 관리
-        if request.COOKIES['refreshToken'] :
+        if request.COOKIES.get('refreshToken') :
             print(
                 f"{self.__class__.__name__} : Controller post get request.COOKIES['refreshToken'] ==> {request.COOKIES['refreshToken']}")
             kwargs['refreshToken'] = request.COOKIES['refreshToken']
 
         # accessToken 은 헤더 'Authorization' 값으로 관리
-        if request.headers['Authorization'] :
+        if request.headers.get('Authorization') :
             print(
                 f"{self.__class__.__name__} : Controller post get request.META.get('Authorization') ==> {request.headers['Authorization']}")
             kwargs['accessToken'] = request.headers['Authorization']
@@ -99,6 +99,10 @@ class CustomerApiController(APIView):
 
         container = BaseContainer()
         service: CustomerService = container.customerCrmServiceProvider()
-        result = service.customer_info_crm(request.data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
+        try:
+            result = service.customer_info_crm(request.data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
+        except Exception as e:
+            print(f"{self.__class__.__name__} : Controller post get Exception ==> {e}")
+            return Response(e, status=500)
 
         return Response(result, status=200)

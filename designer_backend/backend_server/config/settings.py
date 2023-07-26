@@ -73,7 +73,9 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.JSONParser',
-    ]
+    ],
+    # CUSTOM EXCEPTION HANDLER 추가
+    'EXCEPTION_HANDLER': 'config.utils.exceptions.custom_exception_handler',
 }
 
 # django admin화면 접속 시도시 Site matching query does not exist. 발생

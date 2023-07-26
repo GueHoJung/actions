@@ -29,6 +29,6 @@ class AdapterTest(TestCase):
         self.API_ADR = self.API_HOST + ":" + self.API_PORT
         print(f"Api adr ==> {self.API_ADR}")
 
-    # def test_adapter(self):
-    #     print(f"{self.__class__.__name__} test_adapter: exec")
-    #     self.crmAdapter.login_crm_api(self.API_ADR, "/login/login/", "POST", self.json)
+    def test_adapter(self):
+        print(f"{self.__class__.__name__} test_adapter: exec")
+        self.crmAdapter.login_crm_api(self.API_ADR, "/login/login/", "POST", self.json)
