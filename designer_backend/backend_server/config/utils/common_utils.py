@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def call_crm_api(self, className, api_host, path, method, data):
+def call_crm_api(self, className, api_host, path, method, data, *args, **kwargs):
     """
     # call_crm_api 설명
 
@@ -26,8 +26,17 @@ def call_crm_api(self, className, api_host, path, method, data):
     API_HOST = api_host
 
     url = API_HOST + path
+
+    for key in kwargs.keys():
+        print(f"{className} : call_crm_api get arg ==> {key} : {kwargs[key]}")
+
     headers = {'Content-Type': 'application/json; charset=utf-8',
                'Origin': 'http://192.168.0.247:8000'}
+    if kwargs['accessToken'] is not None:
+        headers['Authorization'] = 'Bearer ' + kwargs['accessToken']
+
+    if kwargs['refreshToken'] is not None:
+        requests.cookies = {'accessToken': kwargs['accessToken'], 'refreshToken': kwargs['refreshToken']}
 
     result ={}
     # is_verify = True
