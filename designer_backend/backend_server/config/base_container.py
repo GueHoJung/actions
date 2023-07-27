@@ -20,6 +20,11 @@ from customer.application.port.out.customer_out_port import CustomerOutCrmImpl
 from customer.application.port._in.customer_in_port import CustomerInCrmImpl
 from customer.application.service.customer_service import CustomerService
 
+from analysis.adapter.out.analysis_api_adapter import AnalysisApiAdapter
+from analysis.application.port.out.analysis_out_port import AnalysisOutCrmImpl
+from analysis.application.port._in.analysis_in_port import AnalysisInCrmImpl
+from analysis.application.service.analysis_service import AnalysisService
+
 
 class BaseContainer(DeclarativeContainer):
     """
@@ -56,3 +61,9 @@ class BaseContainer(DeclarativeContainer):
                                                      customerApiAdapter=customerCrmApiAdapterProvider)
     customerCrmServiceProvider = providers.Singleton(CustomerService, portInImpl=CustomerInCrmImpl,
                                                      portOutImpl=customerOutCrmPortProvider)
+    # CRM Analysis API 의존성 주입
+    analysisCrmApiAdapterProvider = providers.Singleton(AnalysisApiAdapter)
+    analysisOutCrmPortProvider = providers.Singleton(AnalysisOutCrmImpl,
+                                                     analysisApiAdapter=analysisCrmApiAdapterProvider)
+    analysisCrmServiceProvider = providers.Singleton(AnalysisService, portInImpl=AnalysisInCrmImpl,
+                                                     portOutImpl=analysisOutCrmPortProvider)

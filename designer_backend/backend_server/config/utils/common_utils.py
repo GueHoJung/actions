@@ -1,4 +1,5 @@
 import requests
+import re
 import json
 
 
@@ -32,10 +33,12 @@ def call_crm_api(self, className, api_host, path, method, data, *args, **kwargs)
 
     headers = {'Content-Type': 'application/json; charset=utf-8',
                'Origin': 'http://192.168.0.247:8000'}
-    if kwargs['accessToken'] is not None:
+    # accessToken은 헤더 'Authorization'에 담아서 보낸다.
+    if kwargs.get('accessToken') is not None:
         headers['Authorization'] = 'Bearer ' + kwargs['accessToken']
 
-    if kwargs['refreshToken'] is not None:
+    # accessToken, refreshToken은 COOKIE 에 담아서 보낸다.
+    if kwargs.get('refreshToken') is not None:
         requests.cookies = {'accessToken': kwargs['accessToken'], 'refreshToken': kwargs['refreshToken']}
 
     result ={}
@@ -106,3 +109,34 @@ def convert_dict_to_json(data):
         return json.dumps(data, ensure_ascii=False)
     else:
         return data
+
+
+def manage_tokens(self, kwargs, request):
+    """
+    # manage_tokens 설명
+
+    # PARAMS :
+        kwargs : accessToken, refreshToken 을 담을 dynamic parameter
+        request : accessToken, refreshToken 을 담고 있는 request 요청
+    # RETURN :
+        kwargs
+    # DESCRIPTION
+
+    ==================================================
+    AUTHOR              DATE                NOTE
+    --------------------------------------------------
+    jung-gyuho              2023/07/27 4:24 PM       최초 작성
+    """
+    # accessToekn, refreshToken 을 request 에서 가져온다.
+    # accessToken 은 쿠키로 관리
+    if request.COOKIES.get('accessToken'):
+        print(
+            f"{self.__class__.__name__} : Controller post get request.COOKIES['accessToken'] ==> {request.COOKIES['accessToken']}")
+        kwargs['accessToken'] = request.COOKIES['accessToken']
+    # refreshToken 은 쿠키로 관리
+    if request.COOKIES.get('refreshToken'):
+        print(
+            f"{self.__class__.__name__} : Controller post get request.COOKIES['refreshToken'] ==> {request.COOKIES['refreshToken']}")
+        kwargs['refreshToken'] = request.COOKIES['refreshToken']
+
+    return kwargs

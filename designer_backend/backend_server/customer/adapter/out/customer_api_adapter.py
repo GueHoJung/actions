@@ -1,4 +1,4 @@
-import config.utils.common_utils as CommonUtils
+import config.utils.common_utils as common_utils
 
 class CustomerApiAdapter:
     """
@@ -18,4 +18,4 @@ class CustomerApiAdapter:
         for kwarg in kwargs:
             print(f"{self.__class__.__name__} : customer_info_crm_api get kwarg ==> {kwarg}")
 
-        return CommonUtils.call_crm_api(self, self.__class__.__name__, api_host, path, method, data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
+        return common_utils.call_crm_api(self, self.__class__.__name__, api_host, path, method, data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])

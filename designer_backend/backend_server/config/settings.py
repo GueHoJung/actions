@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'hexagonal_archi_template',
     'reservation',
     'customer',
+    'analysis',
 ]
 
 # settings.py

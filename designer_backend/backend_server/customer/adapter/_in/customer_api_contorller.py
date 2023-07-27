@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 
 from ...application.service.customer_service import CustomerService
 from ...serializers import PostRequestSerializer
+import config.utils.common_utils as common_utils
+from config.utils.decorator import check_token
 
 from config.base_container import BaseContainer
 
@@ -42,6 +44,7 @@ class CustomerApiController(APIView):
                                                "}",
                          request_body=PostRequestSerializer, responses={200: 'Success'})
     @inject
+    @check_token
     def post(self, request, *args, **kwargs):
         """
         # API : post
@@ -80,17 +83,8 @@ class CustomerApiController(APIView):
 
                 ```
         """
-        # refreshToken 은 쿠키로 관리
-        if request.COOKIES.get('refreshToken') :
-            print(
-                f"{self.__class__.__name__} : Controller post get request.COOKIES['refreshToken'] ==> {request.COOKIES['refreshToken']}")
-            kwargs['refreshToken'] = request.COOKIES['refreshToken']
-
-        # accessToken 은 헤더 'Authorization' 값으로 관리
-        if request.headers.get('Authorization') :
-            print(
-                f"{self.__class__.__name__} : Controller post get request.META.get('Authorization') ==> {request.headers['Authorization']}")
-            kwargs['accessToken'] = request.headers['Authorization']
+        # token 관리
+        kwargs = common_utils.manage_tokens(self, kwargs=kwargs, request=request)
 
         print(f"{self.__class__.__name__} : Controller post get request.data ==> {request.data}")
         # print(f"{self.__class__.__name__} : Controller post get request.COOKIES ==> {request.COOKIES}")
@@ -100,9 +94,11 @@ class CustomerApiController(APIView):
         container = BaseContainer()
         service: CustomerService = container.customerCrmServiceProvider()
         try:
-            result = service.customer_info_crm(request.data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
+            result = service.customer_info_crm(request.data, accessToken=kwargs.get('accessToken','None'), refreshToken=kwargs.get('refreshToken','None'))
+            # if result.get('message') == '0000':
         except Exception as e:
-            print(f"{self.__class__.__name__} : Controller post get Exception ==> {e}")
             return Response(e, status=500)
 
         return Response(result, status=200)
+
+

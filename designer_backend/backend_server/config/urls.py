@@ -25,6 +25,7 @@ schema_url_v1_patterns = [
     path('v1/', include('designer_server.urls', namespace='designer_server_api')),
     path('reservation/', include('reservation.urls', namespace='reservation')),
     path('customer/', include('customer.urls', namespace='customer')),
+    path('analysis/', include('analysis.urls', namespace='analysis')),
 
 ]
 
@@ -50,6 +51,7 @@ urlpatterns = [
     path('', include('web.urls')),
     path('reservation/', include('reservation.urls')),
     path('customer/', include('customer.urls')),
+    path('analysis/', include('analysis.urls')),
 
     # Auto DRF API docs
     re_path(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
