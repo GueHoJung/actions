@@ -90,15 +90,13 @@ class CustomerApiController(APIView):
         # print(f"{self.__class__.__name__} : Controller post get request.COOKIES ==> {request.COOKIES}")
         # print(f"{self.__class__.__name__} : Controller post get request.META.get('HTTP_COOKIE') ==> {request.META.get('HTTP_COOKIE')}")
 
-
         container = BaseContainer()
         service: CustomerService = container.customerCrmServiceProvider()
         try:
-            result = service.customer_info_crm(request.data, accessToken=kwargs.get('accessToken','None'), refreshToken=kwargs.get('refreshToken','None'))
+            result = service.customer_info_crm(request.data, accessToken=kwargs.get('accessToken', 'None'),
+                                               refreshToken=kwargs.get('refreshToken', 'None'))
             # if result.get('message') == '0000':
         except Exception as e:
             return Response(e, status=500)
 
         return Response(result, status=200)
-
-
