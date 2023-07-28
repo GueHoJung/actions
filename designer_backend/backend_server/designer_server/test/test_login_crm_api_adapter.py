@@ -13,7 +13,7 @@ class AdapterTest(TestCase):
     def setUpTestData(cls):
         print(f"{cls.__name__} setUpTestData: Run once to set up non-modified data for all class methods.")
 
-        # cls.crmAdapter = LoginCrmApiAdapter()
+        cls.crmAdapter = LoginCrmApiAdapter()
 
     def setUp(self):
         print(f"{self.__class__.__name__} setUp: Run once for every test method to setup clean data.")
