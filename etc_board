@@ -89,3 +89,419 @@ AUTHOR              DATE                NOTE
 --------------------------------------------------
 $USER$              $DATE$ $TIME$       최초 작성
 """
+
+
+## live template method ##
+
+/.*.[_.*.]([a-z])
+
+fileRelativePath()
+
+capitalize(regularExpression(fileRelativePath(), "/.*.", ""))
+
+regularExpression(fileRelativePath(), "/.*.", "")
+
+fileNameWithoutExtension()
+
+camelCase(fileNameWithoutExtension())
+
+capitalize(camelCase(fileNameWithoutExtension()))
+
+capitalize(fileNameWithoutExtension())
+
+
+
+
+
+adapter_gen
+
+CRM ADAPTER AUTO GENERATE
+
+import config.utils.common_utils as common_utils
+
+class $CLASS$:
+    """
+    # CLASS : $CLASS$
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+        - $CRMAPIPATH$
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+
+    def $DIRLOW$_$CRMAPIPATH$_crm_api(self, api_host, path, method, data, *args, **kwargs):
+
+        for kwarg in kwargs:
+            print(f"{self.__class__.__name__} : $DIRLOW$_$CRMAPIPATH$_crm_api get kwarg ==> {kwarg}")
+
+        return common_utils.call_crm_api(self, self.__class__.__name__, api_host, path, method, data, accessToken=kwargs['accessToken'], refreshToken=kwargs['refreshToken'])
+
+
+
+
+
+controller_gen
+
+CRM CONTROLLER AUTO GENERATE
+
+from dependency_injector.wiring import inject
+from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import permissions
+from rest_framework.views import APIView
+
+from ...application.service.$DIRLOW$_$CRMAPIMETHOD$_service import $DIRUPP$$DESC$Service
+from ...serializers import PostRequestSerializer
+import config.utils.common_utils as common_utils
+from config.utils.decorator import check_token
+
+from config.base_container import BaseContainer
+
+
+class $CLASS$(APIView):
+    """
+    # CLASS : $CLASS$
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+        - $CLASS$
+        - $DESC$ API
+        - CRM 디렉터리 : $DIRLOW$
+        - CRM 서비스 호출 url :
+        - CRM 서비스 호출 method : POST
+        - CRM 서비스 호출 body : json
+        - CRM 서비스 호출 파라미터 :
+            cpId (기업아이디)
+            shopId (매장아이디)
+            custId (고객아이디)
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+
+    permission_classes = [permissions.AllowAny]
+
+    @swagger_auto_schema(tags=['CRM SYSTEM - $DIRUPP$ API'], operation_summary="CRM $DIR$ $DESC$ API",
+                         operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 $DESC$ 요청 API\n"
+                                               "\n"
+                                               "|PARAM NAME|TYPE   |MAX LENGTH|DESC|REQUIRED|ETC     |\n"
+                                               "|:--------:|:-----:|:--------:|:--:|:------:|:------:|\n"
+                                               "|cpID      |varchar|20        |TRUE|기업아이디   |JN|\n"
+                                               "|custId    |varchar|20        |TRUE|고객아이디   |1801141|\n"
+                                               "|prpNo    |varchar|20        |TRUE|회원권번호   |PR000000001801141D001|\n"
+                                               "|searchStDt    |varchar|20        |TRUE|조회시작일   |20200801|\n"
+                                               "|searchEdDt    |varchar|20        |TRUE|조회종료일   |20220801|\n"
+                                               "|prpHisDivCd    |varchar|20        |TRUE|회원권이력구분코드   |\"\"|\n"
+                                               "|userId    |varchar|20        |TRUE|디자이너아이디   |\"\"|\n"
+                                               "\n"
+                                               "### Data type : json\n"
+                                               "```\n"
+                                               "{\n"
+                                               "    \"cpId\": \"**\",\n"
+                                               "    \"shopId\": \"***\",\n"
+                                               "    \"custId\": \"juno*****\",\n"
+                                               "}",
+                         request_body=PostRequestSerializer, responses={200: 'Success'})
+    @inject
+    @check_token
+    def post(self, request, *args, **kwargs):
+        """
+        # API : post
+        # AUTHOR : jung-gyuho
+        # TIME : 2023/07/27 6:02 PM
+        # DESCRIPTION
+            - API NAME : $DESC$ API
+            - API DESC : CRM $DESC$ 진입경로
+                        ex) 분석 > 대시보드,비교분석,랭크 외 다른 메뉴로 진입 > 하단 비중분석에 항목 클릭 > 하단에 오더목록 > 고객명 클릭
+            - API METHOD : POST
+            - REQUEST PARAMS :
+                (파라미터 이름, 타입, 최대길이, 설명, 필수여부, 비고)
+                (ex/ cpId, varchar, 20, 조직ID, TRUE, 주노헤어=JN)
+                |PARAM NAME|TYPE   |MAX LENGTH|DESC|REQUIRED|ETC     |
+                |:--------:|:-----:|:--------:|:--:|:------:|:------:|
+                |cpID      |varchar|20        |TRUE|기업아이디   |주노헤어=JN|
+                |shopId    |varchar|20        |TRUE|매장아이디   |아무개=1234123|
+                |custId    |varchar|20        |TRUE|고객아이디   |A매장=7|
+
+                -SAMPLE JSON
+                ```
+                {
+                    "cpId": "JN",
+                    "custId": "1916685",
+                    "shopId": "1",
+                    "searchShop": "order"
+                }
+
+                ```
+            - RESPONSE OBJECTS : JSON
+                (파라미터 이름, 타입, 최대길이, 설명, 필수여부, 비고)
+                (ex/ code, varchar, 100, 결과 코드, TRUE, -)
+                |PARAM NAME|TYPE|MAX LENGTH|DESC|REQUIRED|ETC|
+                |:---:|:---:|:---:|:---:|:---:|:---:|
+                |code|varchar|100|결과 코드|TRUE| - |
+                - SAMPLE JSON :
+                ```
+
+                ```
+        """
+
+        # token 관리
+        kwargs = common_utils.manage_tokens(self, kwargs=kwargs, request=request)
+
+        print(f"{self.__class__.__name__} : Controller post get request.data ==> {request.data}")
+
+        container = BaseContainer()
+        # service: $DIRUPP$$DESC$Service = container.$DIRLOW$$DESC$CrmServiceProvider()
+
+        # try:
+        #     result = service.$DIRLOW$_$CRMAPIMETHOD$_crm(request.data, accessToken=kwargs.get('accessToken', 'None'),
+        #                                              refreshToken=kwargs.get('refreshToken', 'None'))
+        # except Exception as ex:
+        #     print(f"{self.__class__.__name__} : Controller post error ==> {ex}")
+        #     return Response(ex.__dict__, status=500)
+
+        # return Response(result, status=200)
+        return Response({"result":"CRM CONTROLLER GENERATE TEST"}, status=200)
+
+
+
+
+
+
+
+port_in_gen
+
+CRM PORT IN AUTO GENERATE
+
+from abc import ABC, abstractmethod
+
+class $PORT$(ABC):
+    """
+    # CLASS : $PORT$
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+
+    @abstractmethod
+    def $DIRLOW$_in_port(self, request):
+        pass
+
+
+class $IMPL$($PORT$):
+
+    def __init__(self):
+        pass
+
+    def $DIRLOW$_in_port(self, *args, **kwargs):
+        print(f"{self.__class__.__name__} $DIRLOW$_in request ==> {args[0]}")
+        result = args[0]
+
+        return result
+
+
+
+
+
+
+
+port_out_gen
+
+CRM PORT OUT AUTO GENERATE
+
+from abc import ABC, abstractmethod
+
+from ....adapter.out.$DIRLOW$_$METHODNAME$_api_adapter import $DIRUPP$$DESC$ApiAdapter
+
+
+class $PORT$(ABC):
+    """
+    # CLASS : $PORT$
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+        - $DESC$ Out Port
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+
+    @abstractmethod
+    def $DIRLOW$_out_port(self, request):
+        pass
+
+
+class $IMPL$($PORT$):
+
+    def __init__(self, $DIRLOW$$DESC$ApiAdapter: $DIRUPP$$DESC$ApiAdapter):
+        self.$DIRLOW$$DESC$ApiAdapter = $DIRLOW$$DESC$ApiAdapter
+
+    def $DIRLOW$_out_port(self, *args, **kwargs):
+        print(f"{self.__class__.__name__} $DIRLOW$_out_port args ==> {args[1]}")
+
+        for arg in args:
+            print(f"{self.__class__.__name__} : $DIRLOW$_out_port get arg ==> {arg}")
+
+        for kwarg in kwargs:
+            print(f"{self.__class__.__name__} : $DIRLOW$_out_port get kwarg ==> {kwarg}")
+
+        result = self.$DIRLOW$$DESC$ApiAdapter.$DIRLOW$_$METHODNAME$_crm_api(api_host=args[1], path=args[2],
+                                                                      method=args[3],
+                                                                      data=args[4], accessToken=kwargs['accessToken'],
+                                                                      refreshToken=kwargs['refreshToken'])
+
+        return result
+
+
+
+
+service_gen
+
+CRM SERVICE AUTO GENERATE
+
+from ..port._in.$DIRLOW$_$CRMAPIMETHOD$_in_port import $DIRUPP$$DESC$InPort
+from ..port.out.$DIRLOW$_$CRMAPIMETHOD$_out_port import $DIRUPP$$DESC$OutPort
+import config.utils.common_utils as common_utils
+from django.conf import settings
+
+
+class $CLASS$:
+    """
+    # CLASS : $CLASS$
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+        - $DESC$ Service
+
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+
+    def __init__(self, portInImpl: $DIRUPP$$DESC$InPort, portOutImpl: $DIRUPP$$DESC$OutPort):
+        self.$DIRLOW$In = portInImpl
+        self.$DIRLOW$Out = portOutImpl
+
+    def $DIRLOW$_$CRMAPIMETHOD$_crm(self, *args, **kwargs):
+        print(f"{self.__class__.__name__} $DIRLOW$_$CRMAPIMETHOD$_crm *args ==> {args[0]}")
+
+        data = self.$DIRLOW$In.$DIRLOW$_in_port(self, args[0])
+
+        for arg in args:
+            print(f"{self.__class__.__name__} $DIRLOW$_$CRMAPIMETHOD$_crm *args ==> {arg}")
+
+        for kwarg in kwargs:
+            print(f"{self.__class__.__name__} $DIRLOW$_$CRMAPIMETHOD$_crm **kwargs ==> {kwarg}")
+
+        API_HOST = getattr(settings, "CRM_HOST_IP", None)
+        API_PORT = getattr(settings, "CRM_HOST_PORT", None)
+        API_ADR = API_HOST + ":" + API_PORT
+        print(f"Api host ==> {API_HOST}")
+        result = self.$DIRLOW$Out.$DIRLOW$_out_port(self, API_ADR, "$CRMAPIPATH$", "POST", data,
+                                                    accessToken=kwargs['accessToken'],
+                                                    refreshToken=kwargs['refreshToken'])
+
+        jtOResult = common_utils.convert_json_to_obj(result['data'])
+        print(f"{self.__class__.__name__} : $DIRLOW$_$CRMAPIMETHOD$_crm get result ==> {result}")
+        print(f"{self.__class__.__name__} : $DIRLOW$_$CRMAPIMETHOD$_crm get jResult ==> {jtOResult}")
+
+        return jtOResult
+
+
+
+
+
+
+serializers_gen
+
+CRM SERIALIZERS AUTO GENERATE
+
+from rest_framework import serializers
+
+
+class PostRequestSerializer(serializers.Serializer):
+    """
+    # CLASS : Serializers
+    # AUTHOR : $USER$
+    # TIME : $DATE$ $TIME$
+    # DESCRIPTION
+        - $DIRUPP$ Serializer
+
+    =============================================
+    DATE            AUTHOR          NOTE
+    ---------------------------------------------
+    $DATE$          $USER$          최초 생성
+    """
+    body = serializers.CharField(help_text="CRM $DIRUPP$ INFO PARAM JSON BODY", required=True)
+
+    class Meta:
+        ref_name = '$DIRUPP$_PostRequestSerializer'
+
+
+class PostResponseSerializer(serializers.Serializer):
+    status = serializers.CharField()
+
+    class Meta:
+        ref_name = '$DIRUPP$_PostResponseSerializer'
+
+
+
+
+
+
+urls_gen
+
+CRM URLS AUTO GENERATE
+
+from django.urls import path
+
+from . import views
+from .adapter._in.$DIRLOW$_api_controller import $DIRUPP$ApiController
+
+app_name = '$DIRLOW$'
+
+# 진입점 설정
+urlpatterns = [
+    # DefaultRouter() 에 등록 된 viewset 은 아래와 같이 path를 설정하지 않아도 자동으로 생성됨
+    path("test/", views.test_view),
+    # path("$CRMAPIMETHOD$/", $DIRUPP$ApiController.as_view())
+]
+
+
+
+
+
+
+import_gen
+
+CRM DEPENDENCY INJECTION IMPORT AUTO GENERATE
+
+from $DIRLOW$.adapter.out.$DIRLOW$_$METHOD$_api_adapter import $DIRUPP$ApiAdapter
+from $DIRLOW$.application.port.out.$DIRLOW$_$METHOD$_out_port import $DIRUPP$OutCrmImpl
+from $DIRLOW$.application.port._in.$DIRLOW$_$METHOD$_in_port import $DIRUPP$InCrmImpl
+from $DIRLOW$.application.service.$DIRLOW$_$METHOD$_service import $DIRUPP$Service
+
+
+
+
+inject_gen
+
+CRM DEPENDENCY INJECTION AUTO GENERATE
+
+# CRM $DIRUPP$ API 의존성 주입
+$DIRLOW$CrmApiAdapterProvider = providers.Singleton($DIRUPP$ApiAdapter)
+$DIRLOW$OutCrmPortProvider = providers.Singleton($DIRUPP$OutCrmImpl,
+                                                 $DIRLOW$ApiAdapter=$DIRLOW$CrmApiAdapterProvider)
+$DIRLOW$CrmServiceProvider = providers.Singleton($DIRUPP$Service, portInImpl=$DIRUPP$InCrmImpl,
+                                                 portOutImpl=$DIRLOW$OutCrmPortProvider)

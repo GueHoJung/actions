@@ -25,6 +25,45 @@ from analysis.application.port.out.analysis_out_port import AnalysisOutCrmImpl
 from analysis.application.port._in.analysis_in_port import AnalysisInCrmImpl
 from analysis.application.service.analysis_service import AnalysisService
 
+from employ.adapter.out.employ_api_adapter import EmployApiAdapter
+from employ.application.port.out.employ_out_port import EmployOutHrmImpl
+from employ.application.port._in.employ_in_port import EmployInHrmImpl
+from employ.application.service.employ_service import EmployService
+
+from order.adapter.out.order_prepaid_info_api_adapter import OrderPrepaidInfoApiAdapter
+from order.application.port.out.order_prepaid_info_out_port import OrderPrepaidInfoOutCrmImpl
+from order.application.port._in.order_prepaid_info_in_port import OrderPrepaidInfoInCrmImpl
+from order.application.service.order_prepaid_info_service import OrderPrepaidInfoService
+
+from order.adapter.out.order_ticket_list_api_adapter import OrderTicketListApiAdapter
+from order.application.port.out.order_ticket_list_out_port import OrderTicketListOutCrmImpl
+from order.application.port._in.order_ticket_list_in_port import OrderTicketListInCrmImpl
+from order.application.service.order_ticket_list_service import OrderTicketListService
+
+from order.adapter.out.order_prepaid_history_list_api_adapter import OrderPrepaidHistoryListApiAdapter
+from order.application.port.out.order_prepaid_history_list_out_port import OrderPrepaidHistoryListOutCrmImpl
+from order.application.port._in.order_prepaid_history_list_in_port import OrderPrepaidHistoryListInCrmImpl
+from order.application.service.order_prepaid_history_list_service import OrderPrepaidHistoryListService
+
+from order.adapter.out.order_ticket_history_list_api_adapter import OrderTicketHistoryListApiAdapter
+from order.application.port.out.order_ticket_history_list_out_port import OrderTicketHistoryListOutCrmImpl
+from order.application.port._in.order_ticket_history_list_in_port import OrderTicketHistoryListInCrmImpl
+from order.application.service.order_ticket_history_list_service import OrderTicketHistoryListService
+
+from customer.adapter.out.customer_cust_memo_list_api_adapter import CustomerCustMemoListApiAdapter
+from customer.application.port.out.customer_cust_memo_list_out_port import CustomerCustMemoListOutCrmImpl
+from customer.application.port._in.customer_cust_memo_list_in_port import CustomerCustMemoListInCrmImpl
+from customer.application.service.customer_cust_memo_list_service import CustomerCustMemoListService
+
+from customer.adapter.out.customer_cust_taste_list_api_adapter import CustomerCustTasteListApiAdapter
+from customer.application.port.out.customer_cust_taste_list_out_port import CustomerCustTasteListOutCrmImpl
+from customer.application.port._in.customer_cust_taste_list_in_port import CustomerCustTasteListInCrmImpl
+from customer.application.service.customer_cust_taste_list_service import CustomerCustTasteListService
+
+from customer.adapter.out.customer_modify_cust_info_api_adapter import CustomerModifyCustInfoApiAdapter
+from customer.application.port.out.customer_modify_cust_info_out_port import CustomerModifyCustInfoOutCrmImpl
+from customer.application.port._in.customer_modify_cust_info_in_port import CustomerModifyCustInfoInCrmImpl
+from customer.application.service.customer_modify_cust_info_service import CustomerModifyCustInfoService
 
 class BaseContainer(DeclarativeContainer):
     """
@@ -67,3 +106,66 @@ class BaseContainer(DeclarativeContainer):
                                                      analysisApiAdapter=analysisCrmApiAdapterProvider)
     analysisCrmServiceProvider = providers.Singleton(AnalysisService, portInImpl=AnalysisInCrmImpl,
                                                      portOutImpl=analysisOutCrmPortProvider)
+
+    # HRM Employ API 의존성 주입
+    employHrmApiAdapterProvider = providers.Singleton(EmployApiAdapter)
+    employOutHrmPortProvider = providers.Singleton(EmployOutHrmImpl,
+                                                   employApiAdapter=employHrmApiAdapterProvider)
+    employHrmServiceProvider = providers.Singleton(EmployService, portInImpl=EmployInHrmImpl,
+                                                   portOutImpl=employOutHrmPortProvider)
+
+    # CRM Order PrepaidInfo API 의존성 주입
+    orderPrepaidInfoCrmApiAdapterProvider = providers.Singleton(OrderPrepaidInfoApiAdapter)
+    orderPrepaidInfoOutCrmPortProvider = providers.Singleton(OrderPrepaidInfoOutCrmImpl,
+                                                             orderPrepaidInfoApiAdapter=orderPrepaidInfoCrmApiAdapterProvider)
+    orderPrepaidInfoCrmServiceProvider = providers.Singleton(OrderPrepaidInfoService,
+                                                             portInImpl=OrderPrepaidInfoInCrmImpl,
+                                                             portOutImpl=orderPrepaidInfoOutCrmPortProvider)
+
+    # CRM OrderTicketList API 의존성 주입
+    orderTicketListCrmApiAdapterProvider = providers.Singleton(OrderTicketListApiAdapter)
+    orderTicketListOutCrmPortProvider = providers.Singleton(OrderTicketListOutCrmImpl,
+                                                            orderTicketListApiAdapter=orderTicketListCrmApiAdapterProvider)
+    orderTicketListCrmServiceProvider = providers.Singleton(OrderTicketListService, portInImpl=OrderTicketListInCrmImpl,
+                                                            portOutImpl=orderTicketListOutCrmPortProvider)
+
+    # CRM OrderPrepaidHistoryList API 의존성 주입
+    orderPrepaidHistoryListCrmApiAdapterProvider = providers.Singleton(OrderPrepaidHistoryListApiAdapter)
+    orderPrepaidHistoryListOutCrmPortProvider = providers.Singleton(OrderPrepaidHistoryListOutCrmImpl,
+                                                                    orderPrepaidHistoryListApiAdapter=orderPrepaidHistoryListCrmApiAdapterProvider)
+    orderPrepaidHistoryListCrmServiceProvider = providers.Singleton(OrderPrepaidHistoryListService,
+                                                                    portInImpl=OrderPrepaidHistoryListInCrmImpl,
+                                                                    portOutImpl=orderPrepaidHistoryListOutCrmPortProvider)
+
+    # CRM OrderTicketHistoryList API 의존성 주입
+    orderTicketHistoryListCrmApiAdapterProvider = providers.Singleton(OrderTicketHistoryListApiAdapter)
+    orderTicketHistoryListOutCrmPortProvider = providers.Singleton(OrderTicketHistoryListOutCrmImpl,
+                                                                   orderTicketHistoryListApiAdapter=orderTicketHistoryListCrmApiAdapterProvider)
+    orderTicketHistoryListCrmServiceProvider = providers.Singleton(OrderTicketHistoryListService,
+                                                                   portInImpl=OrderTicketHistoryListInCrmImpl,
+                                                                   portOutImpl=orderTicketHistoryListOutCrmPortProvider)
+
+    # CRM CustomerCustMemoList API 의존성 주입
+    customerCustMemoListCrmApiAdapterProvider = providers.Singleton(CustomerCustMemoListApiAdapter)
+    customerCustMemoListOutCrmPortProvider = providers.Singleton(CustomerCustMemoListOutCrmImpl,
+                                                                 customerCustMemoListApiAdapter=customerCustMemoListCrmApiAdapterProvider)
+    customerCustMemoListCrmServiceProvider = providers.Singleton(CustomerCustMemoListService,
+                                                                 portInImpl=CustomerCustMemoListInCrmImpl,
+                                                                 portOutImpl=customerCustMemoListOutCrmPortProvider)
+
+    # CRM CustomerCustTasteList API 의존성 주입
+    customerCustTasteListCrmApiAdapterProvider = providers.Singleton(CustomerCustTasteListApiAdapter)
+    customerCustTasteListOutCrmPortProvider = providers.Singleton(CustomerCustTasteListOutCrmImpl,
+                                                                  customerCustTasteListApiAdapter=customerCustTasteListCrmApiAdapterProvider)
+    customerCustTasteListCrmServiceProvider = providers.Singleton(CustomerCustTasteListService,
+                                                                  portInImpl=CustomerCustTasteListInCrmImpl,
+                                                                  portOutImpl=customerCustTasteListOutCrmPortProvider)
+
+    # CRM CustomerModifyCustInfo API 의존성 주입
+    customerModifyCustInfoCrmApiAdapterProvider = providers.Singleton(CustomerModifyCustInfoApiAdapter)
+    customerModifyCustInfoOutCrmPortProvider = providers.Singleton(CustomerModifyCustInfoOutCrmImpl,
+                                                                   customerModifyCustInfoApiAdapter=customerModifyCustInfoCrmApiAdapterProvider)
+    customerModifyCustInfoCrmServiceProvider = providers.Singleton(CustomerModifyCustInfoService,
+                                                                   portInImpl=CustomerModifyCustInfoInCrmImpl,
+                                                                   portOutImpl=customerModifyCustInfoOutCrmPortProvider)
+

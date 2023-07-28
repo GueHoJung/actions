@@ -61,11 +61,20 @@ INSTALLED_APPS = [
     'config',
     # django-admin startapp 으로 생성 apps
     'designer_server',
+    # view template 처리
     'web',
+    # startapp 에 대해 사용 할 template
     'hexagonal_archi_template',
+    # 예약
     'reservation',
+    # 고객
     'customer',
+    # 분석
     'analysis',
+    # 인사
+    'employ',
+    # 주문
+    'order',
 ]
 
 # settings.py
