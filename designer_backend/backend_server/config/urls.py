@@ -23,9 +23,12 @@ from drf_yasg import openapi
 
 schema_url_v1_patterns = [
     path('v1/', include('designer_server.urls', namespace='designer_server_api')),
+    path('archi/', include('hexagonal_archi_template.urls', namespace='hexagonal_archi_template')),
     path('reservation/', include('reservation.urls', namespace='reservation')),
     path('customer/', include('customer.urls', namespace='customer')),
     path('analysis/', include('analysis.urls', namespace='analysis')),
+    path('employ/', include('employ.urls', namespace='employ')),
+    path('order/', include('order.urls', namespace='order')),
 
 ]
 
@@ -49,9 +52,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('v1/', include('designer_server.urls')),
     path('', include('web.urls')),
+    path('archi/', include('hexagonal_archi_template.urls')),
     path('reservation/', include('reservation.urls')),
     path('customer/', include('customer.urls')),
     path('analysis/', include('analysis.urls')),
+    path('employ/', include('employ.urls')),
+    path('order/', include('order.urls')),
 
     # Auto DRF API docs
     re_path(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),

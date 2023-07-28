@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for customer/views.py: 62%</title>
+    <title>Coverage for customer/views.py: 100%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -18,13 +18,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>customer/views.py</b> :
-            <span class="pc_cov">62%</span>
+            <span class="pc_cov">100%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
-            8 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">5 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">3 missing</button>
+            3 statements &nbsp;
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">3 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
         </h2>
     </div>
@@ -56,20 +56,20 @@
     <p id="t2" class="run"><span class="n"><a href="#t2">2</a></span><span class="t"><span class="key">from</span> <span class="nam">rest_framework</span><span class="op">.</span><span class="nam">response</span> <span class="key">import</span> <span class="nam">Response</span>&nbsp;</span><span class="r"></span></p>
     <p id="t3" class="run"><span class="n"><a href="#t3">3</a></span><span class="t"><span class="key">from</span> <span class="nam">rest_framework</span><span class="op">.</span><span class="nam">decorators</span> <span class="key">import</span> <span class="nam">api_view</span>&nbsp;</span><span class="r"></span></p>
     <p id="t4" class="pln"><span class="n"><a href="#t4">4</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t5" class="pln"><span class="n"><a href="#t5">5</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p id="t5" class="pln"><span class="n"><a href="#t5">5</a></span><span class="t"><span class="com"># &#50500;&#47000; test_view() &#54632;&#49688; &#51452;&#49437;&#51012; &#54400;&#47732;, LoginService&#51032; crm login &#54632;&#49688;&#44032; &#49892;&#54665;&#46104;&#45716; &#54788;&#49345; &#48156;&#49373;, docker-compose up &#46608;&#45716; &#52968;&#53580;&#51060;&#45320; restart &#49884;&#50640;&#46020; &#48156;&#49373;</span>&nbsp;</span><span class="r"></span></p>
     <p id="t6" class="pln"><span class="n"><a href="#t6">6</a></span><span class="t"><span class="com"># Create your views here.</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t7" class="run"><span class="n"><a href="#t7">7</a></span><span class="t"><span class="op">@</span><span class="nam">api_view</span><span class="op">(</span><span class="op">[</span><span class="str">'GET'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t8" class="run"><span class="n"><a href="#t8">8</a></span><span class="t"><span class="key">def</span> <span class="nam">test_view</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t9" class="mis show_mis"><span class="n"><a href="#t9">9</a></span><span class="t">    <span class="nam">CRM_HOST_IP</span> <span class="op">=</span> <span class="nam">env</span><span class="op">(</span><span class="str">'CRM_HOST_IP'</span><span class="op">)</span>  <span class="com"># SECEREY_KEY &#44050; &#48520;&#47084;&#50724;&#44592;</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t10" class="mis show_mis"><span class="n"><a href="#t10">10</a></span><span class="t">    <span class="nam">CRM_HOST_PORT</span> <span class="op">=</span> <span class="nam">env</span><span class="op">(</span><span class="str">'CRM_HOST_PORT'</span><span class="op">)</span>  <span class="com"># DEBUG &#44050; &#48520;&#47084;&#50724;&#44592;</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t11" class="pln"><span class="n"><a href="#t11">11</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t12" class="mis show_mis"><span class="n"><a href="#t12">12</a></span><span class="t">    <span class="key">return</span> <span class="nam">Response</span><span class="op">(</span><span class="op">{</span><span class="str">"test"</span><span class="op">:</span> <span class="str">"&#53580;&#49828;&#53944;&#51077;&#45768;&#45796;."</span><span class="op">,</span><span class="str">"SECRET_KEY"</span><span class="op">:</span><span class="nam">CRM_HOST_IP</span><span class="op">,</span> <span class="str">"CRM_HOST_PORT"</span><span class="op">:</span><span class="nam">CRM_HOST_PORT</span><span class="op">}</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t7" class="pln"><span class="n"><a href="#t7">7</a></span><span class="t"><span class="com"># @api_view(['GET'])</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t8" class="pln"><span class="n"><a href="#t8">8</a></span><span class="t"><span class="com"># def test_view(request):</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t9" class="pln"><span class="n"><a href="#t9">9</a></span><span class="t"><span class="com">#     CRM_HOST_IP = env('CRM_HOST_IP')  # SECEREY_KEY &#44050; &#48520;&#47084;&#50724;&#44592;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t10" class="pln"><span class="n"><a href="#t10">10</a></span><span class="t"><span class="com">#     CRM_HOST_PORT = env('CRM_HOST_PORT')  # DEBUG &#44050; &#48520;&#47084;&#50724;&#44592;</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t11" class="pln"><span class="n"><a href="#t11">11</a></span><span class="t"><span class="com">#</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t12" class="pln"><span class="n"><a href="#t12">12</a></span><span class="t"><span class="com">#     return Response({"test": "&#53580;&#49828;&#53944;&#51077;&#45768;&#45796;.","SECRET_KEY":CRM_HOST_IP, "CRM_HOST_PORT":CRM_HOST_PORT})</span>&nbsp;</span><span class="r"></span></p>
 </div>
 <div id="footer">
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
-            created at 2023-07-23 15:52 +0900
+            created at 2023-07-28 14:44 +0900
         </p>
     </div>
 </div>
