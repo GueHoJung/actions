@@ -2,8 +2,8 @@ name: designer_server
 
 on:
   push:
-    tags:
-      - ci/cd.**
+    branches:
+      - 'actions'
 
 jobs:
   test-lint:
