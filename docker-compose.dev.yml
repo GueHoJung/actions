@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   nginx:
-    image: softstoneghjung/nginx:1.25.1
+    image: nginx:1.25.1
     container_name: nginx
     build: ./nginx
     ports:
@@ -27,7 +27,7 @@ services:
       - backend
 
   redis: # See Also: https://hub.docker.com/_/redis
-    image: softstoneghjung/redis:7.0.5-alpine
+    image: redis:7.0.5-alpine
     container_name: redis
     hostname: hostname-redis
     ports:
@@ -38,7 +38,7 @@ services:
       - backend
 
   postgresql:
-    image: softstoneghjung/postgres:15
+    image: postgres:15
     container_name: postgres
 #    build: ./designer_backend/Dockerfile
     # hostname: postgresql

@@ -38,4 +38,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Push to Docker Hub
-        run: docker-compose push
+        run: docker compose push
