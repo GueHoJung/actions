@@ -10,24 +10,32 @@ jobs:
     name: BUILD AND UNIT TEST
     runs-on: ubuntu-20.04
     steps:
-#       - name: Login to Docker Hub
-#         uses: docker/login-action@v1
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USER }}
-#           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: Show Files
         run: ls -al
 #       - name: Pull
 #         run: docker-compose pull
-      - name: Up
+      - name: Docker Compose Up
         run: docker compose -f ./docker-compose.dev.yml up -d --build
-      - name: Unit Test
+
+      - name: Perform Unit Test
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
+
       - name: Run Test Coverage
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage report
+
       - name: Generate Coverage Result Html
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage html
+
       - name: Check Html Coverage Result
         run : ls -al ./designer_backend/backend_server/htmlcov
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Push to Docker Hub
+        run: docker-compose push
