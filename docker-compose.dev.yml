@@ -108,7 +108,7 @@ services:
 
 
   designer_backend: # designer_backend
-    image: softstoneghjung/designer_backend
+    image: designer_backend
     container_name: designer_backend
     build:
         context: .

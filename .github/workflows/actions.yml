@@ -37,5 +37,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Push to Docker Hub
-        run: docker compose push
+      - name: Tag to Docker nginx Image
+        run: docker tag nginx:1.25.1 softstoneghjung/nginx_1_25_1:1.0
+
+      - name: Tag to Docker redis Image
+        run: docker tag redis:7.0.5-alpine softstoneghjung/redis_7_0_5_alpine:1.0
+
+      - name: Tag to Docker postgresql Image
+        run: docker tag postgresql:15 softstoneghjung/postgresql_15:1.0
+
+      - name: Tag to Docker designer_backend Image
+        run: docker tag designer_backend softstoneghjung/designer_backend:1.0
+
+      - name: Docker Compose Push
+        run: docker compose -f ./docker-compose.dev.yml push
+
+      - name: Docker Hub Log out
+        run: docker logout
