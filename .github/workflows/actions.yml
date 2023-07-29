@@ -22,10 +22,10 @@ jobs:
 #       - name: Pull
 #         run: docker-compose pull
       - name: Up
-        run: docker-compose -f/ docker-compose.dev.yml up --build
+        run: docker-compose -f/ ./docker-compose.dev.yml up --build
       - name: Unit Test
-        run : docker_compose -f/ docker-compose.dev.yml exec designer_backend coverage run manage.py test
+        run : docker_compose -f/ ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
       - name: Run Test Coverage
-        run : docker_compose -f/ docker-compose.dev.yml exec designer_backend coverage report
+        run : docker_compose -f/ ./docker-compose.dev.yml exec designer_backend coverage report
       - name: Generate Coverage Result Html
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage html
