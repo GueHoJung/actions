@@ -38,16 +38,19 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Tag to Docker nginx Image
-        run: docker tag nginx:1.25.1 softstoneghjung/nginx_1_25_1:1.0
+        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USERNAME }}/nginx_1_25_1:1.0
 
       - name: Tag to Docker redis Image
-        run: docker tag redis:7.0.5-alpine softstoneghjung/redis_7_0_5_alpine:1.0
+        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USERNAME }}/redis_7_0_5_alpine:1.0
 
       - name: Tag to Docker postgresql Image
-        run: docker tag postgresql:15 softstoneghjung/postgresql_15:1.0
+        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USERNAME }}/postgresql_15:1.0
 
       - name: Tag to Docker designer_backend Image
-        run: docker tag designer_backend softstoneghjung/designer_backend:1.0
+        run: |
+          IMAGE_ID=$(docker images -q my_project_designer_backend:1.0)
+          echo $IMAGE_ID
+          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USERNAME }}/designer_backend:1.0
 
       - name: Docker Compose Push
         run: docker compose -f ./docker-compose.dev.yml push
