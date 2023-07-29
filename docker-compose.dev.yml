@@ -116,9 +116,10 @@ services:
     volumes:
       - ./designer_backend/backend_server:/backend_server
     depends_on:
-      postgresql:
-        condition: service_healthy
-#      - redis
+#      postgresql:
+#        condition: service_healthy
+      - postgresql
+      - redis
 #      - mssql
 #      - mysql
     # ..env_BAK 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
