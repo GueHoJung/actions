@@ -17,6 +17,8 @@ jobs:
 #           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Show Files
+        run: ls -al
 #       - name: Pull
 #         run: docker-compose pull
       - name: Up
