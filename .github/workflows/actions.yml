@@ -30,4 +30,4 @@ jobs:
       - name: Generate Coverage Result Html
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage html
       - name: Check Html Coverage Result
-        run : ls -al ./designer_backend/htmlcov
+        run : ls -al ./designer_backend/backend_server/htmlcov
