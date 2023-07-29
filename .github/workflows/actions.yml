@@ -22,7 +22,7 @@ jobs:
 #       - name: Pull
 #         run: docker-compose pull
       - name: Up
-        run: docker-compose -f ./docker-compose.dev.yml up --build
+        run: docker-compose -f ./docker-compose.dev.yml up -d --build
       - name: Unit Test
         run : docker_compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
       - name: Run Test Coverage
