@@ -35,7 +35,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Tag to Docker nginx Image
         run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
