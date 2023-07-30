@@ -99,7 +99,7 @@ jobs:
             gh.jung
           to: gh.jung@softstoneinc.com #, sj.lim@softstoneinc.com
           attachments: |
-            ./htmlcov/index.html
+            ./designer_backend/backend_server/htmlcov/index.html
 
       - name: Docker Hub Log out
         run: docker logout
