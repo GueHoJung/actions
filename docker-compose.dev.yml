@@ -108,7 +108,7 @@ services:
 
 
   designer_backend: # designer_backend
-    image: designer_backend
+    image: designer_backend:1.0
     container_name: designer_backend
     build:
         context: .
