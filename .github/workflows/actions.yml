@@ -48,7 +48,7 @@ jobs:
 
       - name: Tag to Docker designer_backend Image
         run: |
-          IMAGE_ID=$(docker images -q my_project_designer_backend:1.0)
+          IMAGE_ID=$(docker images -q designer_server_designer_backend:1.0)
           echo $IMAGE_ID
           docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
 
