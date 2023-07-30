@@ -10,10 +10,10 @@ jobs:
     name: BUILD, UNIT TEST, GENERATE COVERAGE HTML, PUSH TO DOCKER HUB
     runs-on: ubuntu-20.04
     steps:
-      - name: Check Docker Images
-        run: |
-          docker images
-          docker image ls
+#      - name: Check Docker Images
+#        run: |
+#          docker images
+#          docker image ls
 
       - name: Checkout
         uses: actions/checkout@v2
