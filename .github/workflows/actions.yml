@@ -23,6 +23,11 @@ jobs:
       - name: Docker Compose Up
         run: docker compose -f ./docker-compose.dev.yml up -d --build
 
+      - name: Check Docker Images
+        run: |
+          docker images
+          $$ docker image ls
+
       - name: Perform Unit Test
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
 
@@ -42,30 +47,34 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 #        run : docker login docker.io -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker Images Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/dev:1.0
-#
-#      - name: Tag to Docker nginx Image
-#        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
-#
-#      - name: Tag to Docker redis Image
-#        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
-#
-#      - name: Tag to Docker postgresql Image
-#        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
-#
-#      - name: Tag to Docker designer_backend Image
-#        run: |
-#          IMAGE_ID=$(docker images -q designer_backend:1.0)
-#          echo $IMAGE_ID
-#          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
-#
-#      - name: Docker Compose Push
-#        run: docker compose -f ./docker-compose.dev.yml push
+#      - name: Docker Images Build and push
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          push: true
+#          tags: ${{ secrets.DOCKERHUB_USER }}/dev:1.0
+
+      - name: Tag to Docker nginx Image
+        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
+
+      - name: Tag to Docker redis Image
+        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
+
+      - name: Tag to Docker postgresql Image
+        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
+
+      - name: Tag to Docker designer_backend Image
+        run: |
+          IMAGE_ID=$(docker images -q designer_backend:1.0)
+          echo $IMAGE_ID
+          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
+
+      - name: Docker Push
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
+          && docker push ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
+          && docker push ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
+          && docker push ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
 
       # https://stackoverflow.com/questions/75837306/github-actions-sending-artifacts-by-email
       - name: Send email
