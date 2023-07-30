@@ -13,7 +13,7 @@ jobs:
       - name: Check Docker Images
         run: |
           docker images
-            && docker image ls
+          docker image ls
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
       - name: Check Docker Images
         run: |
           docker images
-            && docker image ls
+          docker image ls
 
       - name: Perform Unit Test
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
@@ -77,9 +77,9 @@ jobs:
       - name: Docker Push
         run: |
           docker push ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
-          && docker push ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
-          && docker push ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
-          && docker push ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
 
       # https://stackoverflow.com/questions/75837306/github-actions-sending-artifacts-by-email
       - name: Send email
