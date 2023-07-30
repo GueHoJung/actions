@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Show Files
         run: ls -al
 #       - name: Pull
@@ -32,29 +36,36 @@ jobs:
         run : ls -al ./designer_backend/backend_server/htmlcov
 
       - name: Login to Docker Hub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USER }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-        run : docker login docker.io -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#        run : docker login docker.io -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Tag to Docker nginx Image
-        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
-
-      - name: Tag to Docker redis Image
-        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
-
-      - name: Tag to Docker postgresql Image
-        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
-
-      - name: Tag to Docker designer_backend Image
-        run: |
-          IMAGE_ID=$(docker images -q designer_backend:1.0)
-          echo $IMAGE_ID
-          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
-
-      - name: Docker Compose Push
-        run: docker compose -f ./docker-compose.dev.yml push
+      - name: Docker Images Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USER }}/dev:1.0
+#
+#      - name: Tag to Docker nginx Image
+#        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
+#
+#      - name: Tag to Docker redis Image
+#        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
+#
+#      - name: Tag to Docker postgresql Image
+#        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
+#
+#      - name: Tag to Docker designer_backend Image
+#        run: |
+#          IMAGE_ID=$(docker images -q designer_backend:1.0)
+#          echo $IMAGE_ID
+#          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
+#
+#      - name: Docker Compose Push
+#        run: docker compose -f ./docker-compose.dev.yml push
 
       # https://stackoverflow.com/questions/75837306/github-actions-sending-artifacts-by-email
       - name: Send email
@@ -68,13 +79,13 @@ jobs:
           from: SoftStoneIncDev
           body: |
             Hi,
-            The Run flutter test and analyze for Softstone Server actions has completed.
-            테스트가 완료 되었습니다.
+            The Run Django DRF test and report for Softstoneinc 'Designer Server' actions has completed.
+            DESIGNER SEVER 테스트, 도커 이미지 PUSH 가 완료 되었습니다.
             Regards,
             gh.jung
           to: gh.jung@softstoneinc.com #, sj.lim@softstoneinc.com
           attachments: |
-            ./README.md
+            ./htmlcov/index.html
 
       - name: Docker Hub Log out
         run: docker logout
