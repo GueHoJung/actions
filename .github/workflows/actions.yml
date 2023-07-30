@@ -87,8 +87,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: sbkyo88@gmail.com # ${{secrets.GOOGLE_ACCOUNT}}
-          password: Mirae010305^ # ${{secrets.GOOGLE_PW}}
+          username: ${{secrets.GOOGLE_ACCOUNT}}
+          password: ${{secrets.GOOGLE_PW}}
           subject: "Email test results for Softstone Desiner Server actions"
           from: SoftStoneIncDev
           body: |
