@@ -10,6 +10,11 @@ jobs:
     name: BUILD, UNIT TEST, GENERATE COVERAGE HTML, PUSH TO DOCKER HUB
     runs-on: ubuntu-20.04
     steps:
+      - name: Check Docker Images
+        run: |
+          docker images
+            && docker image ls
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -26,7 +31,7 @@ jobs:
       - name: Check Docker Images
         run: |
           docker images
-          && docker image ls
+            && docker image ls
 
       - name: Perform Unit Test
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
