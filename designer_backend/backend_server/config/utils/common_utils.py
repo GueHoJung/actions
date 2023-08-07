@@ -51,7 +51,7 @@ def call_crm_api(self, className, api_host, path, method, data, *args, **kwargs)
             response = requests.get(url, headers=headers)
         elif method == 'POST':
 
-            response = requests.post(url, json=data, headers=headers, verify=is_verify, timeout=8)
+            response = requests.post(url, json=data, headers=headers, verify=is_verify, timeout=20)
 
             print("0. response status %r" % response.status_code)
             print("0. response text %r" % response.text)

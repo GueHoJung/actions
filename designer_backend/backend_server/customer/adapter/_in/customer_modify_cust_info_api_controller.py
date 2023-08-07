@@ -167,14 +167,14 @@ class CustomerModifyCustInfoApiController(APIView):
         print(f"{self.__class__.__name__} : Controller post get request.data ==> {request.data}")
 
         container = BaseContainer()
-        # service: CustomerModifyCustInfoService = container.customerModifyCustInfoCrmServiceProvider()
+        service: CustomerModifyCustInfoService = container.customerModifyCustInfoCrmServiceProvider()
 
-        # try:
-        #     result = service.customer_modify_cust_info_crm(request.data, accessToken=kwargs.get('accessToken', 'None'),
-        #                                              refreshToken=kwargs.get('refreshToken', 'None'))
-        # except Exception as ex:
-        #     print(f"{self.__class__.__name__} : Controller post error ==> {ex}")
-        #     return Response(ex.__dict__, status=500)
+        try:
+            result = service.customer_modify_cust_info_crm(request.data, accessToken=kwargs.get('accessToken', 'None'),
+                                                           refreshToken=kwargs.get('refreshToken', 'None'))
+        except Exception as ex:
+            print(f"{self.__class__.__name__} : Controller post error ==> {ex}")
+            return Response(ex.__dict__, status=500)
 
-        # return Response(result, status=200)
-        return Response({"result": "CRM CONTROLLER GENERATE TEST"}, status=200)
+        return Response(result, status=200)
+        # return Response({"result": "CRM CONTROLLER GENERATE TEST"}, status=200)

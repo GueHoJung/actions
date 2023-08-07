@@ -17,9 +17,24 @@ Including another URLconf
 # Django REST Framework API Auto create
 from django.urls import include, path, re_path
 from django.contrib import admin
+from drf_yasg.generators import OpenAPISchemaGenerator
 from drf_yasg.views import get_schema_view
 from rest_framework.permissions import AllowAny
 from drf_yasg import openapi
+
+class BothHttpAndHttpsSchemaGenerator(OpenAPISchemaGenerator):
+    """
+    # CLASS : BothHttpAndHttpsSchemaGenerator
+    # AUTHOR : jung-gyuho
+    # TIME : 2023/08/07 11:41 AM
+    # DESCRIPTION
+        - HTTP and HTTPS
+        - https://stackoverflow.com/questions/55568431/how-can-i-configure-https-schemes-with-the-drf-yasg-auto-generated-swagger-pag
+    """
+    def get_schema(self, request=None, public=False):
+        schema = super().get_schema(request, public)
+        schema.schemes = ["http", "https"]
+        return schema
 
 schema_url_v1_patterns = [
     path('v1/', include('designer_server.urls', namespace='designer_server_api')),
@@ -29,6 +44,7 @@ schema_url_v1_patterns = [
     path('analysis/', include('analysis.urls', namespace='analysis')),
     path('employ/', include('employ.urls', namespace='employ')),
     path('order/', include('order.urls', namespace='order')),
+    path('stats/', include('stats.urls', namespace='stats')),
 
 ]
 
@@ -43,6 +59,7 @@ schema_view_v1 = get_schema_view(
     ),
     validators=['flex',  'ssv'],
     public=True,
+    generator_class=BothHttpAndHttpsSchemaGenerator, # HTTP and HTTPS
     permission_classes=(AllowAny,),
     patterns=schema_url_v1_patterns
 
@@ -58,6 +75,7 @@ urlpatterns = [
     path('analysis/', include('analysis.urls')),
     path('employ/', include('employ.urls')),
     path('order/', include('order.urls')),
+    path('stats/', include('stats.urls')),
 
     # Auto DRF API docs
     re_path(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),

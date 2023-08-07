@@ -5,6 +5,8 @@ from .adapter._in.order_prepaid_info_api_controller import OrderPrepaidInfoApiCo
 from .adapter._in.order_ticket_list_api_controller import OrderTicketListApiController
 from .adapter._in.order_prepaid_history_list_api_controller import OrderPrepaidHistoryListApiController
 from .adapter._in.order_ticket_history_list_api_controller import OrderTicketHistoryListApiController
+from .adapter._in.order_visit_history_list_api_controller import OrderVisitHistoryListApiController
+from .adapter._in.order_visit_history_detail_api_controller import OrderVisitHistoryDetailApiController
 
 app_name = 'order'
 
@@ -15,5 +17,7 @@ urlpatterns = [
     path("getPrpGridListAndSummary/", OrderPrepaidInfoApiController.as_view()),
     path("getTicketList/", OrderTicketListApiController.as_view()),
     path("getPrpHisGridList/", OrderPrepaidHistoryListApiController.as_view()),
-    path("getTicketHistoryList/", OrderTicketHistoryListApiController.as_view())
+    path("getTicketHistoryList/", OrderTicketHistoryListApiController.as_view()),
+    path("getOrderGridList/", OrderVisitHistoryListApiController.as_view()),
+    path("getOrdPayInfo/", OrderVisitHistoryDetailApiController.as_view()),
 ]
