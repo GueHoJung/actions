@@ -3,7 +3,7 @@ name: designer_server
 on:
   push:
     branches:
-      - 'develop'
+      - 'actions'
 
 jobs:
   test-lint:
