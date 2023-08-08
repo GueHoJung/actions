@@ -23,6 +23,21 @@ from .adapter._in.analysis_user_prepaid_sales_rank_api_controller import Analysi
 from .adapter._in.analysis_monthly_cust_prepaid_anlys_api_controller import AnalysisMonthlyCustPrepaidAnlysApiController
 from .adapter._in.analysis_weekly_cust_prepaid_anlys_api_controller import AnalysisWeeklyCustPrepaidAnlysApiController
 from .adapter._in.analysis_daily_cust_prepaid_anlys_api_controller import AnalysisDailyCustPrepaidAnlysApiController
+from .adapter._in.analysis_monthly_inflow_anlys_api_controller import AnalysisMonthlyInflowAnlysApiController
+from .adapter._in.analysis_weekly_inflow_anlys_api_controller import AnalysisWeeklyInflowAnlysApiController
+from .adapter._in.analysis_daily_inflow_anlys_api_controller import AnalysisDailyInflowAnlysApiController
+from .adapter._in.analysis_monthly_retention_anlys_api_controller import AnalysisMonthlyRetentionAnlysApiController
+from .adapter._in.analysis_weekly_retention_anlys_api_controller import AnalysisWeeklyRetentionAnlysApiController
+from .adapter._in.analysis_daily_retention_anlys_api_controller import AnalysisDailyRetentionAnlysApiController
+from .adapter._in.analysis_monthly_dprtr_anlys_api_controller import AnalysisMonthlyDprtrAnlysApiController
+from .adapter._in.analysis_weekly_dprtr_anlys_api_controller import AnalysisWeeklyDprtrAnlysApiController
+from .adapter._in.analysis_daily_dprtr_anlys_api_controller import AnalysisDailyDprtrAnlysApiController
+from .adapter._in.analysis_user_unit_price_compare_api_controller import AnalysisUserUnitPriceCompareApiController
+from .adapter._in.analysis_user_growth_rate_rank_api_controller import AnalysisUserGrowthRateRankApiController
+from .adapter._in.analysis_user_product_compare_api_controller import AnalysisUserProductCompareApiController
+from .adapter._in.analysis_user_cust_count_compare_api_controller import AnalysisUserCustCountCompareApiController
+from .adapter._in.analysis_user_sales_compare_api_controller import AnalysisUserSalesCompareApiController
+from .adapter._in.analysis_user_trm_type_compare_api_controller import AnalysisUserTrmTypeCompareApiController
 
 app_name = 'analysis'
 
@@ -52,4 +67,19 @@ urlpatterns = [
     path("getMonthlyCustPrepaidAnlys/", AnalysisMonthlyCustPrepaidAnlysApiController.as_view()),
     path("getWeeklyCustPrepaidAnlys/", AnalysisWeeklyCustPrepaidAnlysApiController.as_view()),
     path("getDailyCustPrepaidAnlys/", AnalysisDailyCustPrepaidAnlysApiController.as_view()),
+    path("getMonthlyInflowAnlys/", AnalysisMonthlyInflowAnlysApiController.as_view()),
+    path("getWeeklyInflowAnlys/", AnalysisWeeklyInflowAnlysApiController.as_view()),
+    path("getDailyInflowAnlys/", AnalysisDailyInflowAnlysApiController.as_view()),
+    path("getMonthlyRetentionAnlys/", AnalysisMonthlyRetentionAnlysApiController.as_view()),
+    path("getWeeklyRetentionAnlys/", AnalysisWeeklyRetentionAnlysApiController.as_view()),
+    path("getDailyRetentionAnlys/", AnalysisDailyRetentionAnlysApiController.as_view()),
+    path("getMonthlyDprtrAnlys/", AnalysisMonthlyDprtrAnlysApiController.as_view()),
+    path("getWeeklyDprtrAnlys/", AnalysisWeeklyDprtrAnlysApiController.as_view()),
+    path("getDailyDprtrAnlys/", AnalysisDailyDprtrAnlysApiController.as_view()),
+    path("getUserUnitPriceCompare/", AnalysisUserUnitPriceCompareApiController.as_view()),
+    path("getUserGrowthRateRank/", AnalysisUserGrowthRateRankApiController.as_view()),
+    path("getUserProductCompare/", AnalysisUserProductCompareApiController.as_view()),
+    path("getUserCustCountCompare/", AnalysisUserCustCountCompareApiController.as_view()),
+    path("getUserSalesCompare/", AnalysisUserSalesCompareApiController.as_view()),
+    path("getUserTrmTypeCompare/", AnalysisUserTrmTypeCompareApiController.as_view()),
 ]
