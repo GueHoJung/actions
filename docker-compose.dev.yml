@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   nginx:
-    container_name: nginx
     image: nginx:1.25.1
+    container_name: nginx
     build: ./nginx
     ports:
       # 외부 포트: 내부 포트
@@ -27,8 +27,8 @@ services:
       - backend
 
   redis: # See Also: https://hub.docker.com/_/redis
-    container_name: redis
     image: redis:7.0.5-alpine
+    container_name: redis
     hostname: hostname-redis
     ports:
       - "6379:6379"
@@ -38,8 +38,9 @@ services:
       - backend
 
   postgresql:
-    container_name: postgres
     image: postgres:15
+    container_name: postgres
+#    build: ./designer_backend/Dockerfile
     # hostname: postgresql
     restart: always
     ports:
@@ -107,7 +108,7 @@ services:
 
 
   designer_backend: # designer_backend
-    image: designer_backend
+    image: designer_backend:1.0
     container_name: designer_backend
     build:
         context: .
@@ -115,8 +116,10 @@ services:
     volumes:
       - ./designer_backend/backend_server:/backend_server
     depends_on:
-      - redis
+#      postgresql:
+#        condition: service_healthy
       - postgresql
+      - redis
 #      - mssql
 #      - mysql
     # ..env_BAK 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함

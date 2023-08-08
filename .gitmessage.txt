@@ -19,6 +19,7 @@
 #       - 형식: <type>(<scope>): <short summary>
 #       - 예시 : Feat: "추가 get data api 함수"
 #           <type>
+#             - ci/cd: CI/CD 실행 태그
 #             - build: build system 또는 external dependencies에 영향을 미치는 변경사항 (예시 scope: gulp, broccoli, npm)
 #             - ci: CI configuration 파일 또는 scripts의 변경 사항 (예시: CircleCi, SauceLabs)
 #             - config: 설정 관련 파일 작성 또는 변경
