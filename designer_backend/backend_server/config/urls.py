@@ -48,6 +48,7 @@ schema_url_v1_patterns = [
     path('employ/', include('employ.urls', namespace='employ')),
     path('order/', include('order.urls', namespace='order')),
     path('stats/', include('stats.urls', namespace='stats')),
+    path('itsr/', include('itsr.urls', namespace='itsr')),
 
 ]
 
@@ -120,6 +121,7 @@ urlpatterns = [
     path('employ/', include('employ.urls')),
     path('order/', include('order.urls')),
     path('stats/', include('stats.urls')),
+    path('itsr/', include('itsr.urls')),
 
     # Auto DRF API docs
     re_path(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),

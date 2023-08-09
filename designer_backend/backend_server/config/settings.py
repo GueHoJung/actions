@@ -78,6 +78,8 @@ INSTALLED_APPS = [
     'order',
     # 통계
     'stats',
+    # ITSR
+    'itsr',
 ]
 
 # settings.py

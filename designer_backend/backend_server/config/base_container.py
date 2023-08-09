@@ -337,6 +337,79 @@ from analysis.application.port.out.analysis_user_trm_type_compare_out_port impor
 from analysis.application.port._in.analysis_user_trm_type_compare_in_port import AnalysisUserTrmTypeCompareInCrmImpl
 from analysis.application.service.analysis_user_trm_type_compare_service import AnalysisUserTrmTypeCompareService
 
+from reservation.adapter.out.reservation_reservation_holiday_api_adapter import ReservationReservationHolidayApiAdapter
+from reservation.application.port.out.reservation_reservation_holiday_out_port import \
+    ReservationReservationHolidayOutCrmImpl
+from reservation.application.port._in.reservation_reservation_holiday_in_port import \
+    ReservationReservationHolidayInCrmImpl
+from reservation.application.service.reservation_reservation_holiday_service import ReservationReservationHolidayService
+
+from reservation.adapter.out.reservation_rsrv_holiday_schedule_api_adapter import \
+    ReservationRsrvHolidayScheduleApiAdapter
+from reservation.application.port.out.reservation_rsrv_holiday_schedule_out_port import \
+    ReservationRsrvHolidayScheduleOutCrmImpl
+from reservation.application.port._in.reservation_rsrv_holiday_schedule_in_port import \
+    ReservationRsrvHolidayScheduleInCrmImpl
+from reservation.application.service.reservation_rsrv_holiday_schedule_service import \
+    ReservationRsrvHolidayScheduleService
+
+from reservation.adapter.out.reservation_mod_rsrv_holiday_schedule_api_adapter import ReservationModRsrvHolidayScheduleApiAdapter
+from reservation.application.port.out.reservation_mod_rsrv_holiday_schedule_out_port import \
+    ReservationModRsrvHolidayScheduleOutCrmImpl
+from reservation.application.port._in.reservation_mod_rsrv_holiday_schedule_in_port import \
+    ReservationModRsrvHolidayScheduleInCrmImpl
+from reservation.application.service.reservation_mod_rsrv_holiday_schedule_service import ReservationModRsrvHolidayScheduleService
+
+from reservation.adapter.out.reservation_save_reservation_holiday_api_adapter import ReservationSaveReservationHolidayApiAdapter
+from reservation.application.port.out.reservation_save_reservation_holiday_out_port import ReservationSaveReservationHolidayOutCrmImpl
+from reservation.application.port._in.reservation_save_reservation_holiday_in_port import ReservationSaveReservationHolidayInCrmImpl
+from reservation.application.service.reservation_save_reservation_holiday_service import ReservationSaveReservationHolidayService
+
+from reservation.adapter.out.reservation_mod_reservation_holiday_api_adapter import \
+    ReservationModReservationHolidayApiAdapter
+from reservation.application.port.out.reservation_mod_reservation_holiday_out_port import \
+    ReservationModReservationHolidayOutCrmImpl
+from reservation.application.port._in.reservation_mod_reservation_holiday_in_port import \
+    ReservationModReservationHolidayInCrmImpl
+from reservation.application.service.reservation_mod_reservation_holiday_service import \
+    ReservationModReservationHolidayService
+
+from reservation.adapter.out.reservation_save_rsrv_holiday_schedule_api_adapter import \
+    ReservationSaveRsrvHolidayScheduleApiAdapter
+from reservation.application.port.out.reservation_save_rsrv_holiday_schedule_out_port import \
+    ReservationSaveRsrvHolidayScheduleOutCrmImpl
+from reservation.application.port._in.reservation_save_rsrv_holiday_schedule_in_port import \
+    ReservationSaveRsrvHolidayScheduleInCrmImpl
+from reservation.application.service.reservation_save_rsrv_holiday_schedule_service import \
+    ReservationSaveRsrvHolidayScheduleService
+
+from reservation.adapter.out.reservation_pop_rsrv_detail_info_api_adapter import ReservationPopRsrvDetailInfoApiAdapter
+from reservation.application.port.out.reservation_pop_rsrv_detail_info_out_port import \
+    ReservationPopRsrvDetailInfoOutCrmImpl
+from reservation.application.port._in.reservation_pop_rsrv_detail_info_in_port import \
+    ReservationPopRsrvDetailInfoInCrmImpl
+from reservation.application.service.reservation_pop_rsrv_detail_info_service import ReservationPopRsrvDetailInfoService
+
+from customer.adapter.out.customer_customer_grid_list_api_adapter import CustomerCustomerGridListApiAdapter
+from customer.application.port.out.customer_customer_grid_list_out_port import CustomerCustomerGridListOutCrmImpl
+from customer.application.port._in.customer_customer_grid_list_in_port import CustomerCustomerGridListInCrmImpl
+from customer.application.service.customer_customer_grid_list_service import CustomerCustomerGridListService
+
+from itsr.adapter.out.itsr_save_sr_info_api_adapter import ItsrSaveSrInfoApiAdapter
+from itsr.application.port.out.itsr_save_sr_info_out_port import ItsrSaveSrInfoOutCrmImpl
+from itsr.application.port._in.itsr_save_sr_info_in_port import ItsrSaveSrInfoInCrmImpl
+from itsr.application.service.itsr_save_sr_info_service import ItsrSaveSrInfoService
+
+from itsr.adapter.out.itsr_sr_grid_list_api_adapter import ItsrSrGridListApiAdapter
+from itsr.application.port.out.itsr_sr_grid_list_out_port import ItsrSrGridListOutCrmImpl
+from itsr.application.port._in.itsr_sr_grid_list_in_port import ItsrSrGridListInCrmImpl
+from itsr.application.service.itsr_sr_grid_list_service import ItsrSrGridListService
+
+from employ.adapter.out.employ_user_apnt_list_api_adapter import EmployUserApntListApiAdapter
+from employ.application.port.out.employ_user_apnt_list_out_port import EmployUserApntListOutHrmImpl
+from employ.application.port._in.employ_user_apnt_list_in_port import EmployUserApntListInHrmImpl
+from employ.application.service.employ_user_apnt_list_service import EmployUserApntListService
+
 class BaseContainer(DeclarativeContainer):
     """
     # Base container.
@@ -827,3 +900,93 @@ class BaseContainer(DeclarativeContainer):
     analysisUserTrmTypeCompareCrmServiceProvider = providers.Singleton(AnalysisUserTrmTypeCompareService,
                                                                        portInImpl=AnalysisUserTrmTypeCompareInCrmImpl,
                                                                        portOutImpl=analysisUserTrmTypeCompareOutCrmPortProvider)
+
+    # CRM ReservationReservationHoliday API 의존성 주입
+    reservationReservationHolidayCrmApiAdapterProvider = providers.Singleton(ReservationReservationHolidayApiAdapter)
+    reservationReservationHolidayOutCrmPortProvider = providers.Singleton(ReservationReservationHolidayOutCrmImpl,
+                                                                          reservationReservationHolidayApiAdapter=reservationReservationHolidayCrmApiAdapterProvider)
+    reservationReservationHolidayCrmServiceProvider = providers.Singleton(ReservationReservationHolidayService,
+                                                                          portInImpl=ReservationReservationHolidayInCrmImpl,
+                                                                          portOutImpl=reservationReservationHolidayOutCrmPortProvider)
+
+    # CRM ReservationRsrvHolidaySchedule API 의존성 주입
+    reservationRsrvHolidayScheduleCrmApiAdapterProvider = providers.Singleton(ReservationRsrvHolidayScheduleApiAdapter)
+    reservationRsrvHolidayScheduleOutCrmPortProvider = providers.Singleton(ReservationRsrvHolidayScheduleOutCrmImpl,
+                                                                           reservationRsrvHolidayScheduleApiAdapter=reservationRsrvHolidayScheduleCrmApiAdapterProvider)
+    reservationRsrvHolidayScheduleCrmServiceProvider = providers.Singleton(ReservationRsrvHolidayScheduleService,
+                                                                           portInImpl=ReservationRsrvHolidayScheduleInCrmImpl,
+                                                                           portOutImpl=reservationRsrvHolidayScheduleOutCrmPortProvider)
+
+    # CRM ReservationModRsrvHolidaySchedule API 의존성 주입
+    reservationModRsrvHolidayScheduleCrmApiAdapterProvider = providers.Singleton(
+        ReservationModRsrvHolidayScheduleApiAdapter)
+    reservationModRsrvHolidayScheduleOutCrmPortProvider = providers.Singleton(
+        ReservationModRsrvHolidayScheduleOutCrmImpl,
+        reservationModRsrvHolidayScheduleApiAdapter=reservationModRsrvHolidayScheduleCrmApiAdapterProvider)
+    reservationModRsrvHolidayScheduleCrmServiceProvider = providers.Singleton(ReservationModRsrvHolidayScheduleService,
+                                                                              portInImpl=ReservationModRsrvHolidayScheduleInCrmImpl,
+                                                                              portOutImpl=reservationModRsrvHolidayScheduleOutCrmPortProvider)
+
+    # CRM ReservationSaveReservationHoliday API 의존성 주입
+    reservationSaveReservationHolidayCrmApiAdapterProvider = providers.Singleton(
+        ReservationSaveReservationHolidayApiAdapter)
+    reservationSaveReservationHolidayOutCrmPortProvider = providers.Singleton(
+        ReservationSaveReservationHolidayOutCrmImpl,
+        reservationSaveReservationHolidayApiAdapter=reservationSaveReservationHolidayCrmApiAdapterProvider)
+    reservationSaveReservationHolidayCrmServiceProvider = providers.Singleton(ReservationSaveReservationHolidayService,
+                                                                              portInImpl=ReservationSaveReservationHolidayInCrmImpl,
+                                                                              portOutImpl=reservationSaveReservationHolidayOutCrmPortProvider)
+
+    # CRM ReservationModReservationHoliday API 의존성 주입
+    reservationModReservationHolidayCrmApiAdapterProvider = providers.Singleton(ReservationModReservationHolidayApiAdapter)
+    reservationModReservationHolidayOutCrmPortProvider = providers.Singleton(ReservationModReservationHolidayOutCrmImpl,
+                                                                             reservationModReservationHolidayApiAdapter=reservationModReservationHolidayCrmApiAdapterProvider)
+    reservationModReservationHolidayCrmServiceProvider = providers.Singleton(ReservationModReservationHolidayService, portInImpl=ReservationModReservationHolidayInCrmImpl,
+                                                                             portOutImpl=reservationModReservationHolidayOutCrmPortProvider)
+
+    # CRM ReservationSaveRsrvHolidaySchedule API 의존성 주입
+    reservationSaveRsrvHolidayScheduleCrmApiAdapterProvider = providers.Singleton(
+        ReservationSaveRsrvHolidayScheduleApiAdapter)
+    reservationSaveRsrvHolidayScheduleOutCrmPortProvider = providers.Singleton(
+        ReservationSaveRsrvHolidayScheduleOutCrmImpl,
+        reservationSaveRsrvHolidayScheduleApiAdapter=reservationSaveRsrvHolidayScheduleCrmApiAdapterProvider)
+    reservationSaveRsrvHolidayScheduleCrmServiceProvider = providers.Singleton(
+        ReservationSaveRsrvHolidayScheduleService, portInImpl=ReservationSaveRsrvHolidayScheduleInCrmImpl,
+        portOutImpl=reservationSaveRsrvHolidayScheduleOutCrmPortProvider)
+
+    # CRM ReservationPopRsrvDetailInfo API 의존성 주입
+    reservationPopRsrvDetailInfoCrmApiAdapterProvider = providers.Singleton(ReservationPopRsrvDetailInfoApiAdapter)
+    reservationPopRsrvDetailInfoOutCrmPortProvider = providers.Singleton(ReservationPopRsrvDetailInfoOutCrmImpl,
+                                                                         reservationPopRsrvDetailInfoApiAdapter=reservationPopRsrvDetailInfoCrmApiAdapterProvider)
+    reservationPopRsrvDetailInfoCrmServiceProvider = providers.Singleton(ReservationPopRsrvDetailInfoService,
+                                                                         portInImpl=ReservationPopRsrvDetailInfoInCrmImpl,
+                                                                         portOutImpl=reservationPopRsrvDetailInfoOutCrmPortProvider)
+
+    # CRM CustomerCustomerGridList API 의존성 주입
+    customerCustomerGridListCrmApiAdapterProvider = providers.Singleton(CustomerCustomerGridListApiAdapter)
+    customerCustomerGridListOutCrmPortProvider = providers.Singleton(CustomerCustomerGridListOutCrmImpl,
+                                                                     customerCustomerGridListApiAdapter=customerCustomerGridListCrmApiAdapterProvider)
+    customerCustomerGridListCrmServiceProvider = providers.Singleton(CustomerCustomerGridListService,
+                                                                     portInImpl=CustomerCustomerGridListInCrmImpl,
+                                                                     portOutImpl=customerCustomerGridListOutCrmPortProvider)
+
+    # CRM ItsrSaveSrInfo API 의존성 주입
+    itsrSaveSrInfoCrmApiAdapterProvider = providers.Singleton(ItsrSaveSrInfoApiAdapter)
+    itsrSaveSrInfoOutCrmPortProvider = providers.Singleton(ItsrSaveSrInfoOutCrmImpl,
+                                                           itsrSaveSrInfoApiAdapter=itsrSaveSrInfoCrmApiAdapterProvider)
+    itsrSaveSrInfoCrmServiceProvider = providers.Singleton(ItsrSaveSrInfoService, portInImpl=ItsrSaveSrInfoInCrmImpl,
+                                                           portOutImpl=itsrSaveSrInfoOutCrmPortProvider)
+
+    # CRM ItsrSrGridList API 의존성 주입
+    itsrSrGridListCrmApiAdapterProvider = providers.Singleton(ItsrSrGridListApiAdapter)
+    itsrSrGridListOutCrmPortProvider = providers.Singleton(ItsrSrGridListOutCrmImpl,
+                                                           itsrSrGridListApiAdapter=itsrSrGridListCrmApiAdapterProvider)
+    itsrSrGridListCrmServiceProvider = providers.Singleton(ItsrSrGridListService, portInImpl=ItsrSrGridListInCrmImpl,
+                                                           portOutImpl=itsrSrGridListOutCrmPortProvider)
+
+    # HRM EmployUserApntList API 의존성 주입
+    employUserApntListHrmApiAdapterProvider = providers.Singleton(EmployUserApntListApiAdapter)
+    employUserApntListOutHrmPortProvider = providers.Singleton(EmployUserApntListOutHrmImpl,
+                                                               employUserApntListApiAdapter=employUserApntListHrmApiAdapterProvider)
+    employUserApntListHrmServiceProvider = providers.Singleton(EmployUserApntListService, portInImpl=EmployUserApntListInHrmImpl,
+                                                               portOutImpl=employUserApntListOutHrmPortProvider)

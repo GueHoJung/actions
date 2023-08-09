@@ -4,6 +4,7 @@ from .adapter._in.customer_api_contorller import CustomerApiController
 from .adapter._in.customer_cust_memo_list_api_controller import CustomerCustMemoListApiController
 from .adapter._in.customer_cust_taste_list_api_controller import CustomerCustTasteListApiController
 from .adapter._in.customer_modify_cust_info_api_controller import CustomerModifyCustInfoApiController
+from .adapter._in.customer_customer_grid_list_api_controller import CustomerCustomerGridListApiController
 from . import views
 
 app_name = 'customer'
@@ -16,4 +17,5 @@ urlpatterns = [
     path("getCustMemoList/", CustomerCustMemoListApiController.as_view()),
     path("getCustTasteList/", CustomerCustTasteListApiController.as_view()),
     path("modifyCustInfo/", CustomerModifyCustInfoApiController.as_view()),
+    path("getCustomerGridList/", CustomerCustomerGridListApiController.as_view()),
 ]
