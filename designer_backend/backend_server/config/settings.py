@@ -54,6 +54,8 @@ INSTALLED_APPS = [
 
     # requirements.txt에 작성 된 djangorestframework
     'rest_framework',
+    # token authentication
+    'rest_framework.authtoken',
     # yet another swagger,
     'drf_yasg',
     # django-cors-headers
@@ -92,6 +94,34 @@ REST_FRAMEWORK = {
     ],
     # CUSTOM EXCEPTION HANDLER 추가
     'EXCEPTION_HANDLER': 'config.utils.exceptions.custom_exception_handler',
+    # AUTHEENTICATION
+    # 컨트롤러에서 authentication_classes를 지정하지 않으면 기본적으로 아래의 authentication_classes가 적용됩니다.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',  # token authentication
+    ],
+    # PERMISSION
+    # 컨트롤러에서 permission_classes를 지정하지 않으면 기본적으로 아래의 permission_classes가 적용됩니다.
+    'DEFAULT_PERMISSION_CLASSES': (
+        # IsAuthenticated permission 클래스는 인증되지 않은 사용자에게 permission을 거부하고 그렇지 않은 경우에는 permission을 허용합니다.
+        # 이 permission은 등록된 사용자만 API에 액세스 할 수 있게 하려는 경우 적합합니다.
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
+# settings.py SWAGGER
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        },
+        # 'Bearer': {
+        #     'type': 'apiKey',
+        #     'name': 'Authorization',
+        #     'in': 'header'
+        # }
+    },
 }
 
 # django admin화면 접속 시도시 Site matching query does not exist. 발생
@@ -234,7 +264,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',  # 설정한 레벨이상의 로그만 동작합니다.
             'class': 'logging.handlers.RotatingFileHandler',  # 파일처리 핸들러로 파일저장
-            'filename': "./api_logs/admin_log"+datetime.now().strftime('%Y-%m-%d')+".log",
+            'filename': "./api_logs/admin_log" + datetime.now().strftime('%Y-%m-%d') + ".log",
             'encoding': 'UTF-8',  # 인코딩 깨지지 말라고
             'maxBytes': 1024 * 1024 * 5,  # 5 MB  /
             'backupCount': 5,

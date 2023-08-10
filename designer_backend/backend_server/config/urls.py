@@ -19,8 +19,11 @@ from django.urls import include, path, re_path
 from django.contrib import admin
 from drf_yasg.generators import OpenAPISchemaGenerator
 from drf_yasg.views import get_schema_view
-from rest_framework.permissions import AllowAny
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_yasg import openapi
+# obtain_auth_token 추가
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 class BothHttpAndHttpsSchemaGenerator(OpenAPISchemaGenerator):
@@ -39,6 +42,7 @@ class BothHttpAndHttpsSchemaGenerator(OpenAPISchemaGenerator):
         return schema
 
 
+
 schema_url_v1_patterns = [
     path('v1/', include('designer_server.urls', namespace='designer_server_api')),
     path('archi/', include('hexagonal_archi_template.urls', namespace='hexagonal_archi_template')),
@@ -49,6 +53,8 @@ schema_url_v1_patterns = [
     path('order/', include('order.urls', namespace='order')),
     path('stats/', include('stats.urls', namespace='stats')),
     path('itsr/', include('itsr.urls', namespace='itsr')),
+    # Login
+    path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
 
@@ -56,8 +62,24 @@ schema_view_v1 = get_schema_view(
     openapi.Info(
         title="Mobile Designer App Backend Server Open API",
         default_version='v1',
-        description="Softstone Designer App Backend Server\n"
+        description="# SOFTSTONE INC DESIGNER APP BACKEND SERVER\n"
                     "---\n"
+                    "## API AUTHENTICATION & PERMISSION DESCRIPTION\n"
+                    "\n"
+                    "### 아래 항목을 requst 시 각 영역에 반드시 포함 시켜야 SERVER의 AUTHENTICATION, PERMISSION 체크를 통과 할 수 있습니다.\n"
+                    "\n"
+                    "- ### HEADER\n"
+                    "\t- AUTHORIZATION : Token 83e2fa7b2aa22695f4cb9bebb9b3b8dca7604e23\n"
+                    "\n"
+                    "\t\t(향후 firebase remote config 에서 관리 필요)\n"
+                    "\n"
+                    "- ### COOKIES\n"
+                    "\t- accessToken\n"
+                    "\t- refreshToken\n"
+                    "\n"
+                    "\t\t(로그인 전 : 빈 값의 accessToken, refreshToken을 cookie에 set)\n"
+                    "\t\t(로그인 후 : CRM에서 발급 받은 accesstoken, refreshToken 값 cookie에 set)\n"
+                    "\n"
                     "## API PARAMS INFO DESCRIPTION\n"
                     "---\n"
                     "|           PARAM NAME          |        PARAM TYPE         |        MAX LENGTH    |          REQUIRED         |                 DESC                |                    ETC                             |\n"
@@ -88,7 +110,7 @@ schema_view_v1 = get_schema_view(
                     "|			prdcBrndCd		    |			varchar			|			200			|			TRUE			|			점판브랜드코드	              |         null			                            |\n"
                     "|			gndrCd			    |			varchar			|			200			|			TRUE			|			성별코드			        |           'F','M'			                           |\n"
                     "|			joinTpCd		    |			varchar			|			200			|			TRUE			|			유입경로코드			     |          '01','02','03','04','05','06','07','08','09','10','11','99' |\n"
-                    # "|                              |                           |                       |                           |                                       |[ 01 : 포털검색, 02 : 네이버예약, 03 : 인스타그램, 04 : 유튜브, 05 : 페이스북, 06 : 카카오헤어, 07 : 오프라인광고, 08 : 지인추천, 09 : 자택근처, 10 : 직장근처, 11 : 근처지역방문, 99 : 기타 ]	|\n"
+        # "|                              |                           |                       |                           |                                       |[ 01 : 포털검색, 02 : 네이버예약, 03 : 인스타그램, 04 : 유튜브, 05 : 페이스북, 06 : 카카오헤어, 07 : 오프라인광고, 08 : 지인추천, 09 : 자택근처, 10 : 직장근처, 11 : 근처지역방문, 99 : 기타 ]	|\n"
                     "|			ageGrpCd		    |			varchar			|			200			|			TRUE			|			연령대코드			         |          'A10','A30','A60'			               |\n"
                     "|			userNm			    |			varchar			|			200			|			TRUE			|			디자이너이름			     |						                                |\n"
                     "|			userId			    |			varchar			|			200			|			TRUE			|			디자이너아이디			      |						                                |\n"
@@ -105,7 +127,11 @@ schema_view_v1 = get_schema_view(
     validators=['flex', 'ssv'],
     public=True,
     generator_class=BothHttpAndHttpsSchemaGenerator,  # HTTP and HTTPS
-    permission_classes=(AllowAny,),
+    # permission_classes=(AllowAny,),
+    # 인증된 사용자만 접근 가능하도록 권한 설정
+    permission_classes=(IsAuthenticated,),
+    # 로그인 후 API DOC UI 접근 가능
+    authentication_classes=(SessionAuthentication, BasicAuthentication,),
     patterns=schema_url_v1_patterns
 
 )
@@ -122,9 +148,13 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('stats/', include('stats.urls')),
     path('itsr/', include('itsr.urls')),
+    # token authentication 경로 추가
+    path('api/get_token/', obtain_auth_token),
 
     # Auto DRF API docs
-    re_path(r'^swagger(?P<format>\.json|\.yaml)/v1$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^swagger/v1/$', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^redoc/v1/$', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc-v1'),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc-v1'),
+    # Login & Logout
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
