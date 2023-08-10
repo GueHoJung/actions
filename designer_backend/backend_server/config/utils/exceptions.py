@@ -1,5 +1,9 @@
 from rest_framework.views import exception_handler
 from rest_framework import exceptions
+import logging
+from datetime import datetime
+
+logger = logging.getLogger("django.server")
 
 
 def custom_exception_handler(exc, context):
@@ -18,13 +22,19 @@ def custom_exception_handler(exc, context):
     --------------------------------------------------
     jung-gyuho              2023/07/27 5:37 PM       최초 작성
     """
+    logger.error(f"[CUSTOM_EXCEPTION_HANDLER_ERROR]")
+    logger.error(f"[{datetime.now()}]")
+    logger.error(f"> exc")
+    logger.error(f"{exc}")
+    logger.error(f"> context")
+    logger.error(f"{context}")
 
     # Call REST framework's default exception handler first,
     # to get the standard error response.
     response = exception_handler(exc, context)
 
-    print(f"custom_exception_handler exc ==> {exc}")
-    print(f"custom_exception_handler context ==> {context}")
+    logger.info(f"custom_exception_handler exc ==> {exc}")
+    logger.info(f"custom_exception_handler context ==> {context}")
 
     # Now add the HTTP status code to the response.
     if response is not None:

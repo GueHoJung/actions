@@ -18,7 +18,7 @@ services:
       - ./designer_backend/backend_server/.static_root/:/static
       - ./designer_backend/backend_server/.media_root/:/media
     env_file:
-      - ./.env.dev  # 개발에서 쓰이는 환경변수
+      - ./.env.app.dev  # APP 서버 상 개발에서 쓰이는 환경변수
 #    environment:
 #      - TZ=Asia/Seoul
     depends_on:
@@ -33,7 +33,7 @@ services:
     ports:
       - "6379:6379"
     env_file:
-      - ./.env.dev  # 개발에서 쓰이는 환경변수
+      - ./.env.app.dev  # APP 서버 상 개발에서 쓰이는 환경변수
     networks:
       - backend
 
@@ -46,7 +46,7 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - ./.env.dev  # 개발에서 쓰이는 환경변수
+      - ./.env.app.dev  # APP 서버 상 개발에서 쓰이는 환경변수
 #    environment:
 #      POSTGRES_DB: ${POSTGRES_DB}
 #      POSTGRES_USER: ${POSTGRES_USER}
@@ -124,7 +124,7 @@ services:
 #      - mysql
     # ..env_BAK 파일은 docker-compose.yml 파일과 같은 경로에 위치해야 함
     env_file:
-      - ./.env.dev  # 개발에서 쓰이는 환경변수
+      - ./.env.app.dev  # APP 서버 상 개발에서 쓰이는 환경변수
 #    environment:
 #      - DJANGO_SUPERUSER_USERNAME=${DADMIN_ID}
 #      - DJANGO_SUPERUSER_PASSWORD=${DADMIN_PASSWORD}
