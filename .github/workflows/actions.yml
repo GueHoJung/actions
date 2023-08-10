@@ -60,26 +60,26 @@ jobs:
 #          tags: ${{ secrets.DOCKERHUB_USER }}/dev:1.0
 
       - name: Tag to Docker nginx Image
-        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
+        run: docker tag nginx:1.25.1 ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:nginx_1_25_1__1.0
 
       - name: Tag to Docker redis Image
-        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
+        run: docker tag redis:7.0.5-alpine ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:redis_7_0_5_alpine__1.0
 
       - name: Tag to Docker postgresql Image
-        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
+        run: docker tag postgres:15 ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:postgresql_15__1.0
 
       - name: Tag to Docker designer_backend Image
         run: |
           IMAGE_ID=$(docker images -q designer_backend:1.0)
           echo $IMAGE_ID
-          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
+          docker tag $IMAGE_ID ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:designer_backend__1.0
 
       - name: Docker Push
         run: |
-          docker push ${{ secrets.DOCKERHUB_USER }}/nginx_1_25_1:1.0
-          docker push ${{ secrets.DOCKERHUB_USER }}/redis_7_0_5_alpine:1.0
-          docker push ${{ secrets.DOCKERHUB_USER }}/postgresql_15:1.0
-          docker push ${{ secrets.DOCKERHUB_USER }}/designer_backend:1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:nginx_1_25_1__1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:redis_7_0_5_alpine__1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:postgresql_15__1.0
+          docker push ${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKERHUB_REPOSITORY }}:designer_backend__1.0
 
       # https://stackoverflow.com/questions/75837306/github-actions-sending-artifacts-by-email
       - name: Send email
@@ -89,11 +89,11 @@ jobs:
           server_port: 465
           username: ${{secrets.GOOGLE_ACCOUNT}}
           password: ${{secrets.GOOGLE_PW}}
-          subject: "Email test results for Softstone Desiner Server actions"
+          subject: "CI/CD Results For Softstone Desiner Server"
           from: SoftStoneIncDev
           body: |
             Hi,
-            The Run Django DRF test and report for Softstoneinc 'Designer Server' actions has completed.
+            Softstoneinc 'Designer Server' actions has completed.
             DESIGNER SEVER 테스트, 도커 이미지 PUSH 가 완료 되었습니다.
             Regards,
             gh.jung
