@@ -22,7 +22,7 @@ attempt=0
 isFlagFound=0
 while [ $isFlagFound -eq 0 ]
 do
-	sleep 3
+	sleep 60
 	log_echo "========================================================"
 	log_echo "====================FLAG CHECK START===================="
 	log_echo "CHECK TIME : $(date +%Y)-$(date +%m)-$(date +%d) $(date +%H):$(date +%M):$(date +%S)"

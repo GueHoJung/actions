@@ -21,7 +21,7 @@ class LoginHrmApiController(APIView):
         - HRM SYSTEM LOGIN API
         - DESIGNER APP 으로 부터 로그인 요청 받음
     """
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     # manual_parameters = [] 방식 : Path Parameter 방식 => 파라미터 아주 간단할 때 사용
     task_id_path = openapi.Parameter('task_id', in_=openapi.IN_PATH, description='task_id _in path', required=True,

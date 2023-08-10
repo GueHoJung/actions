@@ -45,7 +45,7 @@ class AnalysisDailyCustMembershipAnlysApiController(APIView):
     2023/08/07          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['CRM SYSTEM - Analysis API'],
                          operation_summary="CRM Analysis DailyCustMembershipAnlys API",

@@ -47,7 +47,7 @@ class AnalysisMonthlyInflowAnlysApiController(APIView):
     2023/08/08          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['CRM SYSTEM - Analysis API'], operation_summary="CRM Analysis MonthlyInflowAnlys API",
                          operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 MonthlyInflowAnlys 요청 API\n"

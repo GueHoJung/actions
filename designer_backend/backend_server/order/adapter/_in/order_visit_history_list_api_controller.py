@@ -35,7 +35,7 @@ class OrderVisitHistoryListApiController(APIView):
     2023/07/31          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['CRM SYSTEM - Order API'], operation_summary="CRM Order VisitHistoryList API",
                          operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 VisitHistoryList 요청 API\n"
