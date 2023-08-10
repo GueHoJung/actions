@@ -257,6 +257,159 @@ from analysis.application.port._in.analysis_daily_cust_prepaid_anlys_in_port imp
     AnalysisDailyCustPrepaidAnlysInCrmImpl
 from analysis.application.service.analysis_daily_cust_prepaid_anlys_service import AnalysisDailyCustPrepaidAnlysService
 
+from analysis.adapter.out.analysis_monthly_inflow_anlys_api_adapter import AnalysisMonthlyInflowAnlysApiAdapter
+from analysis.application.port.out.analysis_monthly_inflow_anlys_out_port import AnalysisMonthlyInflowAnlysOutCrmImpl
+from analysis.application.port._in.analysis_monthly_inflow_anlys_in_port import AnalysisMonthlyInflowAnlysInCrmImpl
+from analysis.application.service.analysis_monthly_inflow_anlys_service import AnalysisMonthlyInflowAnlysService
+
+from analysis.adapter.out.analysis_weekly_inflow_anlys_api_adapter import AnalysisWeeklyInflowAnlysApiAdapter
+from analysis.application.port.out.analysis_weekly_inflow_anlys_out_port import AnalysisWeeklyInflowAnlysOutCrmImpl
+from analysis.application.port._in.analysis_weekly_inflow_anlys_in_port import AnalysisWeeklyInflowAnlysInCrmImpl
+from analysis.application.service.analysis_weekly_inflow_anlys_service import AnalysisWeeklyInflowAnlysService
+
+from analysis.adapter.out.analysis_daily_inflow_anlys_api_adapter import AnalysisDailyInflowAnlysApiAdapter
+from analysis.application.port.out.analysis_daily_inflow_anlys_out_port import AnalysisDailyInflowAnlysOutCrmImpl
+from analysis.application.port._in.analysis_daily_inflow_anlys_in_port import AnalysisDailyInflowAnlysInCrmImpl
+from analysis.application.service.analysis_daily_inflow_anlys_service import AnalysisDailyInflowAnlysService
+
+from analysis.adapter.out.analysis_monthly_retention_anlys_api_adapter import AnalysisMonthlyRetentionAnlysApiAdapter
+from analysis.application.port.out.analysis_monthly_retention_anlys_out_port import \
+    AnalysisMonthlyRetentionAnlysOutCrmImpl
+from analysis.application.port._in.analysis_monthly_retention_anlys_in_port import \
+    AnalysisMonthlyRetentionAnlysInCrmImpl
+from analysis.application.service.analysis_monthly_retention_anlys_service import AnalysisMonthlyRetentionAnlysService
+
+from analysis.adapter.out.analysis_weekly_retention_anlys_api_adapter import AnalysisWeeklyRetentionAnlysApiAdapter
+from analysis.application.port.out.analysis_weekly_retention_anlys_out_port import \
+    AnalysisWeeklyRetentionAnlysOutCrmImpl
+from analysis.application.port._in.analysis_weekly_retention_anlys_in_port import AnalysisWeeklyRetentionAnlysInCrmImpl
+from analysis.application.service.analysis_weekly_retention_anlys_service import AnalysisWeeklyRetentionAnlysService
+
+from analysis.adapter.out.analysis_daily_retention_anlys_api_adapter import AnalysisDailyRetentionAnlysApiAdapter
+from analysis.application.port.out.analysis_daily_retention_anlys_out_port import AnalysisDailyRetentionAnlysOutCrmImpl
+from analysis.application.port._in.analysis_daily_retention_anlys_in_port import AnalysisDailyRetentionAnlysInCrmImpl
+from analysis.application.service.analysis_daily_retention_anlys_service import AnalysisDailyRetentionAnlysService
+
+from analysis.adapter.out.analysis_monthly_dprtr_anlys_api_adapter import AnalysisMonthlyDprtrAnlysApiAdapter
+from analysis.application.port.out.analysis_monthly_dprtr_anlys_out_port import AnalysisMonthlyDprtrAnlysOutCrmImpl
+from analysis.application.port._in.analysis_monthly_dprtr_anlys_in_port import AnalysisMonthlyDprtrAnlysInCrmImpl
+from analysis.application.service.analysis_monthly_dprtr_anlys_service import AnalysisMonthlyDprtrAnlysService
+
+from analysis.adapter.out.analysis_weekly_dprtr_anlys_api_adapter import AnalysisWeeklyDprtrAnlysApiAdapter
+from analysis.application.port.out.analysis_weekly_dprtr_anlys_out_port import AnalysisWeeklyDprtrAnlysOutCrmImpl
+from analysis.application.port._in.analysis_weekly_dprtr_anlys_in_port import AnalysisWeeklyDprtrAnlysInCrmImpl
+from analysis.application.service.analysis_weekly_dprtr_anlys_service import AnalysisWeeklyDprtrAnlysService
+
+from analysis.adapter.out.analysis_daily_dprtr_anlys_api_adapter import AnalysisDailyDprtrAnlysApiAdapter
+from analysis.application.port.out.analysis_daily_dprtr_anlys_out_port import AnalysisDailyDprtrAnlysOutCrmImpl
+from analysis.application.port._in.analysis_daily_dprtr_anlys_in_port import AnalysisDailyDprtrAnlysInCrmImpl
+from analysis.application.service.analysis_daily_dprtr_anlys_service import AnalysisDailyDprtrAnlysService
+
+from analysis.adapter.out.analysis_user_unit_price_compare_api_adapter import AnalysisUserUnitPriceCompareApiAdapter
+from analysis.application.port.out.analysis_user_unit_price_compare_out_port import \
+    AnalysisUserUnitPriceCompareOutCrmImpl
+from analysis.application.port._in.analysis_user_unit_price_compare_in_port import AnalysisUserUnitPriceCompareInCrmImpl
+from analysis.application.service.analysis_user_unit_price_compare_service import AnalysisUserUnitPriceCompareService
+
+from analysis.adapter.out.analysis_user_growth_rate_rank_api_adapter import AnalysisUserGrowthRateRankApiAdapter
+from analysis.application.port.out.analysis_user_growth_rate_rank_out_port import AnalysisUserGrowthRateRankOutCrmImpl
+from analysis.application.port._in.analysis_user_growth_rate_rank_in_port import AnalysisUserGrowthRateRankInCrmImpl
+from analysis.application.service.analysis_user_growth_rate_rank_service import AnalysisUserGrowthRateRankService
+
+from analysis.adapter.out.analysis_user_product_compare_api_adapter import AnalysisUserProductCompareApiAdapter
+from analysis.application.port.out.analysis_user_product_compare_out_port import AnalysisUserProductCompareOutCrmImpl
+from analysis.application.port._in.analysis_user_product_compare_in_port import AnalysisUserProductCompareInCrmImpl
+from analysis.application.service.analysis_user_product_compare_service import AnalysisUserProductCompareService
+
+from analysis.adapter.out.analysis_user_cust_count_compare_api_adapter import AnalysisUserCustCountCompareApiAdapter
+from analysis.application.port.out.analysis_user_cust_count_compare_out_port import \
+    AnalysisUserCustCountCompareOutCrmImpl
+from analysis.application.port._in.analysis_user_cust_count_compare_in_port import AnalysisUserCustCountCompareInCrmImpl
+from analysis.application.service.analysis_user_cust_count_compare_service import AnalysisUserCustCountCompareService
+
+from analysis.adapter.out.analysis_user_sales_compare_api_adapter import AnalysisUserSalesCompareApiAdapter
+from analysis.application.port.out.analysis_user_sales_compare_out_port import AnalysisUserSalesCompareOutCrmImpl
+from analysis.application.port._in.analysis_user_sales_compare_in_port import AnalysisUserSalesCompareInCrmImpl
+from analysis.application.service.analysis_user_sales_compare_service import AnalysisUserSalesCompareService
+
+from analysis.adapter.out.analysis_user_trm_type_compare_api_adapter import AnalysisUserTrmTypeCompareApiAdapter
+from analysis.application.port.out.analysis_user_trm_type_compare_out_port import AnalysisUserTrmTypeCompareOutCrmImpl
+from analysis.application.port._in.analysis_user_trm_type_compare_in_port import AnalysisUserTrmTypeCompareInCrmImpl
+from analysis.application.service.analysis_user_trm_type_compare_service import AnalysisUserTrmTypeCompareService
+
+from reservation.adapter.out.reservation_reservation_holiday_api_adapter import ReservationReservationHolidayApiAdapter
+from reservation.application.port.out.reservation_reservation_holiday_out_port import \
+    ReservationReservationHolidayOutCrmImpl
+from reservation.application.port._in.reservation_reservation_holiday_in_port import \
+    ReservationReservationHolidayInCrmImpl
+from reservation.application.service.reservation_reservation_holiday_service import ReservationReservationHolidayService
+
+from reservation.adapter.out.reservation_rsrv_holiday_schedule_api_adapter import \
+    ReservationRsrvHolidayScheduleApiAdapter
+from reservation.application.port.out.reservation_rsrv_holiday_schedule_out_port import \
+    ReservationRsrvHolidayScheduleOutCrmImpl
+from reservation.application.port._in.reservation_rsrv_holiday_schedule_in_port import \
+    ReservationRsrvHolidayScheduleInCrmImpl
+from reservation.application.service.reservation_rsrv_holiday_schedule_service import \
+    ReservationRsrvHolidayScheduleService
+
+from reservation.adapter.out.reservation_mod_rsrv_holiday_schedule_api_adapter import ReservationModRsrvHolidayScheduleApiAdapter
+from reservation.application.port.out.reservation_mod_rsrv_holiday_schedule_out_port import \
+    ReservationModRsrvHolidayScheduleOutCrmImpl
+from reservation.application.port._in.reservation_mod_rsrv_holiday_schedule_in_port import \
+    ReservationModRsrvHolidayScheduleInCrmImpl
+from reservation.application.service.reservation_mod_rsrv_holiday_schedule_service import ReservationModRsrvHolidayScheduleService
+
+from reservation.adapter.out.reservation_save_reservation_holiday_api_adapter import ReservationSaveReservationHolidayApiAdapter
+from reservation.application.port.out.reservation_save_reservation_holiday_out_port import ReservationSaveReservationHolidayOutCrmImpl
+from reservation.application.port._in.reservation_save_reservation_holiday_in_port import ReservationSaveReservationHolidayInCrmImpl
+from reservation.application.service.reservation_save_reservation_holiday_service import ReservationSaveReservationHolidayService
+
+from reservation.adapter.out.reservation_mod_reservation_holiday_api_adapter import \
+    ReservationModReservationHolidayApiAdapter
+from reservation.application.port.out.reservation_mod_reservation_holiday_out_port import \
+    ReservationModReservationHolidayOutCrmImpl
+from reservation.application.port._in.reservation_mod_reservation_holiday_in_port import \
+    ReservationModReservationHolidayInCrmImpl
+from reservation.application.service.reservation_mod_reservation_holiday_service import \
+    ReservationModReservationHolidayService
+
+from reservation.adapter.out.reservation_save_rsrv_holiday_schedule_api_adapter import \
+    ReservationSaveRsrvHolidayScheduleApiAdapter
+from reservation.application.port.out.reservation_save_rsrv_holiday_schedule_out_port import \
+    ReservationSaveRsrvHolidayScheduleOutCrmImpl
+from reservation.application.port._in.reservation_save_rsrv_holiday_schedule_in_port import \
+    ReservationSaveRsrvHolidayScheduleInCrmImpl
+from reservation.application.service.reservation_save_rsrv_holiday_schedule_service import \
+    ReservationSaveRsrvHolidayScheduleService
+
+from reservation.adapter.out.reservation_pop_rsrv_detail_info_api_adapter import ReservationPopRsrvDetailInfoApiAdapter
+from reservation.application.port.out.reservation_pop_rsrv_detail_info_out_port import \
+    ReservationPopRsrvDetailInfoOutCrmImpl
+from reservation.application.port._in.reservation_pop_rsrv_detail_info_in_port import \
+    ReservationPopRsrvDetailInfoInCrmImpl
+from reservation.application.service.reservation_pop_rsrv_detail_info_service import ReservationPopRsrvDetailInfoService
+
+from customer.adapter.out.customer_customer_grid_list_api_adapter import CustomerCustomerGridListApiAdapter
+from customer.application.port.out.customer_customer_grid_list_out_port import CustomerCustomerGridListOutCrmImpl
+from customer.application.port._in.customer_customer_grid_list_in_port import CustomerCustomerGridListInCrmImpl
+from customer.application.service.customer_customer_grid_list_service import CustomerCustomerGridListService
+
+from itsr.adapter.out.itsr_save_sr_info_api_adapter import ItsrSaveSrInfoApiAdapter
+from itsr.application.port.out.itsr_save_sr_info_out_port import ItsrSaveSrInfoOutCrmImpl
+from itsr.application.port._in.itsr_save_sr_info_in_port import ItsrSaveSrInfoInCrmImpl
+from itsr.application.service.itsr_save_sr_info_service import ItsrSaveSrInfoService
+
+from itsr.adapter.out.itsr_sr_grid_list_api_adapter import ItsrSrGridListApiAdapter
+from itsr.application.port.out.itsr_sr_grid_list_out_port import ItsrSrGridListOutCrmImpl
+from itsr.application.port._in.itsr_sr_grid_list_in_port import ItsrSrGridListInCrmImpl
+from itsr.application.service.itsr_sr_grid_list_service import ItsrSrGridListService
+
+from employ.adapter.out.employ_user_apnt_list_api_adapter import EmployUserApntListApiAdapter
+from employ.application.port.out.employ_user_apnt_list_out_port import EmployUserApntListOutHrmImpl
+from employ.application.port._in.employ_user_apnt_list_in_port import EmployUserApntListInHrmImpl
+from employ.application.service.employ_user_apnt_list_service import EmployUserApntListService
+
 class BaseContainer(DeclarativeContainer):
     """
     # Base container.
@@ -630,3 +783,210 @@ class BaseContainer(DeclarativeContainer):
     analysisDailyCustPrepaidAnlysCrmServiceProvider = providers.Singleton(AnalysisDailyCustPrepaidAnlysService,
                                                                           portInImpl=AnalysisDailyCustPrepaidAnlysInCrmImpl,
                                                                           portOutImpl=analysisDailyCustPrepaidAnlysOutCrmPortProvider)
+
+    # CRM AnalysisMonthlyInflowAnlys API 의존성 주입
+    analysisMonthlyInflowAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisMonthlyInflowAnlysApiAdapter)
+    analysisMonthlyInflowAnlysOutCrmPortProvider = providers.Singleton(AnalysisMonthlyInflowAnlysOutCrmImpl,
+                                                                       analysisMonthlyInflowAnlysApiAdapter=analysisMonthlyInflowAnlysCrmApiAdapterProvider)
+    analysisMonthlyInflowAnlysCrmServiceProvider = providers.Singleton(AnalysisMonthlyInflowAnlysService, portInImpl=AnalysisMonthlyInflowAnlysInCrmImpl,
+                                                                       portOutImpl=analysisMonthlyInflowAnlysOutCrmPortProvider)
+
+    # CRM AnalysisWeeklyInflowAnlys API 의존성 주입
+    analysisWeeklyInflowAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisWeeklyInflowAnlysApiAdapter)
+    analysisWeeklyInflowAnlysOutCrmPortProvider = providers.Singleton(AnalysisWeeklyInflowAnlysOutCrmImpl,
+                                                                      analysisWeeklyInflowAnlysApiAdapter=analysisWeeklyInflowAnlysCrmApiAdapterProvider)
+    analysisWeeklyInflowAnlysCrmServiceProvider = providers.Singleton(AnalysisWeeklyInflowAnlysService, portInImpl=AnalysisWeeklyInflowAnlysInCrmImpl,
+                                                                      portOutImpl=analysisWeeklyInflowAnlysOutCrmPortProvider)
+
+    # CRM AnalysisDailyInflowAnlys API 의존성 주입
+    analysisDailyInflowAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisDailyInflowAnlysApiAdapter)
+    analysisDailyInflowAnlysOutCrmPortProvider = providers.Singleton(AnalysisDailyInflowAnlysOutCrmImpl,
+                                                                     analysisDailyInflowAnlysApiAdapter=analysisDailyInflowAnlysCrmApiAdapterProvider)
+    analysisDailyInflowAnlysCrmServiceProvider = providers.Singleton(AnalysisDailyInflowAnlysService,
+                                                                     portInImpl=AnalysisDailyInflowAnlysInCrmImpl,
+                                                                     portOutImpl=analysisDailyInflowAnlysOutCrmPortProvider)
+
+    # CRM AnalysisMonthlyRetentionAnlys API 의존성 주입
+    analysisMonthlyRetentionAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisMonthlyRetentionAnlysApiAdapter)
+    analysisMonthlyRetentionAnlysOutCrmPortProvider = providers.Singleton(AnalysisMonthlyRetentionAnlysOutCrmImpl,
+                                                                          analysisMonthlyRetentionAnlysApiAdapter=analysisMonthlyRetentionAnlysCrmApiAdapterProvider)
+    analysisMonthlyRetentionAnlysCrmServiceProvider = providers.Singleton(AnalysisMonthlyRetentionAnlysService,
+                                                                          portInImpl=AnalysisMonthlyRetentionAnlysInCrmImpl,
+                                                                          portOutImpl=analysisMonthlyRetentionAnlysOutCrmPortProvider)
+
+    # CRM AnalysisWeeklyRetentionAnlys API 의존성 주입
+    analysisWeeklyRetentionAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisWeeklyRetentionAnlysApiAdapter)
+    analysisWeeklyRetentionAnlysOutCrmPortProvider = providers.Singleton(AnalysisWeeklyRetentionAnlysOutCrmImpl,
+                                                                         analysisWeeklyRetentionAnlysApiAdapter=analysisWeeklyRetentionAnlysCrmApiAdapterProvider)
+    analysisWeeklyRetentionAnlysCrmServiceProvider = providers.Singleton(AnalysisWeeklyRetentionAnlysService, portInImpl=AnalysisWeeklyRetentionAnlysInCrmImpl,
+                                                                         portOutImpl=analysisWeeklyRetentionAnlysOutCrmPortProvider)
+
+    # CRM AnalysisDailyRetentionAnlys API 의존성 주입
+    analysisDailyRetentionAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisDailyRetentionAnlysApiAdapter)
+    analysisDailyRetentionAnlysOutCrmPortProvider = providers.Singleton(AnalysisDailyRetentionAnlysOutCrmImpl,
+                                                                        analysisDailyRetentionAnlysApiAdapter=analysisDailyRetentionAnlysCrmApiAdapterProvider)
+    analysisDailyRetentionAnlysCrmServiceProvider = providers.Singleton(AnalysisDailyRetentionAnlysService,
+                                                                        portInImpl=AnalysisDailyRetentionAnlysInCrmImpl,
+                                                                        portOutImpl=analysisDailyRetentionAnlysOutCrmPortProvider)
+
+    # CRM AnalysisMonthlyDprtrAnlys API 의존성 주입
+    analysisMonthlyDprtrAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisMonthlyDprtrAnlysApiAdapter)
+    analysisMonthlyDprtrAnlysOutCrmPortProvider = providers.Singleton(AnalysisMonthlyDprtrAnlysOutCrmImpl,
+                                                                      analysisMonthlyDprtrAnlysApiAdapter=analysisMonthlyDprtrAnlysCrmApiAdapterProvider)
+    analysisMonthlyDprtrAnlysCrmServiceProvider = providers.Singleton(AnalysisMonthlyDprtrAnlysService,
+                                                                      portInImpl=AnalysisMonthlyDprtrAnlysInCrmImpl,
+                                                                      portOutImpl=analysisMonthlyDprtrAnlysOutCrmPortProvider)
+
+    # CRM AnalysisWeeklyDprtrAnlys API 의존성 주입
+    analysisWeeklyDprtrAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisWeeklyDprtrAnlysApiAdapter)
+    analysisWeeklyDprtrAnlysOutCrmPortProvider = providers.Singleton(AnalysisWeeklyDprtrAnlysOutCrmImpl,
+                                                                     analysisWeeklyDprtrAnlysApiAdapter=analysisWeeklyDprtrAnlysCrmApiAdapterProvider)
+    analysisWeeklyDprtrAnlysCrmServiceProvider = providers.Singleton(AnalysisWeeklyDprtrAnlysService,
+                                                                     portInImpl=AnalysisWeeklyDprtrAnlysInCrmImpl,
+                                                                     portOutImpl=analysisWeeklyDprtrAnlysOutCrmPortProvider)
+
+    # CRM AnalysisDailyDprtrAnlys API 의존성 주입
+    analysisDailyDprtrAnlysCrmApiAdapterProvider = providers.Singleton(AnalysisDailyDprtrAnlysApiAdapter)
+    analysisDailyDprtrAnlysOutCrmPortProvider = providers.Singleton(AnalysisDailyDprtrAnlysOutCrmImpl,
+                                                                    analysisDailyDprtrAnlysApiAdapter=analysisDailyDprtrAnlysCrmApiAdapterProvider)
+    analysisDailyDprtrAnlysCrmServiceProvider = providers.Singleton(AnalysisDailyDprtrAnlysService,
+                                                                    portInImpl=AnalysisDailyDprtrAnlysInCrmImpl,
+                                                                    portOutImpl=analysisDailyDprtrAnlysOutCrmPortProvider)
+
+    # CRM AnalysisUserUnitPriceCompare API 의존성 주입
+    analysisUserUnitPriceCompareCrmApiAdapterProvider = providers.Singleton(AnalysisUserUnitPriceCompareApiAdapter)
+    analysisUserUnitPriceCompareOutCrmPortProvider = providers.Singleton(AnalysisUserUnitPriceCompareOutCrmImpl,
+                                                                         analysisUserUnitPriceCompareApiAdapter=analysisUserUnitPriceCompareCrmApiAdapterProvider)
+    analysisUserUnitPriceCompareCrmServiceProvider = providers.Singleton(AnalysisUserUnitPriceCompareService,
+                                                                         portInImpl=AnalysisUserUnitPriceCompareInCrmImpl,
+                                                                         portOutImpl=analysisUserUnitPriceCompareOutCrmPortProvider)
+
+    # CRM AnalysisUserGrowthRateRank API 의존성 주입
+    analysisUserGrowthRateRankCrmApiAdapterProvider = providers.Singleton(AnalysisUserGrowthRateRankApiAdapter)
+    analysisUserGrowthRateRankOutCrmPortProvider = providers.Singleton(AnalysisUserGrowthRateRankOutCrmImpl,
+                                                                       analysisUserGrowthRateRankApiAdapter=analysisUserGrowthRateRankCrmApiAdapterProvider)
+    analysisUserGrowthRateRankCrmServiceProvider = providers.Singleton(AnalysisUserGrowthRateRankService,
+                                                                       portInImpl=AnalysisUserGrowthRateRankInCrmImpl,
+                                                                       portOutImpl=analysisUserGrowthRateRankOutCrmPortProvider)
+
+    # CRM AnalysisUserProductCompare API 의존성 주입
+    analysisUserProductCompareCrmApiAdapterProvider = providers.Singleton(AnalysisUserProductCompareApiAdapter)
+    analysisUserProductCompareOutCrmPortProvider = providers.Singleton(AnalysisUserProductCompareOutCrmImpl,
+                                                                       analysisUserProductCompareApiAdapter=analysisUserProductCompareCrmApiAdapterProvider)
+    analysisUserProductCompareCrmServiceProvider = providers.Singleton(AnalysisUserProductCompareService,
+                                                                       portInImpl=AnalysisUserProductCompareInCrmImpl,
+                                                                       portOutImpl=analysisUserProductCompareOutCrmPortProvider)
+
+    # CRM AnalysisUserCustCountCompare API 의존성 주입
+    analysisUserCustCountCompareCrmApiAdapterProvider = providers.Singleton(AnalysisUserCustCountCompareApiAdapter)
+    analysisUserCustCountCompareOutCrmPortProvider = providers.Singleton(AnalysisUserCustCountCompareOutCrmImpl,
+                                                                         analysisUserCustCountCompareApiAdapter=analysisUserCustCountCompareCrmApiAdapterProvider)
+    analysisUserCustCountCompareCrmServiceProvider = providers.Singleton(AnalysisUserCustCountCompareService,
+                                                                         portInImpl=AnalysisUserCustCountCompareInCrmImpl,
+                                                                         portOutImpl=analysisUserCustCountCompareOutCrmPortProvider)
+
+    # CRM AnalysisUserSalesCompare API 의존성 주입
+    analysisUserSalesCompareCrmApiAdapterProvider = providers.Singleton(AnalysisUserSalesCompareApiAdapter)
+    analysisUserSalesCompareOutCrmPortProvider = providers.Singleton(AnalysisUserSalesCompareOutCrmImpl,
+                                                                     analysisUserSalesCompareApiAdapter=analysisUserSalesCompareCrmApiAdapterProvider)
+    analysisUserSalesCompareCrmServiceProvider = providers.Singleton(AnalysisUserSalesCompareService,
+                                                                     portInImpl=AnalysisUserSalesCompareInCrmImpl,
+                                                                     portOutImpl=analysisUserSalesCompareOutCrmPortProvider)
+
+    # CRM AnalysisUserTrmTypeCompare API 의존성 주입
+    analysisUserTrmTypeCompareCrmApiAdapterProvider = providers.Singleton(AnalysisUserTrmTypeCompareApiAdapter)
+    analysisUserTrmTypeCompareOutCrmPortProvider = providers.Singleton(AnalysisUserTrmTypeCompareOutCrmImpl,
+                                                                       analysisUserTrmTypeCompareApiAdapter=analysisUserTrmTypeCompareCrmApiAdapterProvider)
+    analysisUserTrmTypeCompareCrmServiceProvider = providers.Singleton(AnalysisUserTrmTypeCompareService,
+                                                                       portInImpl=AnalysisUserTrmTypeCompareInCrmImpl,
+                                                                       portOutImpl=analysisUserTrmTypeCompareOutCrmPortProvider)
+
+    # CRM ReservationReservationHoliday API 의존성 주입
+    reservationReservationHolidayCrmApiAdapterProvider = providers.Singleton(ReservationReservationHolidayApiAdapter)
+    reservationReservationHolidayOutCrmPortProvider = providers.Singleton(ReservationReservationHolidayOutCrmImpl,
+                                                                          reservationReservationHolidayApiAdapter=reservationReservationHolidayCrmApiAdapterProvider)
+    reservationReservationHolidayCrmServiceProvider = providers.Singleton(ReservationReservationHolidayService,
+                                                                          portInImpl=ReservationReservationHolidayInCrmImpl,
+                                                                          portOutImpl=reservationReservationHolidayOutCrmPortProvider)
+
+    # CRM ReservationRsrvHolidaySchedule API 의존성 주입
+    reservationRsrvHolidayScheduleCrmApiAdapterProvider = providers.Singleton(ReservationRsrvHolidayScheduleApiAdapter)
+    reservationRsrvHolidayScheduleOutCrmPortProvider = providers.Singleton(ReservationRsrvHolidayScheduleOutCrmImpl,
+                                                                           reservationRsrvHolidayScheduleApiAdapter=reservationRsrvHolidayScheduleCrmApiAdapterProvider)
+    reservationRsrvHolidayScheduleCrmServiceProvider = providers.Singleton(ReservationRsrvHolidayScheduleService,
+                                                                           portInImpl=ReservationRsrvHolidayScheduleInCrmImpl,
+                                                                           portOutImpl=reservationRsrvHolidayScheduleOutCrmPortProvider)
+
+    # CRM ReservationModRsrvHolidaySchedule API 의존성 주입
+    reservationModRsrvHolidayScheduleCrmApiAdapterProvider = providers.Singleton(
+        ReservationModRsrvHolidayScheduleApiAdapter)
+    reservationModRsrvHolidayScheduleOutCrmPortProvider = providers.Singleton(
+        ReservationModRsrvHolidayScheduleOutCrmImpl,
+        reservationModRsrvHolidayScheduleApiAdapter=reservationModRsrvHolidayScheduleCrmApiAdapterProvider)
+    reservationModRsrvHolidayScheduleCrmServiceProvider = providers.Singleton(ReservationModRsrvHolidayScheduleService,
+                                                                              portInImpl=ReservationModRsrvHolidayScheduleInCrmImpl,
+                                                                              portOutImpl=reservationModRsrvHolidayScheduleOutCrmPortProvider)
+
+    # CRM ReservationSaveReservationHoliday API 의존성 주입
+    reservationSaveReservationHolidayCrmApiAdapterProvider = providers.Singleton(
+        ReservationSaveReservationHolidayApiAdapter)
+    reservationSaveReservationHolidayOutCrmPortProvider = providers.Singleton(
+        ReservationSaveReservationHolidayOutCrmImpl,
+        reservationSaveReservationHolidayApiAdapter=reservationSaveReservationHolidayCrmApiAdapterProvider)
+    reservationSaveReservationHolidayCrmServiceProvider = providers.Singleton(ReservationSaveReservationHolidayService,
+                                                                              portInImpl=ReservationSaveReservationHolidayInCrmImpl,
+                                                                              portOutImpl=reservationSaveReservationHolidayOutCrmPortProvider)
+
+    # CRM ReservationModReservationHoliday API 의존성 주입
+    reservationModReservationHolidayCrmApiAdapterProvider = providers.Singleton(ReservationModReservationHolidayApiAdapter)
+    reservationModReservationHolidayOutCrmPortProvider = providers.Singleton(ReservationModReservationHolidayOutCrmImpl,
+                                                                             reservationModReservationHolidayApiAdapter=reservationModReservationHolidayCrmApiAdapterProvider)
+    reservationModReservationHolidayCrmServiceProvider = providers.Singleton(ReservationModReservationHolidayService, portInImpl=ReservationModReservationHolidayInCrmImpl,
+                                                                             portOutImpl=reservationModReservationHolidayOutCrmPortProvider)
+
+    # CRM ReservationSaveRsrvHolidaySchedule API 의존성 주입
+    reservationSaveRsrvHolidayScheduleCrmApiAdapterProvider = providers.Singleton(
+        ReservationSaveRsrvHolidayScheduleApiAdapter)
+    reservationSaveRsrvHolidayScheduleOutCrmPortProvider = providers.Singleton(
+        ReservationSaveRsrvHolidayScheduleOutCrmImpl,
+        reservationSaveRsrvHolidayScheduleApiAdapter=reservationSaveRsrvHolidayScheduleCrmApiAdapterProvider)
+    reservationSaveRsrvHolidayScheduleCrmServiceProvider = providers.Singleton(
+        ReservationSaveRsrvHolidayScheduleService, portInImpl=ReservationSaveRsrvHolidayScheduleInCrmImpl,
+        portOutImpl=reservationSaveRsrvHolidayScheduleOutCrmPortProvider)
+
+    # CRM ReservationPopRsrvDetailInfo API 의존성 주입
+    reservationPopRsrvDetailInfoCrmApiAdapterProvider = providers.Singleton(ReservationPopRsrvDetailInfoApiAdapter)
+    reservationPopRsrvDetailInfoOutCrmPortProvider = providers.Singleton(ReservationPopRsrvDetailInfoOutCrmImpl,
+                                                                         reservationPopRsrvDetailInfoApiAdapter=reservationPopRsrvDetailInfoCrmApiAdapterProvider)
+    reservationPopRsrvDetailInfoCrmServiceProvider = providers.Singleton(ReservationPopRsrvDetailInfoService,
+                                                                         portInImpl=ReservationPopRsrvDetailInfoInCrmImpl,
+                                                                         portOutImpl=reservationPopRsrvDetailInfoOutCrmPortProvider)
+
+    # CRM CustomerCustomerGridList API 의존성 주입
+    customerCustomerGridListCrmApiAdapterProvider = providers.Singleton(CustomerCustomerGridListApiAdapter)
+    customerCustomerGridListOutCrmPortProvider = providers.Singleton(CustomerCustomerGridListOutCrmImpl,
+                                                                     customerCustomerGridListApiAdapter=customerCustomerGridListCrmApiAdapterProvider)
+    customerCustomerGridListCrmServiceProvider = providers.Singleton(CustomerCustomerGridListService,
+                                                                     portInImpl=CustomerCustomerGridListInCrmImpl,
+                                                                     portOutImpl=customerCustomerGridListOutCrmPortProvider)
+
+    # CRM ItsrSaveSrInfo API 의존성 주입
+    itsrSaveSrInfoCrmApiAdapterProvider = providers.Singleton(ItsrSaveSrInfoApiAdapter)
+    itsrSaveSrInfoOutCrmPortProvider = providers.Singleton(ItsrSaveSrInfoOutCrmImpl,
+                                                           itsrSaveSrInfoApiAdapter=itsrSaveSrInfoCrmApiAdapterProvider)
+    itsrSaveSrInfoCrmServiceProvider = providers.Singleton(ItsrSaveSrInfoService, portInImpl=ItsrSaveSrInfoInCrmImpl,
+                                                           portOutImpl=itsrSaveSrInfoOutCrmPortProvider)
+
+    # CRM ItsrSrGridList API 의존성 주입
+    itsrSrGridListCrmApiAdapterProvider = providers.Singleton(ItsrSrGridListApiAdapter)
+    itsrSrGridListOutCrmPortProvider = providers.Singleton(ItsrSrGridListOutCrmImpl,
+                                                           itsrSrGridListApiAdapter=itsrSrGridListCrmApiAdapterProvider)
+    itsrSrGridListCrmServiceProvider = providers.Singleton(ItsrSrGridListService, portInImpl=ItsrSrGridListInCrmImpl,
+                                                           portOutImpl=itsrSrGridListOutCrmPortProvider)
+
+    # HRM EmployUserApntList API 의존성 주입
+    employUserApntListHrmApiAdapterProvider = providers.Singleton(EmployUserApntListApiAdapter)
+    employUserApntListOutHrmPortProvider = providers.Singleton(EmployUserApntListOutHrmImpl,
+                                                               employUserApntListApiAdapter=employUserApntListHrmApiAdapterProvider)
+    employUserApntListHrmServiceProvider = providers.Singleton(EmployUserApntListService, portInImpl=EmployUserApntListInHrmImpl,
+                                                               portOutImpl=employUserApntListOutHrmPortProvider)
