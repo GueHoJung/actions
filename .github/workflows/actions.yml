@@ -26,8 +26,8 @@ jobs:
       #       - name: Pull
       #         run: docker-compose pull
 
-#      - name: Docker Prune Images
-#        run: docker image prune -f
+      - name: Docker Prune Images
+        run: docker image prune -f
 
       - name: Docker Compose Up
         run: docker compose -f ./docker-compose.app.dev.yml up -d --build
