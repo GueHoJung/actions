@@ -40,7 +40,7 @@ services:
   postgresql:
     image: postgres:15
     container_name: postgres
-#    build: ./designer_backend/Dockerfile
+#    build: ./postgresql
     # hostname: postgresql
     restart: always
     ports:
@@ -53,7 +53,7 @@ services:
 #      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 #      POSTGRES_INITDB_ARGS: ${POSTGRES_INITDB_ARGS}
 #    DB INIT ERROR, PostgreSQL Skipping initialization, postgres exited with code 1
-#    위 에러 해결 위해서 volumes 제거, 환경변수로 DB 연결 처리, 데이터 그대로 살아 있는지 확인 필요
+#    위 에러 해결 위해서 volumes 제거, 환경변수로 DB 연결 처리, 데이터 그대로 살아 있는지 확인 필요 (X)
     volumes:
       - ./postgresql/data:/var/lib/postgresql/data
     networks:
