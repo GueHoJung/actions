@@ -30,7 +30,7 @@ jobs:
 #        run: docker image prune -f
 
       - name: Docker Compose Up
-        run: docker compose -f ./docker-compose.app.yml up -d --build
+        run: docker compose -f ./docker-compose.app.dev.yml up -d --build
 
       - name: Check Docker Images
         run: |
@@ -38,16 +38,16 @@ jobs:
           docker image ls
 
       - name: Wait for PostgreSQL
-        run: docker-compose -f ./docker-compose.app.yml exec -it designer_backend ./designer_backend/backend_server/wait_for_it.sh postgresql:5432 --timeout=180
+        run: docker-compose -f ./docker-compose.app.dev.yml exec -it designer_backend ./designer_backend/backend_server/wait_for_it.sh postgresql:5432 --timeout=180
 
       - name: Container Inspections
-        run: docker-compose -f ./docker-compose.app.yml ps
+        run: docker-compose -f ./docker-compose.app.dev.yml ps
 
       - name: Check Container designer_backend Logs
-        run: docker-compose -f ./docker-compose.app.yml logs designer_backend
+        run: docker-compose -f ./docker-compose.app.dev.yml logs designer_backend
 
       - name: Check Container postgresql Logs
-        run: docker-compose -f ./docker-compose.app.yml logs postgresql
+        run: docker-compose -f ./docker-compose.app.dev.yml logs postgresql
 
       - name: Container IP Address designer_backend
         run: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' designer_backend
@@ -63,13 +63,13 @@ jobs:
           && sudo chmod -R 700 ./postgresql/data
 
       - name: Perform Unit Test
-        run: docker compose -f ./docker-compose.app.yml exec designer_backend coverage run manage.py test
+        run: docker compose -f ./docker-compose.app.dev.yml exec designer_backend coverage run manage.py test
 
       - name: Run Test Coverage
-        run: docker compose -f ./docker-compose.app.yml exec designer_backend coverage report
+        run: docker compose -f ./docker-compose.app.dev.yml exec designer_backend coverage report
 
       - name: Generate Coverage Result Html
-        run: docker compose -f ./docker-compose.app.yml exec designer_backend coverage html
+        run: docker compose -f ./docker-compose.app.dev.yml exec designer_backend coverage html
 
       - name: Check Html Coverage Result
         run: ls -al ./designer_backend/backend_server/htmlcov
