@@ -41,7 +41,7 @@ services:
     image: postgres:15
     container_name: postgres
 #    build: ./designer_backend/Dockerfile
-    # hostname: postgresql
+#    hostname: postgresql
     restart: always
     ports:
       - "5432:5432"
@@ -140,6 +140,7 @@ services:
       bash -c "
       chmod +x ./wait_for_it.sh
       && ./wait_for_it.sh postgresql:5432 --timeout=120
+      && sleep 10 # Add a 10-second delay
       && python manage.py collectstatic --noinput
       && python manage.py makemigrations
       && python manage.py makemigrations analysis customer designer_server employ itsr order reservation stats web
