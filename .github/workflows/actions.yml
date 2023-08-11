@@ -34,7 +34,7 @@ jobs:
           docker image ls
 
       - name: Wait for PostgreSQL
-        run: docker-compose -f ./docker-compose.dev.yml exec designer_backend ./designer_backend/backend_server/wait_for_it.sh postgresql:5432 --timeout=180
+        run: docker-compose -f ./docker-compose.dev.yml exec -it designer_backend ./designer_backend/backend_server/wait_for_it.sh postgresql:5432 --timeout=180
 
       - name: Perform Unit Test
         run : docker compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
