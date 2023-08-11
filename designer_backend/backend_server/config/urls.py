@@ -69,7 +69,7 @@ schema_view_v1 = get_schema_view(
                     "### 아래 항목을 requst 시 각 영역에 반드시 포함 시켜야 SERVER의 AUTHENTICATION, PERMISSION 체크를 통과 할 수 있습니다.\n"
                     "\n"
                     "- ### HEADER\n"
-                    "\t- AUTHORIZATION : Token 83af18dee7e3a31a96924988301d882175c5f0ea\n"
+                    "\t- AUTHORIZATION : Token b11549d2df18979bf24cb6e6bb2299c5f529c9f1\n"
                     "\n"
                     "\t\t(향후 firebase remote config 에서 관리 필요)\n"
                     "\n"
