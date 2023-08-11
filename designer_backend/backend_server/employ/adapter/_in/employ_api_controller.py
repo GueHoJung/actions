@@ -34,7 +34,7 @@ class EmployApiController(APIView):
     2023/07/28          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['HRM SYSTEM - Employ API'], operation_summary="HRM Employ APNT LIST API",
                          operation_description="# DESIGNER SEVER에서 HRM SYSTEM으로 APNT LIST 요청 API\n"

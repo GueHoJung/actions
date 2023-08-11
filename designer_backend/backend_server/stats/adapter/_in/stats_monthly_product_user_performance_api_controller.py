@@ -39,7 +39,7 @@ class StatsMonthlyProductUserPerformanceApiController(APIView):
     2023/08/07          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['CRM SYSTEM - Stats API'],
                          operation_summary="CRM Stats MonthlyProductUserPerformance API",

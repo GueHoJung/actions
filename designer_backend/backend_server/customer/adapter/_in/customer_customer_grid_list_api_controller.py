@@ -52,7 +52,7 @@ class CustomerCustomerGridListApiController(APIView):
     2023/08/09          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['CRM SYSTEM - Customer API'], operation_summary="CRM Customer CustomerGridList API",
                          operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 CustomerGridList 요청 API\n"

@@ -43,7 +43,7 @@ class AnalysisUserProductSalesRankApiController(APIView):
     2023/08/07          jung-gyuho          최초 생성
     """
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
 
     @swagger_auto_schema(tags=['CRM SYSTEM - Analysis API'], operation_summary="CRM Analysis UserProductSalesRank API",
                          operation_description="# DESIGNER SEVER에서 CRM SYSTEM으로 UserProductSalesRank 요청 API\n"
