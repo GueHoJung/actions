@@ -39,14 +39,17 @@ jobs:
       - name: Container Inspections
         run: docker-compose -f ./docker-compose.dev.yml ps
 
-      - name: Check Container Logs
+      - name: Check Container designer_backend Logs
         run: docker-compose -f ./docker-compose.dev.yml logs designer_backend
+
+      - name: Check Container postgresql Logs
+        run: docker-compose -f ./docker-compose.dev.yml logs postgresql
 
       - name: Container IP Address designer_backend
         run: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' designer_backend
 
       - name: Container IP Address postgresql
-        run: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgresql
+        run: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
 
       - name: Perform Unit Test
         run: docker compose -f ./docker-compose.dev.yml exec designer_backend coverage run manage.py test
