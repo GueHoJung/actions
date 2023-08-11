@@ -55,12 +55,12 @@ jobs:
       - name: Container IP Address postgresql
         run: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
 
-#      - name: Check Ownership and Permissions
-#        run: ls -ld ./postgresql/data
+      - name: Check Ownership and Permissions
+        run: ls -ld ./postgresql/data
 
-#      - name: Set Ownership and Permissions
-#        run: sudo chown -R postgres:postgres ./postgresql/data
-#          && sudo chmod -R 700 ./postgresql/data
+      - name: Set Ownership and Permissions
+        run: sudo chown -R postgres:postgres ./postgresql
+          && sudo chmod -R 700 ./postgresql
 
       - name: Perform Unit Test
         run: docker compose -f ./docker-compose.app.dev.yml exec designer_backend coverage run manage.py test
