@@ -55,7 +55,7 @@ services:
 #    DB INIT ERROR, PostgreSQL Skipping initialization, postgres exited with code 1
 #    위 에러 해결 위해서 volumes 제거, 환경변수로 DB 연결 처리, 데이터 그대로 살아 있는지 확인 필요
     volumes:
-      - ./postgresql/data:/var/lib/postgresql/data
+      - ./postgresql/dev/data:/var/lib/postgresql/data
     networks:
       - backend
 
@@ -140,7 +140,6 @@ services:
       bash -c "
       chmod +x ./wait_for_it.sh
       && ./wait_for_it.sh postgresql:5432 --timeout=120
-      && sleep 10 # Add a 10-second delay
       && python manage.py collectstatic --noinput
       && python manage.py makemigrations
       && python manage.py makemigrations analysis customer designer_server employ itsr order reservation stats web
